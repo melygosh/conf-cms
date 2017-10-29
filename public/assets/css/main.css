@@ -265,6 +265,9 @@ ul li {
 .navbar-custom .navbar-nav li {
   margin: 0;
 }
+.navbar-custom.navbar-solid .navbar-nav > li > a {
+  color: #000;
+}  
 .navbar-custom .navbar-nav > li > a {
   color: #fff;
   text-transform: uppercase;
@@ -279,6 +282,12 @@ ul li {
 .navbar-custom .navbar-nav > .active > a {
   border-color: rgba(255, 255, 255, 0.5);
 }
+.navbar-custom.navbar-solid .navbar-nav > li > a:focus, .navbar-custom .navbar-nav > li > a:hover {
+  border-color: rgba(0, 0, 0, 0.5);
+}
+.navbar-custom.navbar-solid .navbar-nav > .active > a {
+  border-color: rgba(0, 0, 0, 0.5);
+}
 
 .navbar-toggle {
   border: 0;
@@ -290,7 +299,7 @@ ul li {
 }
 
 .navbar-solid {
-  background-color: #000 !important;
+  background-color: #fafafa !important;
   padding: 0 !important;
   -webkit-transition: all 0.2s linear 0s;
           transition: all 0.2s linear 0s;
@@ -300,6 +309,9 @@ ul li {
   float: left;
   margin-top: 0;
   margin-left: 10px;
+}
+.navbar-solid .site-branding .logo {
+  color: #000;
 }
 .site-branding .logo {
   color: #fff;
@@ -446,6 +458,13 @@ ul li {
   border: 1px solid #fff;
 }
 
+.cost .schedule-box {
+  background-color: #ccc;
+  color: #333;  
+}
+.cost .schedule-box::before {
+  border: 1px solid #eee;
+}  
 /* 
  * 6.7 Section: Schedule
  */
@@ -599,4 +618,9 @@ ul li {
 }
 .site-footer .social-block li a:hover, .site-footer .social-block li a:focus {
   opacity: 0.8;
+}
+
+.date-counter{
+  display: block;
+  font-size: 52px;
 }
