@@ -1,0 +1,35 @@
+{
+  "name": "conf-cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require test/init.js test/*/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ionicons": "^3.0.0",
+    "ng-admin": "^1.0.7",
+    "smooth-scroll": "^12.1.5",
+    "ejs": "*",
+    "ejs-ext": "latest",
+    "express": "~3.x",
+    "compound": ">= 1.1.0",
+    "jugglingdb": ">= 0.1.0",
+    "jugglingdb-postgres": ">= 0",
+    "coffee-script": ">= 1.1.1",
+    "stylus": "latest",
+    "seedjs": "latest",
+    "co-assets-compiler": "*"
+  },
+  "devDependencies": {
+    "nodeunit": "*",
+    "sinon": "*",
+    "supertest": ">= 0",
+    "mocha": ">= 0",
+    "should": ">= 0",
+    "semicov": "*",
+    "co-generators": "*"
+  }
+}

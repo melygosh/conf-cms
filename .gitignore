@@ -1,3 +1,15 @@
+dump.rdb
+*.csv
+*.out
+results
+.idea
+.DS_Store
+log/*.log
+.c9revisions
+coverage.html
+.settings
+doc
+
 # Logs
 logs
 *.log
