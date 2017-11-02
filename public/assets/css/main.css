@@ -41,7 +41,7 @@ p {
 }
 
 ul li {
-  font-weight: 700;
+  /*font-weight: 700;*/
   margin-bottom: 10px;
 }
 
@@ -390,7 +390,6 @@ ul li {
   margin: 0 0 25px;
 }
 .about figure {
-  margin-bottom: 25px;
 }
 
 /* 
@@ -623,4 +622,18 @@ ul li {
 .date-counter{
   display: block;
   font-size: 52px;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
 }
