@@ -3,16 +3,17 @@ module.exports = {
         driver: 'postgres',
         host: 'localhost',
         port: 5432,
-        username: 'root',
+        username: 'postgres',
         password: '',
         database: 'conf-cms_dev',
-        debug: true
+        debug: true,
+        ssl:false
     },
     test: {
         driver: 'postgres',
         host: 'localhost',
         port: 5432,
-        username: 'root',
+        username: 'postgres',
         password: '',
         database: 'conf-cms_test'
     },
@@ -20,8 +21,8 @@ module.exports = {
         driver: 'postgres',
         host: 'localhost',
         port: 5432,
-        username: 'root',
+        username: 'postgres',
         password: '',
-        database: 'conf-cms_production'
+        database: 'conf-cms_prod'
     }
 };

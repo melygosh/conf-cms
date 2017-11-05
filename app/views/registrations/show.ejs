@@ -1,0 +1,46 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li><a href="<%- pathTo.registrations %>">registrations</a> <span class="divider">/</span></li>
+    <li class="active"><a href="#">Details of registration</a></li>
+</ul>
+
+<div class="page-header">
+    <h1>Details of registration</h1>
+</div>
+
+<table class="table table-bordered">
+    <tbody>
+        <tr><th>name</th><td><%= registration.name %></td></tr>
+
+        <tr><th>last_name</th><td><%= registration.last_name %></td></tr>
+
+        <tr><th>middle_name</th><td><%= registration.middle_name %></td></tr>
+
+        <tr><th>country</th><td><%= registration.country %></td></tr>
+
+        <tr><th>city</th><td><%= registration.city %></td></tr>
+
+        <tr><th>organization</th><td><%= registration.organization %></td></tr>
+
+        <tr><th>position</th><td><%= registration.position %></td></tr>
+
+        <tr><th>degree</th><td><%= registration.degree %></td></tr>
+
+        <tr><th>academic_title</th><td><%= registration.academic_title %></td></tr>
+
+        <tr><th>phone</th><td><%= registration.phone %></td></tr>
+
+        <tr><th>email</th><td><%= registration.email %></td></tr>
+
+        <tr><th>speach_title</th><td><%= registration.speach_title %></td></tr>
+
+        <tr><th>co_author</th><td><%= registration.co_author %></td></tr>
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', pathTo.edit_registration(registration), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.registration(registration), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', pathTo.registrations) %>
+</div>

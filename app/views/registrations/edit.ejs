@@ -1,0 +1,18 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li><a href="<%- pathTo.registrations() %>">registrations</a> <span class="divider">/</span></li>
+    <li class="active"><a href="#">Edit registration</a></li>
+</ul>
+
+<div class="page-header">
+    <h1>Edit registration</h1>
+</div>
+
+<% var form = formFor(registration, {action: pathTo.registration(registration), method: 'PUT', id: "registration-form", class: 'form-horizontal'}) %>
+<%- form.begin() %>
+<%- include _form %>
+<div class="form-actions">
+    <%- form.submit('<i class="icon-ok icon-white"></i> Update registration', {class: 'btn btn-primary'}) %> or
+    <%- linkTo('Cancel', pathTo.registration(registration), {class: 'btn'}) %>
+</div>
+<%- form.end() %>
