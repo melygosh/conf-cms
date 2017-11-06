@@ -20,7 +20,7 @@
  });
 
 */
-if (process.env.DATABASE_URL)
+if (!process.env.DBHOST && process.env.DATABASE_URL)
     schema('postgres', { url: process.env.DATABASE_URL }, defineAll);
 else
     defineAll();
