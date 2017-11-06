@@ -27,41 +27,66 @@ function handleTopNavAnimation() {
 
 $('#registration-form').submit(function (e) {
     e.preventDefault();
-
-    var postForm = { //Fetch form data
-        'fname': $('#registration-form #fname').val(),
-        'lname': $('#registration-form #lname').val(),
+    var postFormCommon = { //Fetch form data
+        'country': $('#registration-form #country option:selected').text(),
+        'phone': $('#registration-form #phone').val(),
         'email': $('#registration-form #email').val(),
-        'cell': $('#registration-form #cell').val(),
-        'address': $('#registration-form #address').val(),
-        'zip': $('#registration-form #zip').val(),
-        'city': $('#registration-form #city').val(),
-        'program': $('#registration-form #program').val()
+        'degree': $('#registration-form #degree').val(),
+        'academic_title': $('#registration-form #academic_title').val(),
     };
 
-    $.ajax({
-        type: 'POST',
-        url: './assets/php/contact.php',
-        data: postForm,
-        dataType: 'json',
-        success: function (data) {
-            if (data.success) {
-                $('#registration-msg .alert').html("Registration Successful");
-                $('#registration-msg .alert').removeClass("alert-danger");
-                $('#registration-msg .alert').addClass("alert-success");
-                $('#registration-msg').show();
-            }
-            else {
-                $('#registration-msg .alert').html("Registration Failed");
-                $('#registration-msg .alert').removeClass("alert-success");
-                $('#registration-msg .alert').addClass("alert-danger");
-                $('#registration-msg').show();
-            }
-        }
+    Promise.all(['_ua', '_ru', '_en'].map((lang) => {
+        var postForm = { //Fetch form data
+            'lang' : lang.slice(1),
+            'name': $('#registration-form #fname' + lang).val(),
+            'last_name': $('#registration-form #lname' + lang).val(),
+            'middle_name': $('#registration-form #pname' + lang).val(),
+            'city': $('#registration-form #city' + lang).val(),
+            'organization': $('#registration-form #organization' + lang).val(),
+            'position': $('#registration-form #position' + lang).val(),
+            'speach_title': $('#registration-form #speach_title' + lang).val(),
+            'co_author': $('#registration-form #co_author' + lang).val()
+        };
+        Object.assign(postForm, postFormCommon);
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                type: 'POST',
+                url: './registrations.json',
+                data: { "Registration": postForm },
+                dataType: 'json',
+                success: function (data, statusText) {
+                    if (!data.error) {
+                        resolve(statusText)
+                    }
+                    else {
+                        reject(data.error ? data.error : statusText);
+                    }
+                },
+                error: (xhr, statusText) => reject(statusText)
+            });
+        });
+    }))
+    .then((statusText)=>{
+        console.log("Success: " + statusText);
+        $('#registration-msg .alert').html("Реєстрація прошла успiшно / Registration successful");
+        $('#registration-msg .alert').removeClass("alert-danger");
+        $('#registration-msg .alert').addClass("alert-success");
+        $('#registration-msg').show();
+        $('#registration')[0].scrollIntoView();
+    },
+    (statusText)=>{
+        console.log("Error: " + statusText);
+        $('#registration-msg .alert').html("Помилка реєстрації / Registration failed");
+        $('#registration-msg .alert').removeClass("alert-success");
+        $('#registration-msg .alert').addClass("alert-danger");
+        $('#registration-msg').show();
+        $('#registration')[0].scrollIntoView();
     });
 });
 
-
+/**
+ * Set date counters
+ */
 $(".date-counter").each(function () {
     $(this).text(
         parseInt((new Date($(this).text()) - new Date()) / (3600 * 24000)));

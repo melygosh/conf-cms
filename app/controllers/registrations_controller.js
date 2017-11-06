@@ -39,6 +39,8 @@ action(function create() {
 action(function index() {
     this.title = 'Registrations index';
     Registration.all(function (err, registrations) {
+        console.log(err);
+        
         switch (params.format) {
             case "json":
                 send({code: 200, data: registrations});

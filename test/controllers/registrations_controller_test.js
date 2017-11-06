@@ -16,7 +16,8 @@ function ValidAttributes () {
         phone: '',
         email: '',
         speach_title: '',
-        co_author: ''
+        co_author: '',
+        lang: ''
     };
 }
 

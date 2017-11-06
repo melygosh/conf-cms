@@ -20,27 +20,34 @@
  });
 
 */
+if (process.env.DATABASE_URL)
+    schema('postgres', { url: process.env.DATABASE_URL }, defineAll);
+else
+    defineAll();
 
-var Htmlblock = describe('Htmlblock', function(){
-    property('name', String);
-    property('body', String);
-    set('restPath', pathTo.htmlblocks);
-});
+function defineAll() {
+    var Htmlblock = describe('Htmlblock', function () {
+        property('name', String);
+        property('body', String);
+        set('restPath', pathTo.htmlblocks);
+    });
 
-var Registration = describe('Registration', ()=>{
-    property('name', String);
-    property('last_name', String);
-    property('middle_name', String);
-    property('country', String);
-    property('city', String);
-    property('organization', String);
-    property('position', String);
-    property('degree', String);
-    property('academic_title', String);
-    property('phone', String);
-    property('email', String);
-    property('speach_title', String);
-    property('co_author', String);
-    set('restPath', pathTo.registrations);
-});
+    var Registration = describe('Registration', () => {
+        property('name', String);
+        property('last_name', String);
+        property('middle_name', String);
+        property('country', String);
+        property('city', String);
+        property('organization', String);
+        property('position', String);
+        property('degree', String);
+        property('academic_title', String);
+        property('phone', String);
+        property('email', String);
+        property('speach_title', String);
+        property('co_author', String);
+        property('lang', String);
+        set('restPath', pathTo.registrations);
+    });
+}
 
