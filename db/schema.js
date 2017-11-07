@@ -47,6 +47,7 @@ function defineAll() {
         property('speach_title', String);
         property('co_author', String);
         property('lang', String);
+        property('created_date', { type: Date, default: function () { return (new Date()).toISOString();} });
         set('restPath', pathTo.registrations);
     });
 }

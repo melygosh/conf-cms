@@ -37,6 +37,8 @@
         <tr><th>co_author</th><td><%= registration.co_author %></td></tr>
 
         <tr><th>lang</th><td><%= registration.lang %></td></tr>
+
+        <tr><th>date</th><td><%= ((date) => new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())))(registration.created_date).toLocaleString() %></td></tr>
     </tbody>
 </table>
 

@@ -21,6 +21,7 @@
                 <tr>
                     <th>Name + Last name</th>
                     <th>Lang</th>
+                    <th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                 <tr>
                     <td><strong><%- link_to(registration.name + ' ' + registration.last_name, pathTo.registration(registration)) %></strong></td>
                     <td><%- registration.lang %></td>
+                    <td><%- ((date) => new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())))(registration.created_date).toLocaleString() %></td>
                     <td>
                         <%- link_to('<i class="icon-edit"></i> Edit', pathTo.edit_registration(registration), {class: 'btn btn-mini'}) %>
                         <%- link_to('<i class="icon-remove icon-white"></i> Delete', pathTo.registration(registration), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>
