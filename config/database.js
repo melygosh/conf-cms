@@ -23,6 +23,7 @@ module.exports = {
         port: process.env.DBPORT || 5432,
         username: process.env.DBUSER || 'postgres',
         password: process.env.DBPASSWORD || '',
-        database: process.env.DBNAME || 'conf-cms_prod'
+        database: process.env.DBNAME || 'conf-cms_prod',
+        debug: !!process.env.DEBUG,        
     }
 };
