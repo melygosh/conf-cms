@@ -1,0 +1,14 @@
+{
+    "dependencies":{
+        "jugglingdb-postgres": {
+            "version": "0.1.0",
+            "from": "jugglingdb-postgres@>= 0",
+            "dependencies":{
+                "pg":{
+                    "version": "4.5.5",
+                    "from": "~3"
+                }
+            }
+        }
+    }
+}
