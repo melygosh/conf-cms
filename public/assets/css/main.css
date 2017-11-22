@@ -61,6 +61,7 @@ ul li {
 }
 
 .social-block {
+  display:none;
   list-style-type: none;
   padding: 0;
 }
@@ -136,7 +137,7 @@ ul li {
 }
 
 .section {
-  padding: 70px 0;
+  padding: 40px 0;
 }
 
 .section-title {
@@ -239,7 +240,7 @@ ul li {
 
 @media (min-width: 768px) {
   .section {
-    padding: 90px 0;
+    padding: 60px 0;
   }
 
   .section-title {
@@ -313,8 +314,14 @@ ul li {
 .navbar-solid .site-branding .logo {
   color: #000;
 }
+
+.navbar-fixed-top .site-branding .logo img{
+  width: 100px;
+}
+@media (min-width: 768px) {  
 .navbar-fixed-top .site-branding .logo img{
   width: 250px;
+}
 }
 .navbar-solid .site-branding .logo img{
   width: 100px;

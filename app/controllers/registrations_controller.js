@@ -2,7 +2,7 @@ load('application');
 
 before(loadRegistration, {
     only: ['show', 'edit', 'update', 'destroy']
-    });
+});
 
 action('new', function () {
     this.title = 'New registration';
@@ -15,9 +15,29 @@ action(function create() {
         respondTo(function (format) {
             format.json(function () {
                 if (err) {
-                    send({code: 500, error: registration && registration.errors || err});
+                    send({ code: 500, error: registration && registration.errors || err });
                 } else {
-                    send({code: 200, data: registration.toObject()});
+                    if (registration.lang == "ua") {
+                        compound.mailer.send('common/registration', registration, function (err, res) {
+                            if (err) throw err;
+                            console.log(err);
+                        });
+                    }
+                    
+                    // compound.app.registrationsForMail[registration.email] = compound.app.registrationsForMail[registration.email] || [];
+                    // let currentReg = compound.app.registrationsForMail[registration.email];
+                    // currentReg.push(registration);
+                    // console.log(registrationsForMail)
+                    // console.log(currentReg)
+                    if (true) {
+                        compound.mailer.send('common/notification', registration, function (err, res) {
+                            //currentReg.reduce((prev, curr) => (prev[curr.lang] = curr) && prev, {})
+                            //compound.app.registrationsForMail[registration.email] = [];
+                            if (err) throw err;
+                            console.log(err);
+                        });
+                    }
+                    send({ code: 200, data: registration.toObject() });
                 }
             });
             format.html(function () {
@@ -40,10 +60,10 @@ action(function index() {
     this.title = 'Registrations index';
     Registration.all(function (err, registrations) {
         console.log(err);
-        
+
         switch (params.format) {
             case "json":
-                send({code: 200, data: registrations});
+                send({ code: 200, data: registrations });
                 break;
             default:
                 render({
@@ -55,9 +75,9 @@ action(function index() {
 
 action(function show() {
     this.title = 'Registration show';
-    switch(params.format) {
+    switch (params.format) {
         case "json":
-            send({code: 200, data: this.registration});
+            send({ code: 200, data: this.registration });
             break;
         default:
             render();
@@ -66,7 +86,7 @@ action(function show() {
 
 action(function edit() {
     this.title = 'Registration edit';
-    switch(params.format) {
+    switch (params.format) {
         case "json":
             send(this.registration);
             break;
@@ -82,9 +102,9 @@ action(function update() {
         respondTo(function (format) {
             format.json(function () {
                 if (err) {
-                    send({code: 500, error: registration && registration.errors || err});
+                    send({ code: 500, error: registration && registration.errors || err });
                 } else {
-                    send({code: 200, data: registration});
+                    send({ code: 200, data: registration });
                 }
             });
             format.html(function () {
@@ -105,9 +125,9 @@ action(function destroy() {
         respondTo(function (format) {
             format.json(function () {
                 if (error) {
-                    send({code: 500, error: error});
+                    send({ code: 500, error: error });
                 } else {
-                    send({code: 200});
+                    send({ code: 200 });
                 }
             });
             format.html(function () {
@@ -126,7 +146,7 @@ function loadRegistration() {
     Registration.find(params.id, function (err, registration) {
         if (err || !registration) {
             if (!err && !registration && params.format === 'json') {
-                return send({code: 404, error: 'Not found'});
+                return send({ code: 404, error: 'Not found' });
             }
             redirect(path_to.registrations);
         } else {

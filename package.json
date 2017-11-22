@@ -9,19 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ionicons": "^3.0.0",
-    "ng-admin": "^1.0.7",
-    "smooth-scroll": "^12.1.5",
+    "co-assets-compiler": "*",
+    "co-mailer": "^0.2.0",
+    "coffee-script": ">= 1.1.1",
+    "compound": ">= 1.1.0",
     "ejs": "*",
     "ejs-ext": "latest",
     "express": "~3.x",
-    "compound": ">= 1.1.0",
+    "ionicons": "^3.0.0",
     "jugglingdb": ">= 0.1.0",
     "jugglingdb-postgres": ">= 0",
-    "coffee-script": ">= 1.1.1",
-    "stylus": "latest",
+    "ng-admin": "^1.0.7",
     "seedjs": "latest",
-    "co-assets-compiler": "*"
+    "smooth-scroll": "^12.1.5",
+    "stylus": "latest"
   },
   "devDependencies": {
     "nodeunit": "*",
