@@ -32,5 +32,8 @@
     "should": ">= 0",
     "semicov": "*",
     "co-generators": "*"
+  },
+  "engines": {
+    "node": "6.x"
   }
 }
