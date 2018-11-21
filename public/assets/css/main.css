@@ -530,6 +530,10 @@ ul li {
 .partner .partner-box-8 {
   background: url(../images/partner/partner-8.png) no-repeat center center/contain;
 }
+.partner .partner-box-9 {
+  background: url(../images/partner/partner-9.jpg) no-repeat center center/contain;
+  width: 250px;
+}
 
 /* 
  * 6.8 Section: FAQ
