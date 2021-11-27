@@ -3,37 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    "test": "./node_modules/.bin/mocha --require test/init.js test/*/*.test.js"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "co-assets-compiler": "*",
-    "co-mailer": "^0.2.0",
-    "coffee-script": ">= 1.1.1",
-    "compound": ">= 1.1.0",
-    "ejs": "*",
-    "ejs-ext": "latest",
-    "express": "~3.x",
-    "ionicons": "^3.0.0",
-    "jugglingdb": ">= 0.1.0",
-    "jugglingdb-postgres": ">= 0",
-    "ng-admin": "^1.0.7",
-    "seedjs": "latest",
-    "smooth-scroll": "^12.1.5",
-    "stylus": "latest"
-  },
-  "devDependencies": {
-    "nodeunit": "*",
-    "sinon": "*",
-    "supertest": ">= 0",
-    "mocha": ">= 0",
-    "should": ">= 0",
-    "semicov": "*",
-    "co-generators": "*"
+    "express": "4.17.1"
   },
   "engines": {
-    "node": "6.x"
+    "node": "16.x"
   }
 }
