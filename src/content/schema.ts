@@ -17,7 +17,7 @@ export const conferenceSchema = z
     title: localized(z.string()),
     dates: z.object({ start: isoDate, end: isoDate }).strict(),
     venue: z
-      .object({ description: localized(z.string()), mapEmbedUrl: url, mapLink: url })
+      .object({ place: localized(z.string()), description: localized(z.string()), mapEmbedUrl: url, mapLink: url })
       .strict(),
     links: z.object({ registration: localized(url), infoLetter: localized(url) }).strict(),
     organizers: localized(z.string()),

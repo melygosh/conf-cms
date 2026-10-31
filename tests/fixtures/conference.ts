@@ -10,6 +10,7 @@ export function rawConference(): Record<string, unknown> {
     title: l('Інтегроване стратегічне управління', 'Integrated Strategic Management'),
     dates: { start: '2026-02-17', end: '2026-02-19' },
     venue: {
+      place: l('Славсько', 'Slavsko'),
       description: l('Карпати', 'Carpathians'),
       mapEmbedUrl: 'https://www.google.com/maps/embed?pb=x',
       mapLink: 'https://maps.app.goo.gl/xyA32VJdHeu1uJ4a6',

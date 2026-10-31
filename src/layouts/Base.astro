@@ -1,0 +1,38 @@
+---
+import type { Lang } from '../content/schema';
+import { homeHref } from '../i18n/ui';
+import '../styles/global.css';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const site = Astro.site!;
+const canonical = new URL(homeHref[lang], site).href;
+const ogLocale = lang === 'uk' ? 'uk_UA' : 'en_GB';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="uk" href={new URL(homeHref.uk, site).href} />
+    <link rel="alternate" hreflang="en" href={new URL(homeHref.en, site).href} />
+    <link rel="icon" href="/favicon.ico" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

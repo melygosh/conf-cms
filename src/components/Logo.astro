@@ -1,0 +1,44 @@
+---
+// The original logo artwork with the year removed (scripts/strip-logo-year.mjs);
+// the year is drawn on top so the logo never has to be redrawn for a new conference.
+interface Props {
+  year: number;
+  width?: number;
+}
+
+const { year, width = 160 } = Astro.props;
+---
+
+<svg
+  class="logo"
+  viewBox="0 0 326 161"
+  width={width}
+  height={Math.round((width * 161) / 326)}
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label={`Integrated Management ${year}`}
+>
+  <image href="/images/logo-base.png" width="326" height="161"></image>
+  <text
+    x="165.5"
+    y="96.5"
+    font-family="'Arial Narrow', 'Roboto Condensed', Arial, sans-serif"
+    font-stretch="condensed"
+    font-style="italic"
+    font-size="22"
+    fill="#fdf1f1"
+    stroke="#c0302b"
+    stroke-width="1.2"
+    stroke-linejoin="round"
+    textLength="40"
+    lengthAdjust="spacingAndGlyphs">{year}</text
+  >
+</svg>
+
+<style>
+  .logo {
+    display: block;
+    max-width: 160px;
+    height: auto;
+  }
+</style>
