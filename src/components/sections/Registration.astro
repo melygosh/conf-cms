@@ -1,0 +1,19 @@
+---
+import type { Conference, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+---
+
+<Section id="registration" title={t.sections.registration}>
+  <p>
+    <a class="button button--accent" href={c.links.registration[lang]} target="_blank" rel="noopener">{t.registerLong}</a>
+  </p>
+</Section>

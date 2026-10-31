@@ -1,0 +1,45 @@
+---
+import type { Lang, Site } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import { md } from '../../lib/markdown';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  site: Site;
+}
+
+const { lang, site } = Astro.props;
+const t = ui[lang];
+---
+
+<Section id="contacts" title={t.sections.contacts} tone="tinted">
+  <div class="contacts">
+    <div class="prose contacts__text" set:html={md(site.contacts[lang])} />
+    <iframe
+      class="contacts__map"
+      src={site.khpiMapEmbedUrl}
+      title={t.sections.contacts}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+  </div>
+</Section>
+
+<style>
+  .contacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 2rem;
+  }
+
+  .contacts__text :global(h3) {
+    font-size: 1.05rem;
+  }
+
+  .contacts__map {
+    width: 100%;
+    min-height: 18rem;
+    border: 1px solid var(--color-border);
+  }
+</style>

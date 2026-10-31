@@ -1,0 +1,42 @@
+---
+import type { Conference, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+---
+
+<Section id="topics" title={t.sections.topics} tone="tinted">
+  <h4>{t.sections.aim}</h4>
+  <p>{c.aim[lang]}</p>
+  {
+    c.sections.map((s, i) => (
+      <div class="topic">
+        <h4>{t.sections.section(i + 1)}</h4>
+        <h3 class="topic__name">{s.name[lang]}</h3>
+        {s.items && (
+          <ul>
+            {s.items[lang].map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )}
+        {s.text && <p>{s.text[lang]}</p>}
+      </div>
+    ))
+  }
+  <h4>{t.sections.languages}</h4>
+  <p>{c.languages[lang]}</p>
+</Section>
+
+<style>
+  .topic__name {
+    margin-top: 0;
+  }
+</style>

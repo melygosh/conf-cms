@@ -1,0 +1,54 @@
+---
+import type { Conference, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import { md } from '../../lib/markdown';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+---
+
+<Section id="about" title={t.sections.about}>
+  <div class="about">
+    <div>
+      <h3>{t.sections.organizers}</h3>
+      <div class="prose" set:html={md(c.organizers[lang])} />
+    </div>
+    <div>
+      <h3>{t.sections.venue}</h3>
+      <div class="prose" set:html={md(c.venue.description[lang])} />
+      <iframe
+        class="about__map"
+        src={c.venue.mapEmbedUrl}
+        title={`${t.sections.venue}: ${c.venue.place[lang]}`}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+      <p><a href={c.venue.mapLink} target="_blank" rel="noopener">{t.openMap}</a></p>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: 2rem 3rem;
+  }
+
+  .about h3 {
+    margin-top: 0;
+  }
+
+  .about__map {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--color-border);
+  }
+</style>

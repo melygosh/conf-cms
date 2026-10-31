@@ -1,0 +1,153 @@
+---
+import type { Conference, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import { countdownTarget, isFinished } from '../../lib/conference';
+import { daysUntil, deadlineState, formatDate, formatRange, pluralDays, toIso } from '../../lib/dates';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+// Rendered with the build date; src/scripts/date-states.ts recomputes the
+// data-* states on the visitor's date (contract shared with that script).
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+const now = new Date();
+const countdown = c.deadlines.find((d) => d.countdown);
+const countdownIso = countdown ? toIso(countdown.date) : null;
+const target = countdownTarget(c, now);
+const startIso = toIso(c.dates.start);
+const endIso = toIso(c.dates.end);
+---
+
+<section id="dates" class="dates">
+  <div class="container">
+    <h2 class="dates__title">{t.sections.dates}</h2>
+    <table>
+      <tbody>
+        {
+          c.deadlines.map((d) => {
+            const iso = toIso(d.date);
+            return (
+              <tr data-deadline={iso} data-state={deadlineState(iso, now)}>
+                <th scope="row">{d.title[lang]}</th>
+                <td>{d.note?.[lang]}</td>
+                <td class="dates__date">{formatDate(iso, lang)}</td>
+              </tr>
+            );
+          })
+        }
+        <tr class="dates__conference" data-deadline={endIso} data-state={deadlineState(endIso, now)}>
+          <th scope="row">{t.conferenceDates}</th>
+          <td></td>
+          <td class="dates__date">{formatRange(startIso, endIso, lang)}</td>
+        </tr>
+      </tbody>
+    </table>
+    {
+      countdownIso && (
+        <p class="dates__countdown" data-countdown={countdownIso} data-lang={lang} hidden={!target}>
+          {t.countdownPrefix} <strong>{pluralDays(Math.max(0, daysUntil(countdownIso, now)), lang)}</strong>
+        </p>
+      )
+    }
+    <p class="dates__finished" data-finished-after={endIso} hidden={!isFinished(c, now)}>{t.finished}</p>
+  </div>
+</section>
+
+<style>
+  .dates {
+    padding: 0 0 clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .dates__title {
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+
+  .dates table {
+    max-width: 48rem;
+  }
+
+  .dates th {
+    font-size: 1rem;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .dates td {
+    color: var(--color-muted);
+  }
+
+  .dates .dates__date {
+    color: var(--color-text);
+    font-weight: 700;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .dates .dates__conference .dates__date,
+  .dates .dates__conference th {
+    color: var(--color-accent);
+  }
+
+  .dates tr[data-state='past'] th,
+  .dates tr[data-state='past'] td {
+    color: var(--color-muted);
+    font-weight: 400;
+    text-decoration: line-through;
+    text-decoration-color: var(--color-border);
+  }
+
+  .dates .dates__conference[data-state='past'] th,
+  .dates .dates__conference[data-state='past'] td {
+    text-decoration: none;
+  }
+
+  .dates__countdown,
+  .dates__finished {
+    margin: 1rem 0 0;
+    font-weight: 600;
+  }
+
+  .dates__finished {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 560px) {
+    .dates tr {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+
+    .dates td:empty {
+      display: none;
+    }
+
+    .dates td:not(.dates__date) {
+      grid-column: 1;
+      padding-top: 0;
+    }
+
+    .dates th,
+    .dates td {
+      border-bottom: none;
+    }
+
+    .dates tr {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .dates .dates__date {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+</style>

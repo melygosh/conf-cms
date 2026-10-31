@@ -1,0 +1,26 @@
+---
+import type { Conference, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import { md } from '../../lib/markdown';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+---
+
+<Section id="publication" title={ui[lang].sections.publication}>
+  <p class="lead">{c.publication.summary[lang]}</p>
+  <div class="prose" set:html={md(c.publication.rules[lang])} />
+  <div class="prose" set:html={md(c.publication.formatting[lang])} />
+</Section>
+
+<style>
+  .lead {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+  }
+</style>

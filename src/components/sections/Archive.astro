@@ -1,0 +1,54 @@
+---
+import type { ArchiveYear, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  archive: ArchiveYear[];
+}
+
+const { lang, archive } = Astro.props;
+const t = ui[lang];
+---
+
+{
+  archive.length > 0 && (
+    <Section id="archive" title={t.sections.archive} tone="tinted">
+      {archive.map((a) => (
+        <details class="archive__year">
+          <summary>{a.year}</summary>
+          {a.photos && (
+            <p>
+              <a href={a.photos} target="_blank" rel="noopener">
+                {t.photos}
+              </a>
+            </p>
+          )}
+          {a.presentations.length > 0 && (
+            <>
+              <h4>{t.presentations}</h4>
+              <ul>
+                {a.presentations.map((p) => (
+                  <li>
+                    {p.author} — <a href={p.href} target="_blank" rel="noopener">{p.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </details>
+      ))}
+    </Section>
+  )
+}
+
+<style>
+  .archive__year summary {
+    padding: 0.75rem 0;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>

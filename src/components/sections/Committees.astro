@@ -1,0 +1,23 @@
+---
+import type { Conference, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import { md } from '../../lib/markdown';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+---
+
+<Section id="committees" title={ui[lang].sections.committees} tone="tinted">
+  <div class="prose committees" set:html={md(c.committees[lang])} />
+</Section>
+
+<style>
+  .committees :global(p) {
+    margin: 0.4rem 0;
+  }
+</style>

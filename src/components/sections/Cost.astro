@@ -1,0 +1,53 @@
+---
+import type { Conference, Lang } from '../../content/schema';
+import { ui } from '../../i18n/ui';
+import { md, mdInline } from '../../lib/markdown';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+---
+
+<Section id="cost" title={t.sections.cost} tone="tinted">
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>{c.cost.headers[lang].map((h) => <th scope="col">{h}</th>)}</tr>
+      </thead>
+      <tbody>
+        {
+          c.cost.rows.map((r) => (
+            <tr>
+              <td set:html={mdInline(r.label[lang])} />
+              <td>{r.ukraine[lang]}</td>
+              <td>{r.abroad[lang]}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="prose cost__notes" set:html={md(c.cost.notes[lang])} />
+  <h3>{t.sections.payment}</h3>
+  <div class="prose" set:html={md(c.cost.payment[lang])} />
+</Section>
+
+<style>
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  .table-scroll table {
+    min-width: 32rem;
+  }
+
+  .cost__notes {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+</style>
