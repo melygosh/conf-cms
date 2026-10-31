@@ -1,0 +1,60 @@
+# Дані, що не залежать від року конференції.
+
+# UA і EN контакти різні навмисно (так на сайті 2026).
+contacts:
+  uk: |
+    ### Поштова адреса
+
+    Кафедра управління проєктами в інформаційних технологіях<br>
+    НТУ «ХПІ», вул. Кирпичова, 2<br>
+    Харків, 61002, Україна
+
+    ### Організаційний комітет
+
+    Шуба Ірина Володимирівна<br>
+    Телефон: [+38 (057) 707-68-24](tel:+380577076824)<br>
+    Мобільний: [+38 (068) 618-09-60](tel:+380686180960)<br>
+    E-mail: [imconf@gmail.com](mailto:imconf@gmail.com)
+
+    ### Програмний комітет
+
+    Телефон кафедри: [+38 (057) 707-68-24](tel:+380577076824)<br>
+    Мобільний: [+38 (050) 984-69-79](tel:+380509846979)<br>
+    E-mail: [publish.conf@gmail.com](mailto:publish.conf@gmail.com)
+  en: |
+    ### Address
+
+    Strategic Management Department<br>
+    NTU "KhPI", 2 Kyrpychova str.<br>
+    Kharkiv, 61002, Ukraine
+
+    ### Contact Information
+
+    Igor V. Kononenko<br>
+    Phone: [+38 (050) 514-20-16](tel:+380505142016)<br>
+    E-mail: [igorvkononenko@gmail.com](mailto:igorvkononenko@gmail.com)
+
+khpiMapEmbedUrl: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10258.636093345713!2d36.2498081!3d49.9990019!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4847f00cec333b6!2z0J3QsNGG0LjQvtC90LDQu9GM0L3Ri9C5INGC0LXRhdC90LjRh9C10YHQutC40Lkg0YPQvdC40LLQtdGA0YHQuNGC0LXRgiAi0KXQsNGA0YzQutC-0LLRgdC60LjQuSDQv9C-0LvQuNGC0LXRhdC90LjRh9C10YHQutC40Lkg0LjQvdGB0YLQuNGC0YPRgiI!5e0!3m2!1sru!2sua!4v1509992454938
+
+partners:
+  - name: Ukrainian Project Management Association
+    href: http://www.upma.kiev.ua/
+    image: /assets/images/partner/partner-1.png
+  - name: Lviv National Environmental University
+    href: https://www.lnau.lviv.ua
+    image: /assets/images/partner/partner-2.png
+  - name: O.M. Beketov National University of Urban Economy in Kharkiv
+    href: http://www.kname.edu.ua/index.php/ru/
+    image: /assets/images/partner/partner-3.png
+  - name: University of National and World Economy
+    href: http://www.unwe.bg/bg/
+    image: /assets/images/partner/partner-5.png
+  - name: WSB University in Opole
+    href: https://www.wsb.pl/opole/
+    image: /assets/images/partner/partner-9.jpg
+  - name: Azerbaijan Project Management Association
+    href: http://ipma.az/ru/
+    image: /assets/images/partner/partner-6.png
+  - name: Azerbaijan University of Architecture and Construction
+    href: https://www.azmiu.edu.az/en
+    image: /assets/images/partner/partner-4.png

@@ -1,0 +1,361 @@
+# XVI конференція, 2026.
+# Новий рік: скопіювати цей файл у <рік>.yaml і змінити year, edition, dates, deadlines, links.
+# Поточною на сайті стає конференція з найбільшим year.
+# Тексти — Markdown. Кожне поле має значення uk і en.
+
+year: 2026
+edition: 16
+
+title:
+  uk: Інтегроване стратегічне управління, управління портфелями, програмами, проєктами
+  en: Integrated Strategic Management, Portfolio, Program and Project Management
+
+dates:
+  start: 2026-02-17
+  end: 2026-02-19
+
+venue:
+  description:
+    uk: |
+      Конференція буде проходити в мальовничому куточку Українських Карпат у затишному навчально-оздоровчому таборі Національного університету «Львівська політехніка» [«Політехнік-2»](http://www.lp.edu.ua/politehnik-2), який знаходиться у селищі Славсько, Львівської області. Славсько це не тільки неповторний місцевий колорит, який закохує в себе багатьох гостей раз і назавжди, а й база гірськолижного відпочинку, де кожному можна підібрати трасу відповідно до свого рівня спортивної підготовки.
+
+      Конференція буде проходити в змішаному форматі. Посилання для приєднання до засідань будуть надіслані зареєстрованим учасникам.
+    en: |
+      The conference will take place in a picturesque corner of the Ukrainian Carpathians in a cozy educational and health camp of the National University «Lviv Polytechnic» ["Polytechnic-2"](http://www.lp.edu.ua/politehnik-2), located in Slavsko, Lviv region. Slavsko is not only a unique local flavor that makes many guests fall in love with it once and for all, but also a base for skiing and recreation, where everyone can choose a trail according to their level of athletic training.
+
+      The conference will be held in a hybrid format. Links to join the sessions will be sent to registered participants.
+  mapEmbedUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99897.5166815242!2d23.46006058048362!3d48.856157216603066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47398b454daeba4b%3A0x8ce8ecf3a65b8b10!2z0J3QsNCy0YfQsNC70YzQvdC-LdC-0LfQtNC-0YDQvtCy0YfQuNC5INGC0LDQsdGW0YAg0KPQvdGW0LLQtdGA0YHQuNGC0LXRgtGDIMKr0J_QvtC70ZbRgtC10YXQvdGW0LotMsK7!5e0!3m2!1sen!2sua!4v1574459297253!5m2!1sen!2sua
+  mapLink: https://maps.app.goo.gl/xyA32VJdHeu1uJ4a6
+
+links:
+  registration:
+    uk: https://docs.google.com/forms/d/e/1FAIpQLScH4NPI31ig5qQ7ENp5DNdq-89fkvnv0CWZfmoMKaqpb7DwSA/viewform?usp=header
+    en: https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header
+  infoLetter:
+    uk: https://drive.google.com/file/d/1YRxQU5y64J0Z_zOHJFTVxMsxUHKY3h4o/view?usp=sharing
+    en: https://drive.google.com/file/d/1ElIhfmjbDcbgkylnpDjZhMhthZdkqVOa/view?usp=sharing
+
+organizers:
+  uk: |
+    - Міністерство освіти і науки України
+    - Національний технічний університет «Харківський політехнічний інститут»
+    - Українська асоціація управління проєктами
+    - Національний університет «Львівська політехніка»
+    - Азербайджанський університет архітектури та будівництва
+    - Азербайджанська асоціація управління проєктами
+  en: |
+    - Ministry of Education and Science of Ukraine
+    - National Technical University "Kharkiv Polytechnic Institute" (NTU "KhPI")
+    - Lviv Polytechnic National University
+    - Azerbaijan University of Architecture and Construction
+    - Ukrainian Association of Project Management
+    - Azerbaijan Project Management Association
+
+aim:
+  uk: Обговорення нових ідей в галузі стратегічного управління, управління портфелями, програмами, проєктами.
+  en: Discussion of new ideas in the field of strategic management, portfolio, program and project management.
+
+sections:
+  - name:
+      uk: "Інтеграція стратегічного управління, управління портфелями, програмами, проектами: моделі, методи та технології"
+      en: "Integration of Strategic Management with Portfolio, Program and Project Management: Models, Methods, and Techniques"
+    items:
+      uk:
+        - Прогнозне забезпечення стратегічного управління, управління проектами і програмами.
+        - Моделі та методи стратегічного управління, управління портфелями, програмами, проектами.
+        - Маркетингові стратегії в сучасних умовах.
+        - Формування портфеля проектів організації.
+        - Система збалансованих показників.
+        - Оптимізація бізнес-процесів організацій.
+        - Інформаційні технології у стратегічному управлінні, управлінні портфелями, програмами, проектами.
+      en:
+        - Forecasting in strategic management, project and program management.
+        - Models and methods of strategic management, portfolio, program and project management.
+        - Contemporary marketing strategies.
+        - Portfolio selection and optimization.
+        - Balanced scorecard.
+        - Business-process modeling and optimization.
+        - Information technology in strategic management, portfolio, program and project management.
+  - name:
+      uk: Управління ІТ проєктами
+      en: Managing IT Projects
+    text:
+      uk: Виступ експертів з управління ІТ проєктами.
+      en: Speeches by experts in IT project management.
+  - name:
+      uk: Застосування ефективних технологій управління на практиці
+      en: Application of Effective Management Technologies in Practice
+    text:
+      uk: Виступ експертів-практиків з управління. Виступи випускників університетів з доповіддю про власні професійні досягнення.
+      en: Speeches by experts in management. Speeches by students graduated in project management about their professional achievements.
+
+languages:
+  uk: Англійська та українська.
+  en: English.
+
+publication:
+  summary:
+    uk: Матеріали конференції будуть опубліковані у вигляді збірника тез доповідей та у Віснику НТУ «ХПІ».
+    en: The conference materials will be published in the form of a collection of abstracts and in the NTU "KhPI" Bulletin.
+  rules:
+    uk: |
+      - Тези приймаються обсягом 2 сторінки тексту формату А4, включно з рисунками, в редакторі MS Word (тези необхідно прикріпити до форми реєстрації, або надіслати на електронну адресу програмного комітету **publish.conf@gmail.com**).
+      - Мова конференції: **англійська та українська**.
+      - Назва файлу повинна відповідати прізвищу першого автора.
+    en: |
+      - Abstracts are accepted in the amount of 2 pages of A4 text, including figures, in MS Word (abstracts must be attached to the registration form or sent to the program committee's email address **publish.conf@gmail.com**).
+      - Conference language: **English**.
+      - The file name should correspond to the surname of the first author.
+  formatting:
+    uk: |
+      **Тези доповіді оформлюються відповідно до наступних вимог:**
+
+      - шрифт **Times New Roman**, кегль 14; поля: зліва, справа, зверху, знизу – **2 см**; міжрядковий інтервал – **одинарний**;
+      - *у першому рядку* – назва доповіді прописними літерами, вирівнювання по центру, жирним шрифтом;
+      - *у другому рядку* – по центру ініціали та прізвища авторів доповіді жирним шрифтом;
+      - *у третьому рядку* – по центру повна назва організації і місто, курсивом (шрифт напівжирний).
+      - Рисунки, що вставляються в текст, повинні мати розміри не більше 12 на 9 см із застосуванням форматів: **bmp**, **tif**, **jpg**. Розмір шрифту під рисунком – 12 pt. Рисунки, виконані за допомогою Word, повинні бути обов'язково згрупованими.
+      - Посилання на літературу подаються у стилі **APA**.
+    en: |
+      **Abstracts should be prepared in accordance with the following requirements:**
+
+      - font **Times New Roman**, size 14; margins: left, right, top, bottom – **2 cm**; line spacing – **single**;
+      - *first line* – the title of the report in capital letters, centre alignment, bold;
+      - *the second line* – initials and surnames of the authors of the report in bold in the centre;
+      - *in the third line* – the full name of the organisation and the city in italics (bold).
+      - Figures inserted into the text should be no larger than 12 by 9 cm in size and should use the following formats: **bmp**, **tif**, **jpg**. The font size under the figure is 12 pt. Figures made using Word must be grouped.
+      - References to the literature are given in **APA** style.
+
+deadlines:
+  - date: 2026-01-25
+    title:
+      uk: Подача заявки учасниками
+      en: Conference registration
+    note:
+      uk: Оплата організаційного внеску
+      en: Payment of the participation fee
+  - date: 2026-01-25
+    countdown: true
+    title:
+      uk: Закінчення прийому тез доповідей
+      en: Abstracts and reports submission
+  - date: 2026-02-16
+    title:
+      uk: Закінчення прийому статей
+      en: Paper submission
+    note:
+      uk: Оплата публікації
+      en: Payment for publication
+
+cost:
+  headers:
+    uk: [Умови участі, Для України, Для інших країн]
+    en: [Terms of participation, For Ukraine, For other countries]
+  rows:
+    - label:
+        uk: Організаційний внесок за участь у конференції <sup>1</sup>
+        en: Fee for participation in the conference <sup>1</sup>
+      ukraine:
+        uk: 300 грн.
+        en: 300 UAH
+      abroad:
+        uk: "-"
+        en: "-"
+    - label:
+        uk: Оплата за публікацію статті у Віснику НТУ «ХПІ» <sup>2</sup>
+        en: Payment for the paper publication in the Bulletin of the NTU "KhPI" <sup>2</sup>
+      ukraine:
+        uk: 150 грн. за сторінку
+        en: 150 UAH per page
+      abroad:
+        uk: 5 USD per page
+        en: 5 EUR per page
+  notes:
+    uk: |
+      <sup>1</sup> Оплата здійснюється окремо після прийняття статті програмним комітетом.
+
+      <sup>2</sup> Друкований примірник наукового журналу зі статтями конференції у вартість публікації статті не входить. Друковані примірники журналу можуть бути замовлені окремо. Вартість складатиме 300 грн. для учасників з України та 12 USD для учасників із-за кордону.
+    en: |
+      <sup>1</sup> Payment is made separately after the paper acceptance by the Program Committee.
+
+      <sup>2</sup> Printed copy of a scientific bulletin with conference papers is not included in the paper publication cost. Printed copies of the bulletin can be ordered separately. The cost will be 300 UAH for participants from Ukraine and 12 EUR for participants from abroad.
+  # UA і EN тут різні навмисно (так на сайті 2026): в EN немає реквізитів.
+  payment:
+    uk: |
+      **Реквізити для сплати організаційного внеску і сплати за публікацію статті у Віснику НТУ «ХПІ»:**
+
+      Отримувач: ФОП Роговий Антон Іванович<br>
+      Код отримувача: 2676910774<br>
+      Рахунок: UA283052990000026002045921275 в ПАТ КБ "Приватбанк"<br>
+      Призначення платежу: *"За участь в конференції" (Прізвище, ім'я, по-батькові учасника)*.
+
+      **Увага!!!!** Обов'язково вказувати призначення платежу та ПІБ учасника, без нього кошти не зарахуються й участь не підтвердиться.
+    en: |
+      **Payment details:**
+
+      To pay for the publication of a paper in the NTU 'KhPI' Bulletin, authors will need to contact the Program Committee.
+
+authors:
+  - title:
+      uk: Загальні положення
+      en: General Terms
+    body:
+      uk: |
+        ![Вісник НТУ «ХПІ»](/images/vestnik-hpi.jpg)
+
+        1. Статті, що надходять на розгляд до *[програмного комітету](mailto:publish.conf@gmail.com)*, повинні повністю відповідати встановленим вимогам до оформлення. В іншому випадку стаття буде повернена на доопрацювання автору або статті буде відмовлено в публікації.
+        2. Статті, отримані програмним комітетом, у випадку їх повної відповідності вимогам до оформлення, будуть направлені на подвійне анонімне рецензування.
+        3. Авторам статей, що отримали негативну рецензію, у публікації може бути відмовлено. При цьому, програмний комітет залишає за собою право повернути статтю автору на доопрацювання.
+        4. Стаття, рекомендована рецензентами та програмним комітетом, повинна бути сплачена згідно з розділом *[«Вартість»](#cost)* у відведений термін, який зазначено у розділі *[«Важливі дати»](#dates)*. У випадку несвоєчасної оплати вартості публікації програмний комітет залишає за собою право не публікувати статтю. Сплата за публікацію у цьому випадку буде повернена автору у повному обсязі.
+        5. Статті, що успішно пройшли процедуру рецензування та були своєчасно оплачені, будуть опубліковані у *[Віснику НТУ «ХПІ». Серія: Стратегічне управління, управління портфелями програмами та проектами](http://pm.khpi.edu.ua/issue/view/5768)*. Даний науковий журнал входить до переліку фахових видань України, а також включений в наукометричні бази та репозитарії.
+        6. На всі статті конференції, які будуть опубліковані у журналі, будуть встановлені цифрові ідентифікатори DOI.
+        7. Вісник НТУ «ХПІ» входить до переліку наукових фахових видань категорії Б зі спеціальностей – 122, 126.
+      en: |
+        ![Bulletin of NTU "KhPI"](/images/vestnik-hpi.jpg)
+
+        1. Papers submitted to the *[Program committee consideration](mailto:publish.conf@gmail.com)*, must fully comply with design requirements. Otherwise, the paper will be returned to the author for refinement or the publication will be refused.
+        2. In case of their full compliance with the requirements, papers will be send to a double anonymous review.
+        3. If the paper received a negative review its publication may be denied. In this case, the Program committee reserves the right to return the author's paper for revision.
+        4. The paper recommended by reviewers and the Program committee should be paid in accordance with section *["Price"](#cost)* in the allotted time, which is defined in Section *["Important Dates"](#dates)*. In case of late publication costs payment, the Program committee reserves the right not to publish the paper. The publication payment in this case will be returned to the author in full.
+        5. Papers that have successfully passed the review process and were promptly paid will be published in the *[Bulletin of NTU "KhPI". Series: Strategic Management, Portfolio, Program and Project Management](http://pm.khpi.edu.ua/issue/view/5768)*. The journal is included in the list of scientific specialised editions of Ukraine; abstracted and indexed in the international scientometric databases, repositories, libraries, search engines, and catalogues.
+        6. All conference papers that will be published in the journal will have DOI numerical identifiers.
+  - title:
+      uk: До програмного комітету подаються
+      en: To Program Committee should be submitted
+    body:
+      uk: |
+        1. *[Заявка на участь](https://docs.google.com/forms/d/e/1FAIpQLScH4NPI31ig5qQ7ENp5DNdq-89fkvnv0CWZfmoMKaqpb7DwSA/viewform?usp=header)*
+        2. *Електронний варіант тез доповіді*
+        3. *Електронний варіант статті (електронною поштою) за бажанням.*
+        4. *Копія чеку про сплату організаційного внеску та вартості публікації статті.*
+      en: |
+        1. *[Application for participation](https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header)*
+        2. *Electronic version of the abstracts of the report*
+        3. *Electronic version of the article (by email) if desired.*
+        4. *Copy of the payment check (the organizational fee and the publication cost payment).*
+
+committees:
+  uk: |
+    ### Організаційний комітет
+
+    #### Голови
+
+    **Сокол Є.І.**, член-кореспондент НАН України, д.т.н., проф., ректор НТУ «ХПІ», м. Харків, Україна
+
+    **Шаховська Н.Б.**, член-кореспондент НАН України, д.т.н., проф., ректор Національного університету «Львівська політехніка», м. Львів, Україна
+
+    **Мамедова Г.**, доктор наук, проф., ректор Азербайджанського університету архітектури та будівництва, м. Баку, Азербайджан
+
+    **Бушуєв С.Д.**, д.т.н., проф., президент Української асоціації управління проєктами, м. Київ, Україна
+
+    #### Заступники голови
+
+    **Марченко А.П.**, д.т.н., проф., проректор НТУ «ХПІ», м. Харків, Україна
+
+    **Корж Р.О.**, д.т.н., проф., проректор Національного університету «Львівська політехніка», м. Львів, Україна
+
+    **Бабаєв І.**, д.т.н., проф., президент Азербайджанської асоціації управління проєктами, зав. кафедрою управління проєктами Азербайджанського університету архітектури та будівництва, м. Баку, Азербайджан
+
+    **Кононенко І.В.**, д.т.н., проф., НТУ «ХПІ», м. Харків, Україна
+
+    #### Члени оргкомітету
+
+    **Лобач О.В.**, к.т.н., доцент, НТУ «ХПІ», м. Харків, Україна
+
+    **Роговий А.І.**, к.т.н., доцент, НТУ «ХПІ», м. Харків, Україна
+
+    **Тимочко В.О.**, к.т.н., доцент, ЛНАУ, м. Львів, Україна
+
+    **Тімофєєв В.О.**, д.т.н., проф, ХНУМГ ім.О.М.Бекетова, м. Харків, Україна
+
+    **Чумаченко І.В.**, д.т.н., проф., зав. кафедрою управління проектами в міському господарстві і будівництві ХНУМГ ім. О.М. Бекетова, м. Харків, Україна
+
+    **Абдуллаєв Р.**, заступник завідувача кафедрою управління проєктами Азербайджанського університету архітектури та будівництва, м. Баку, Азербайджан
+
+    #### Менеджер конференції
+
+    **Шуба І.В.**, к.т.н., доцент, НТУ «ХПІ», м. Харків, Україна
+
+    ### Програмний комітет
+
+    #### Голова
+
+    **Кононенко І.В.**, д.т.н., проф., НТУ «ХПІ», м. Харків, Україна
+
+    #### Члени комітету
+
+    **Гринченко М.А.**, к.т.н., доцент, зав. кафедрою управління проєктами в інформаційних технологіях НТУ «ХПІ», м. Харків, Україна
+
+    **Зачко О.Б.**, д.т.н., проф., Львівський державний університет безпеки життєдіяльності, м. Львів, Україна
+
+    **Коларов К.**, PhD, директор Інституту підприємництва Університету національної і світової економіки, м. Софія, Болгарія
+
+    **Кподжедо М.**, PhD, радник президента Республіки Бенін з інформаційних технологій, Бенін
+
+    **Малєєва О.В.**, д.т.н., проф., НАУ ім. М.Є.Жуковського «ХАІ», м. Харків, Україна
+
+    **Саченко А.О.**, д.т.н., проф., директор Науково-дослідного інституту інтелектуальних комп'ютерних систем, Західноукраїнський національний університет, м. Тернопіль, Україна
+
+    **Чернов С.К.**, д.т.н., проф., зав. кафедрою управління проєктами НУК ім. адмірала Макарова, м. Миколаїв, Україна
+  en: |
+    ### Organizing Committee
+
+    #### Chairmen
+
+    **Yevgen I. Sokol**, D.Sc. (Tech.), Professor, Rector of NTU "KhPI", Kharkiv, Ukraine
+
+    **Nataliya B. Shakhovska**, D.Sc. (Tech.), Professor, Rector of Lviv Polytechnic National University, Lviv, Ukraine
+
+    **Gulchohra Mammadova**, D.Sc., Professor, Rector of Azerbaijan University of Architecture and Construction, Baku, Azerbaijan
+
+    **Sergey D. Bushuiev**, D.Sc. (Tech.), Professor, President of Ukrainian Project Management Association, Kyiv, Ukraine
+
+    #### Deputy Chairmen
+
+    **Andrey P. Marchenko**, D.Sc. (Tech.), Professor, Vice-rector of NTU "KhPI", Kharkiv, Ukraine
+
+    **Roman O. Korzh**, D.Sc. (Tech.), Professor, Vice-rector of Lviv Polytechnic National University, Lviv, Ukraine
+
+    **Igbal Babayev**, D.Sc. (Tech.), Professor, President of Azerbaijan Project Management Association, Head of Project Management Department, Azerbaijan University of Architecture and Construction, Baku, Azerbaijan
+
+    **Igor V. Kononenko**, D.Sc. (Tech.), Professor, NTU "KhPI", Kharkiv, Ukraine, Azerbaijan University of Architecture and Construction, Baku, Azerbaijan
+
+    #### Members
+
+    **Igor V. Chumachenko**, D.Sc. (Tech.), Professor, O.M.Beketov National University of Urban Economy, Kharkiv, Ukraine
+
+    **Helena V. Lobach**, Associate Professor, NTU "KhPI", Kharkiv, Ukraine
+
+    **Anton I. Rogovoy**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
+
+    **Volodymyr O. Timofeev**, D.Sc. (Tech.), Professor, O.M.Beketov National University of Urban Economy, Kharkiv, Ukraine
+
+    **Vasiliy O. Tymochko**, Ph.D., Associate Professor, LNAU, Lviv, Ukraine
+
+    **Rasim Abdullayev**, Deputy Head of Project Management Department, Azerbaijan University of Architecture and Construction, Baku, Azerbaijan
+
+    #### Conference Manager
+
+    **Iryna V. Shuba**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
+
+    ### Program Committee
+
+    #### Chairman
+
+    **Igor V. Kononenko**, D.Sc. (Tech.), Professor, NTU "KhPI", Kharkiv, Ukraine
+
+    #### Members
+
+    **Sergey K. Chernov**, D.Sc. (Tech.), Professor, NUS, Mykolayiv, Ukraine
+
+    **Marina A. Grinchenko**, Ph.D., Assoc. Prof., NTU "KhPI", Kharkiv, Ukraine
+
+    **Kostadin Kolarov**, Ph.D., Director of Institute of Entrepreneurship, University of National and World Economy, Sofia, Bulgaria
+
+    **Maximilien F. Kpodjedo**, Ph.D., Digital Adviser to the President of the Republic of Benin, Republic of Benin
+
+    **Olga V. Maleeva**, D.Sc. (Tech.), NAU "KHAI", Kharkiv, Ukraine
+
+    **Anatoliy O. Sachenko**, D.Sc. (Tech.), Professor, Director of Research Institute for Intelligent Computer Systems, West Ukrainian National University, Ternopil, Ukraine
+
+    **Oleg B. Zachko**, D.Sc. (Tech.), Professor, Lviv State University of Life Safety, Lviv, Ukraine

@@ -1,0 +1,18 @@
+# Матеріали минулих конференцій. Рік без photos і presentations на сайті не показується.
+# Назви презентацій — мовою оригіналу.
+
+year: 2018
+photos: https://photos.app.goo.gl/V2orFOwz0o38lC543
+presentations:
+  - author: Кононенко І.В.
+    title: НОВЫЕ КОМПОНЕНТЫ ОБОБЩЕННОГО СВОДА ЗНАНИЙ ПО УПРАВЛЕНИЮ ПРОЕКТАМИ
+    href: https://drive.google.com/file/d/1AEv66LCacxyKd3vagIA-r6zpG1EKFSaa/view
+  - author: Бушуев С.Д.
+    title: УПРАВЛЕНИЕ ПРОЕКТАМИ НА ПУТИ К ПОВЕДЕНЧЕСКОЙ ЭКОНОМИКЕ
+    href: https://drive.google.com/file/d/1iG5Hd63IW-yPQgkFvGrmO7SCdxtpdPE1/view?usp=sharing
+  - author: Зачко О.Б.
+    title: УПРАВЛІННЯ БЕЗПЕКОЮ НА СТАДІЇ ПЛАНУВАННЯ ПРОЕКТІВ З МАСОВИМ ПЕРЕБУВАННЯМ ЛЮДЕЙ З ВРАХУВАННЯМ КАТЕГОРІЇ СКЛАДНОСТІ
+    href: https://drive.google.com/file/d/1UIDKVvlSCw0S6aS78tC2urQh7tw2USYH/view?usp=sharing
+  - author: Никифоров А.
+    title: ОПТИМИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ ОРГАНИЗАЦИЙ С ПОМОЩЬЮ НЕЙРОННЫХ СЕТЕЙ
+    href: https://drive.google.com/file/d/19MQc4Plo1_wm4BMuv82LNAMRM0IOJl_1/view?usp=sharing
