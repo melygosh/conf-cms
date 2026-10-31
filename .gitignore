@@ -69,3 +69,10 @@ typings/
 # dotenv environment variables file
 .env
 
+
+# Astro
+dist/
+.astro/
+
+# Superpowers scratch (mockups, plan ledgers)
+.superpowers/

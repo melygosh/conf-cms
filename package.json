@@ -1,14 +1,27 @@
 {
   "name": "conf-cms",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "author": "",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
   "license": "ISC",
-  "dependencies": {
-    "express": "4.17.1"
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run --exclude 'tests/build/**'",
+    "test:build": "astro build && vitest run tests/build",
+    "logo": "node scripts/strip-logo-year.mjs"
   },
-  "engines": {
-    "node": "16.x"
+  "dependencies": {
+    "astro": "^7.4.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "happy-dom": "^21.0.4",
+    "sharp": "^0.35.5",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5",
+    "yaml": "^2.9.1"
   }
 }
