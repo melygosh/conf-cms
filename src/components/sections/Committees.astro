@@ -33,7 +33,7 @@ const committees = c.committees[lang]
   <div class="committees">
     {
       committees.map((committee) => (
-        <details class="committee">
+        <details class="committee" open>
           <summary>
             <span class="committee__title">{committee.title}</span>
             <span class="committee__count">{t.people(committee.count)}</span>

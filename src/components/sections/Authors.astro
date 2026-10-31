@@ -16,7 +16,7 @@ const { lang, conference: c } = Astro.props;
   <div class="accordion">
     {
       c.authors.map((a) => (
-        <details class="accordion__item">
+        <details class="accordion__item" open>
           <summary>{a.title[lang]}</summary>
           <div class="prose accordion__body" set:html={md(a.body[lang])} />
         </details>
