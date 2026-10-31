@@ -10,53 +10,132 @@ interface Props {
 }
 
 const { lang, conference: c } = Astro.props;
-// Entries are written as "**Name**, title…"; the name gets its own line, so drop the joining comma.
-const html = md(c.committees[lang]).replace(/<\/strong>,\s*/g, '</strong>');
+const t = ui[lang];
+
+// The Markdown is "### Committee" blocks of "#### Role" and "**Name**, title…" paragraphs.
+// Each committee becomes a collapsible block so ~30 people don't turn into a wall of cards.
+const committees = c.committees[lang]
+  .split(/^### /m)
+  .filter((block) => block.trim())
+  .map((block) => {
+    const [title, ...rest] = block.split('\n');
+    const body = rest.join('\n');
+    return {
+      title: title.trim(),
+      count: (body.match(/^\*\*/gm) ?? []).length,
+      // The name gets its own line in the card, so drop the joining comma.
+      html: md(body).replace(/<\/strong>,\s*/g, '</strong>'),
+    };
+  });
 ---
 
-<Section id="committees" title={ui[lang].sections.committees} tone="surface">
-  <div class="committees" set:html={html} />
+<Section id="committees" title={t.sections.committees} tone="surface">
+  <div class="committees">
+    {
+      committees.map((committee) => (
+        <details class="committee">
+          <summary>
+            <span class="committee__title">{committee.title}</span>
+            <span class="committee__count">{t.people(committee.count)}</span>
+          </summary>
+          <div class="committee__people" set:html={committee.html} />
+        </details>
+      ))
+    }
+  </div>
 </Section>
 
 <style>
-  /* The Markdown is a flat run of h3 (committee), h4 (role) and p (person); lay people out as a grid of cards. */
   .committees {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-    gap: 0.75rem;
+    border-top: 1px solid var(--color-border);
   }
 
-  .committees :global(h3) {
-    grid-column: 1 / -1;
-    margin: 2.5rem 0 0;
-    padding-bottom: 0.75rem;
+  .committee {
     border-bottom: 1px solid var(--color-border);
   }
 
-  .committees :global(h3:first-child) {
+  .committee summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .committee summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .committee__title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+  }
+
+  .committee__count {
+    margin-right: auto;
+    white-space: nowrap;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .committee summary::after {
+    content: '+';
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+
+  .committee[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  /* Roles (h4) span the row; people (p) flow into a grid of compact cards. */
+  .committee__people {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr));
+    gap: 0.6rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .committee__people :global(h4) {
+    grid-column: 1 / -1;
+    margin: 1rem 0 0.1rem;
+  }
+
+  .committee__people :global(h4:first-child) {
     margin-top: 0;
   }
 
-  .committees :global(h4) {
-    grid-column: 1 / -1;
-    margin: 1.25rem 0 0;
-  }
-
-  .committees :global(p) {
+  .committee__people :global(p) {
     margin: 0;
-    padding: 1rem 1.1rem;
+    padding: 0.8rem 0.95rem;
     border-radius: var(--radius);
     background: var(--color-bg);
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.84rem;
+    line-height: 1.45;
     color: var(--color-muted);
   }
 
-  .committees :global(p strong) {
+  .committee__people :global(p strong) {
     display: block;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
     font-family: var(--font-serif);
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--color-text);
   }
 </style>

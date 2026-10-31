@@ -76,3 +76,6 @@ dist/
 
 # Superpowers scratch (mockups, plan ledgers)
 .superpowers/
+
+# Playwright MCP snapshots
+.playwright-mcp/

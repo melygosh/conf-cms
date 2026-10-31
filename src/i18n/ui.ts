@@ -1,5 +1,10 @@
 import type { Lang } from '../content/schema';
 
+const ukPlural = (n: number, one: string, few: string, many: string) => {
+  const rule = new Intl.PluralRules('uk-UA').select(n);
+  return rule === 'one' ? one : rule === 'few' ? few : many;
+};
+
 export interface UiStrings {
   nav: {
     about: string;
@@ -23,6 +28,7 @@ export interface UiStrings {
     cost: string;
     payment: string;
     authors: string;
+    authorsNote: string;
     committees: string;
     registration: string;
     archive: string;
@@ -40,6 +46,7 @@ export interface UiStrings {
   photos: string;
   presentations: string;
   menu: string;
+  people: (n: number) => string;
   langSwitchLabel: string;
   langSwitchTitle: string;
   footer: string;
@@ -68,7 +75,8 @@ export const ui: Record<Lang, UiStrings> = {
       dates: 'Важливі дати',
       cost: 'Вартість',
       payment: 'Оплата',
-      authors: 'Авторам публікацій (Вісник НТУ «ХПІ»)',
+      authors: 'Авторам публікацій',
+      authorsNote: 'Вісник НТУ «ХПІ»',
       committees: 'Комітети',
       registration: 'Реєстрація',
       archive: 'Архів',
@@ -86,6 +94,7 @@ export const ui: Record<Lang, UiStrings> = {
     photos: 'Фото',
     presentations: 'Презентації',
     menu: 'Меню',
+    people: (n) => `${n} ${ukPlural(n, 'особа', 'особи', 'осіб')}`,
     langSwitchLabel: 'EN',
     langSwitchTitle: 'English version',
     footer: 'Designed and developed by Strategic Management Department',
@@ -112,7 +121,8 @@ export const ui: Record<Lang, UiStrings> = {
       dates: 'Important dates',
       cost: 'Price',
       payment: 'Payment',
-      authors: 'For authors (Bulletin of the NTU "KhPI")',
+      authors: 'For authors',
+      authorsNote: 'Bulletin of the NTU "KhPI"',
       committees: 'Committees',
       registration: 'Registration',
       archive: 'Archive',
@@ -130,6 +140,7 @@ export const ui: Record<Lang, UiStrings> = {
     photos: 'Photos',
     presentations: 'Presentations',
     menu: 'Menu',
+    people: (n) => `${n} ${n === 1 ? 'member' : 'members'}`,
     langSwitchLabel: 'UA',
     langSwitchTitle: 'Українська версія',
     footer: 'Designed and developed by Strategic Management Department',

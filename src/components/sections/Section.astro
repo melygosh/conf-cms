@@ -2,6 +2,8 @@
 interface Props {
   id: string;
   title: string;
+  /** Smaller line under the title. */
+  subtitle?: string;
   /** Show the running section number ("01", "02", …) above the title. */
   numbered?: boolean;
   tone?: 'plain' | 'surface' | 'dark';
@@ -12,7 +14,7 @@ interface Props {
   hidden?: boolean;
 }
 
-const { id, title, numbered = true, tone = 'plain', split = true, hiddenAfter, hidden } = Astro.props;
+const { id, title, subtitle, numbered = true, tone = 'plain', split = true, hiddenAfter, hidden } = Astro.props;
 ---
 
 <section
@@ -25,6 +27,7 @@ const { id, title, numbered = true, tone = 'plain', split = true, hiddenAfter, h
     <header class="section__head">
       {numbered && <p class="eyebrow section__eyebrow" aria-hidden="true" />}
       <h2 class="section__title">{title}</h2>
+      {subtitle && <p class="section__subtitle">{subtitle}</p>}
     </header>
     <div class="section__body">
       <slot />
@@ -78,7 +81,18 @@ const { id, title, numbered = true, tone = 'plain', split = true, hiddenAfter, h
     color: var(--color-primary-deep);
   }
 
+  .section__subtitle {
+    margin: -1.25rem 0 2rem;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--color-muted);
+  }
+
   @media (min-width: 960px) {
+    .section--split .section__subtitle {
+      margin: 0.5rem 0 0;
+    }
+
     .section--split .section__grid {
       display: grid;
       grid-template-columns: minmax(14rem, 1fr) 2.6fr;

@@ -12,6 +12,8 @@ interface Props {
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
 const [, ukraineHeader, abroadHeader] = c.cost.headers[lang];
+// "-" in the data means "not applicable".
+const dash = (value: string) => (value.trim() === '-' ? '—' : value);
 ---
 
 <Section id="cost" title={t.sections.cost} tone="surface">
@@ -23,11 +25,11 @@ const [, ukraineHeader, abroadHeader] = c.cost.headers[lang];
           <dl class="price__values">
             <div>
               <dt>{ukraineHeader}</dt>
-              <dd>{r.ukraine[lang]}</dd>
+              <dd>{dash(r.ukraine[lang])}</dd>
             </div>
             <div>
               <dt>{abroadHeader}</dt>
-              <dd>{r.abroad[lang]}</dd>
+              <dd>{dash(r.abroad[lang])}</dd>
             </div>
           </dl>
         </div>
@@ -72,7 +74,7 @@ const [, ukraineHeader, abroadHeader] = c.cost.headers[lang];
   .price__values dd {
     margin: 0.25rem 0 0;
     font-family: var(--font-serif);
-    font-size: 1.35rem;
+    font-size: 1.15rem;
     font-weight: 700;
     line-height: 1.25;
     color: var(--color-primary-deep);
@@ -94,6 +96,10 @@ const [, ukraineHeader, abroadHeader] = c.cost.headers[lang];
     border-left: 4px solid var(--color-accent);
     border-radius: 0 var(--radius) var(--radius) 0;
     background: var(--color-primary-soft);
+  }
+
+  .cost__payment {
+    overflow-wrap: anywhere;
   }
 
   .cost__payment h4 {

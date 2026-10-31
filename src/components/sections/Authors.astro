@@ -12,7 +12,7 @@ interface Props {
 const { lang, conference: c } = Astro.props;
 ---
 
-<Section id="authors" title={ui[lang].sections.authors}>
+<Section id="authors" title={ui[lang].sections.authors} subtitle={ui[lang].sections.authorsNote}>
   <div class="accordion">
     {
       c.authors.map((a) => (

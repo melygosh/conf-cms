@@ -237,3 +237,14 @@ main {
   background: var(--color-bg);
   border-color: transparent;
 }
+
+/* Google Maps iframes: a tinted placeholder while the map loads. */
+.map-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius);
+  background:
+    repeating-linear-gradient(45deg, transparent 0 12px, rgb(29 60 143 / 4%) 12px 24px),
+    var(--color-primary-soft);
+}

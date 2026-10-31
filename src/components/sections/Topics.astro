@@ -17,7 +17,7 @@ const t = ui[lang];
   <ol class="topics">
     {
       c.sections.map((s, i) => (
-        <li class="card topic">
+        <li class:list={['card', 'topic', { 'topic--wide': !!s.items }]}>
           <p class="topic__number">{t.sections.section(i + 1)}</p>
           <h3 class="topic__name">{s.name[lang]}</h3>
           {s.items && (
@@ -48,12 +48,18 @@ const t = ui[lang];
     font-weight: 700;
   }
 
+  /* A section with a topic list spans the row; short sections sit side by side. */
   .topics {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
     gap: 1rem;
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  .topic--wide {
+    grid-column: 1 / -1;
   }
 
   .topic__number {
@@ -71,19 +77,29 @@ const t = ui[lang];
   }
 
   .topic__items {
-    margin: 0;
-    padding-left: 1.1rem;
-    columns: 2 18rem;
-    column-gap: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: 0.6rem 2rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
   }
 
   .topic__items li {
-    break-inside: avoid;
-    margin-bottom: 0.4rem;
+    position: relative;
+    padding-left: 1.1rem;
+    line-height: 1.5;
   }
 
-  .topic__items li::marker {
-    color: var(--color-primary);
+  .topic__items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-primary);
   }
 
   .topic__text {
