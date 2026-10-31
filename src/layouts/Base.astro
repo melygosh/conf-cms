@@ -31,6 +31,14 @@ const ogLocale = lang === 'uk' ? 'uk_UA' : 'en_GB';
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ogLocale} />
+    {
+      lang === 'uk' && (
+        <script is:inline>
+          // Old links pointed to /?lang=en.
+          if (new URLSearchParams(location.search).get('lang') === 'en') location.replace('/en/');
+        </script>
+      )
+    }
   </head>
   <body>
     <slot />

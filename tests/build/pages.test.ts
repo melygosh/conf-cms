@@ -32,3 +32,16 @@ describe('both pages', () => {
     }
   });
 });
+
+describe('legacy URLs', () => {
+  it('redirects /index_eng.html to /en/', () => {
+    const html = readFileSync('dist/index_eng.html', 'utf8');
+    expect(html).toContain('<meta http-equiv="refresh" content="0; url=/en/">');
+    expect(html).toContain('<link rel="canonical" href="https://imconf.com.ua/en/">');
+  });
+
+  it('redirects /?lang=en to /en/ from the Ukrainian page only', () => {
+    expect(uk).toMatch(/lang=en[\s\S]*location\.replace\('\/en\/'\)|location\.replace\('\/en\/'\)[\s\S]*lang=en/);
+    expect(en).not.toContain("location.replace('/en/')");
+  });
+});
