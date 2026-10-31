@@ -20,16 +20,8 @@ const t = ui[lang];
   <ul class="organizers">
     {
       c.organizers.map((o) => (
-        <li class="organizer">
-          <span class="organizer__logo">
-            {o.logo ? (
-              <img src={o.logo} alt="" loading="lazy" />
-            ) : (
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 3 3 8v2h18V8l-9-5Zm-7 9v6H4v2h16v-2h-1v-6h-2v6h-3v-6h-4v6H7v-6H5Z" fill="currentColor" />
-              </svg>
-            )}
-          </span>
+        <li class:list={['organizer', { 'organizer--with-logo': o.logo }]}>
+          {o.logo && <img class="organizer__watermark" src={o.logo} alt="" loading="lazy" />}
           <span class="organizer__name">{o.name[lang]}</span>
         </li>
       ))
@@ -76,42 +68,42 @@ const t = ui[lang];
     list-style: none;
   }
 
+  /* The organizer's logo is a large, faded watermark cropped by the card edge. */
   .organizer {
+    position: relative;
+    isolation: isolate;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.9rem 1.1rem;
+    min-height: 6rem;
+    padding: 1.1rem 1.25rem;
     border-radius: var(--radius);
     background: var(--color-surface);
     box-shadow: 0 1px 2px rgb(16 36 58 / 6%);
+    overflow: hidden;
   }
 
-  .organizer__logo {
-    flex: none;
-    display: grid;
-    place-items: center;
-    /* Wide enough for horizontal logos, tall enough for round seals. */
-    width: 6rem;
-    height: 3.75rem;
+  .organizer--with-logo {
+    padding-right: 7.75rem;
   }
 
-  .organizer__logo img {
-    width: auto;
-    height: auto;
-    max-width: 6rem;
-    max-height: 3.75rem;
+  /* A fixed frame bleeding off the right edge: round seals fill it and get cropped,
+     wide wordmarks shrink to fit instead of running under the name. */
+  .organizer__watermark {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    right: -1.75rem;
+    width: 9.5rem;
+    height: 170%;
+    max-width: none;
     object-fit: contain;
-  }
-
-  .organizer__logo svg {
-    width: 2rem;
-    height: 2rem;
-    color: var(--color-muted);
-    opacity: 0.6;
+    opacity: 0.4;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 
   .organizer__name {
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.35;
   }
 
