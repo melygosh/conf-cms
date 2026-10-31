@@ -11,10 +11,12 @@ const BUILT_IN_NOVEMBER = `
   </tbody></table>
   <p data-countdown="2026-01-25" data-lang="uk">До кінця прийому тез: <strong>71 день</strong></p>
   <p data-finished-after="2026-02-19" hidden>Конференція відбулася</p>
+  <a class="register" data-hidden-after="2026-02-19" href="https://example.com/form">Реєстрація</a>
 `;
 
 const state = (iso: string) => document.querySelector(`[data-deadline="${iso}"]`)!.getAttribute('data-state');
 const countdown = () => document.querySelector<HTMLElement>('[data-countdown]')!;
+const register = () => document.querySelector<HTMLElement>('.register')!;
 const finished = () => document.querySelector<HTMLElement>('[data-finished-after]')!;
 
 describe('applyDateStates', () => {
@@ -27,6 +29,7 @@ describe('applyDateStates', () => {
     expect(countdown().textContent?.replace(/\s+/g, ' ').trim()).toBe('До кінця прийому тез: 5 днів');
     expect(countdown().hidden).toBe(false);
     expect(state('2026-01-25')).toBe('upcoming');
+    expect(register().hidden).toBe(false);
   });
 
   it('shows the deadline day in Kyiv as today with 0 days', () => {
@@ -41,5 +44,6 @@ describe('applyDateStates', () => {
     expect(finished().hidden).toBe(false);
     for (const iso of ['2026-01-25', '2026-02-16', '2026-02-19']) expect(state(iso)).toBe('past');
     expect(document.body.textContent).not.toMatch(/-\d/);
+    expect(register().hidden).toBe(true);
   });
 });

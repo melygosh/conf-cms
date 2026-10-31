@@ -2,7 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import type { Lang } from '../content/schema';
 import Base from '../layouts/Base.astro';
-import { pickCurrent, toRoman } from '../lib/conference';
+import { assertConferenceFiles, pickCurrent, toRoman } from '../lib/conference';
 import { ui } from '../i18n/ui';
 import Footer from './Footer.astro';
 import Header from './Header.astro';
@@ -24,7 +24,9 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const conference = pickCurrent((await getCollection('conferences')).map((e) => e.data));
+const conferenceEntries = await getCollection('conferences');
+assertConferenceFiles(conferenceEntries);
+const conference = pickCurrent(conferenceEntries.map((e) => e.data));
 const archive = (await getCollection('archive'))
   .map((e) => e.data)
   .filter((a) => a.photos || a.presentations.length > 0)

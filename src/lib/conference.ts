@@ -1,6 +1,21 @@
 import type { Conference } from '../content/schema';
 import { deadlineState, toIso } from './dates';
 
+/**
+ * Guards the yearly copy-and-edit workflow: a file copied to 2027.yaml that still says
+ * `year: 2026` would otherwise build green and keep showing the old conference.
+ */
+export function assertConferenceFiles(entries: { id: string; data: Conference }[]): void {
+  const seen = new Set<number>();
+  for (const { id, data } of entries) {
+    if (id !== String(data.year)) {
+      throw new Error(`src/content/conferences/${id}.yaml has year: ${data.year}; the file name and year must match`);
+    }
+    if (seen.has(data.year)) throw new Error(`Two conference files for year ${data.year}`);
+    seen.add(data.year);
+  }
+}
+
 /** The current conference is the one with the latest year. */
 export function pickCurrent(list: Conference[]): Conference {
   if (list.length === 0) throw new Error('No conference data in src/content/conferences');

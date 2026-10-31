@@ -24,6 +24,10 @@
   --header-height: 4.5rem;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 *,
 *::before,
 *::after {

@@ -1,6 +1,6 @@
 ---
 import type { Conference, Lang } from '../content/schema';
-import { toRoman } from '../lib/conference';
+import { isFinished, toRoman } from '../lib/conference';
 import { formatRange, toIso } from '../lib/dates';
 import { ui } from '../i18n/ui';
 
@@ -11,6 +11,8 @@ interface Props {
 
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
+const endIso = toIso(c.dates.end);
+const finished = isFinished(c, new Date());
 ---
 
 <section class="hero">
@@ -23,7 +25,14 @@ const t = ui[lang];
       <span>{c.venue.place[lang]}</span>
     </p>
     <p class="hero__actions">
-      <a class="button button--accent" href={c.links.registration[lang]} target="_blank" rel="noopener">{t.register}</a>
+      <a
+        class="button button--accent"
+        href={c.links.registration[lang]}
+        target="_blank"
+        rel="noopener"
+        data-hidden-after={endIso}
+        hidden={finished}>{t.register}</a
+      >
       <a class="hero__letter" href={c.links.infoLetter[lang]} target="_blank" rel="noopener">{t.infoLetter}</a>
     </p>
     <slot />

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { countdownTarget, isFinished, pickCurrent, toRoman } from '../../src/lib/conference';
+import { assertConferenceFiles, countdownTarget, isFinished, pickCurrent, toRoman } from '../../src/lib/conference';
 import { conference } from '../fixtures/conference';
 
 describe('pickCurrent', () => {
@@ -37,5 +37,17 @@ describe('isFinished', () => {
     const c = await conference();
     expect(isFinished(c, new Date('2026-02-19T10:00:00Z'))).toBe(false);
     expect(isFinished(c, new Date('2026-02-20T10:00:00Z'))).toBe(true);
+  });
+});
+
+describe('assertConferenceFiles', () => {
+  it('accepts files named after their year', async () => {
+    const c = await conference();
+    expect(() => assertConferenceFiles([{ id: '2026', data: c }])).not.toThrow();
+  });
+
+  it('fails when a copied file keeps the old year', async () => {
+    const c = await conference();
+    expect(() => assertConferenceFiles([{ id: '2026', data: c }, { id: '2027', data: c }])).toThrow(/2027\.yaml.*year: 2026/);
   });
 });

@@ -24,6 +24,29 @@ describe('conferenceSchema', () => {
     expect(paths(raw)).toContainEqual(['deadlines', 0, 'date']);
   });
 
+  it.each([['January 25'], ['25 January 2027'], ['2027/01/25'], [20270125], ['2026-02-30']])(
+    'rejects the loosely written date %s instead of guessing',
+    (date) => {
+      const raw = rawConference() as { deadlines: { date: unknown }[] };
+      raw.deadlines[0].date = date;
+      expect(paths(raw)).toContainEqual(['deadlines', 0, 'date']);
+    },
+  );
+
+  it('accepts a YAML date (UTC midnight Date) and an ISO string', () => {
+    const raw = rawConference() as { deadlines: { date: unknown }[] };
+    raw.deadlines[0].date = new Date(Date.UTC(2026, 0, 25));
+    expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
+  it('rejects conference dates outside the conference year', () => {
+    expect(paths({ ...rawConference(), year: 2027 })).toContainEqual(['dates', 'start']);
+  });
+
+  it('rejects a conference that ends before it starts', () => {
+    expect(paths({ ...rawConference(), dates: { start: '2026-02-19', end: '2026-02-17' } })).toContainEqual(['dates', 'end']);
+  });
+
   it('rejects unknown top-level fields', () => {
     expect(conferenceSchema.safeParse({ ...rawConference(), extra: 1 }).success).toBe(false);
   });

@@ -19,6 +19,10 @@ export function applyDateStates(root: ParentNode, now: Date): void {
   root.querySelectorAll<HTMLElement>('[data-finished-after]').forEach((el) => {
     el.hidden = deadlineState(el.dataset.finishedAfter!, now) !== 'past';
   });
+
+  root.querySelectorAll<HTMLElement>('[data-hidden-after]').forEach((el) => {
+    el.hidden = deadlineState(el.dataset.hiddenAfter!, now) === 'past';
+  });
 }
 
 if (typeof document !== 'undefined') applyDateStates(document, new Date());

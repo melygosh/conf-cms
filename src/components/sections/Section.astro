@@ -3,12 +3,15 @@ interface Props {
   id: string;
   title: string;
   tone?: 'plain' | 'tinted';
+  /** Hide the section once this date has passed (see src/scripts/date-states.ts). */
+  hiddenAfter?: string;
+  hidden?: boolean;
 }
 
-const { id, title, tone = 'plain' } = Astro.props;
+const { id, title, tone = 'plain', hiddenAfter, hidden } = Astro.props;
 ---
 
-<section id={id} class:list={['section', `section--${tone}`]}>
+<section id={id} class:list={['section', `section--${tone}`]} data-hidden-after={hiddenAfter} hidden={hidden}>
   <div class="container">
     <h2 class="section__title">{title}</h2>
     <slot />

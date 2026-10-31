@@ -6,8 +6,24 @@ export const LANGS: Lang[] = ['uk', 'en'];
 /** A value that must be present in both languages. */
 export const localized = <T extends z.ZodType>(t: T) => z.object({ uk: t, en: t }).strict();
 
-// YAML `2026-01-25` arrives as a Date; a human-written "25 січня" fails here.
-const isoDate = z.coerce.date();
+// YAML parses an unquoted `2026-01-25` into a Date at UTC midnight; a quoted one stays a string.
+// Anything else ("January 25", "2027/01/25", 20270125, 2026-02-30) is rejected rather than guessed.
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+const DATE_HINT = 'Use a YYYY-MM-DD date, e.g. 2027-01-25';
+
+const isoDate = z.union([z.date(), z.string()]).transform((value, ctx) => {
+  const date = typeof value === 'string' ? new Date(`${value}T00:00:00Z`) : value;
+  const valid =
+    !Number.isNaN(date.getTime()) &&
+    date.getUTCHours() === 0 &&
+    date.getUTCMinutes() === 0 &&
+    (typeof value !== 'string' || (ISO_DATE.test(value) && date.toISOString().slice(0, 10) === value));
+  if (!valid) {
+    ctx.addIssue({ code: 'custom', message: DATE_HINT });
+    return z.NEVER;
+  }
+  return date;
+});
 const url = z.url();
 
 export const conferenceSchema = z
@@ -61,7 +77,15 @@ export const conferenceSchema = z
     authors: z.array(z.object({ title: localized(z.string()), body: localized(z.string()) }).strict()),
     committees: localized(z.string()),
   })
-  .strict();
+  .strict()
+  .superRefine((c, ctx) => {
+    if (c.dates.start.getUTCFullYear() !== c.year) {
+      ctx.addIssue({ code: 'custom', path: ['dates', 'start'], message: `Conference start is not in year ${c.year}` });
+    }
+    if (c.dates.end < c.dates.start) {
+      ctx.addIssue({ code: 'custom', path: ['dates', 'end'], message: 'Conference ends before it starts' });
+    }
+  });
 
 export const archiveSchema = z
   .object({

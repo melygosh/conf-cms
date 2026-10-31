@@ -1,6 +1,8 @@
 ---
 import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
+import { isFinished } from '../../lib/conference';
+import { toIso } from '../../lib/dates';
 import Section from './Section.astro';
 
 interface Props {
@@ -10,10 +12,17 @@ interface Props {
 
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
+const endIso = toIso(c.dates.end);
 ---
 
-<Section id="registration" title={t.sections.registration}>
+<Section id="registration" title={t.sections.registration} hiddenAfter={endIso} hidden={isFinished(c, new Date())}>
   <p>
-    <a class="button button--accent" href={c.links.registration[lang]} target="_blank" rel="noopener">{t.registerLong}</a>
+    <a
+      class="button button--accent"
+      href={c.links.registration[lang]}
+      target="_blank"
+      rel="noopener"
+      data-hidden-after={endIso}>{t.registerLong}</a
+    >
   </p>
 </Section>

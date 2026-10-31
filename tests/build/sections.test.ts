@@ -24,6 +24,11 @@ describe('page sections', () => {
     expect(html).toContain('data-finished-after="2026-02-19"');
   });
 
+  it.each(pages)('%s ties registration to the conference end date', (_, html) => {
+    expect(html).toMatch(/<a[^>]*data-hidden-after="2026-02-19"[^>]*docs\.google\.com\/forms|<a[^>]*docs\.google\.com\/forms[^>]*data-hidden-after="2026-02-19"/);
+    expect(html).toMatch(/id="registration"[^>]*data-hidden-after="2026-02-19"|data-hidden-after="2026-02-19"[^>]*id="registration"/);
+  });
+
   it.each(pages)('%s uses native disclosure for the authors section', (_, html) => {
     expect(html).toContain('<details');
   });

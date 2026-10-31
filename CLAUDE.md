@@ -24,7 +24,7 @@ npm run logo -- <in.png> <out.png>       # strip the red year from a logo PNG
 - `src/content/conferences/<year>.yaml` — everything about one conference, every text as `{ uk, en }`. The conference with the largest `year` is the current one. Texts are Markdown (raw HTML such as `<sup>` passes through).
 - `src/content/archive/<year>.yaml` — photos/presentations of past years; a year with neither is not shown.
 - `src/content/site.yaml` — data that does not change per year: contacts, KhPI map, partners.
-- `src/content/schema.ts` — zod schemas (strict). A missing translation, unknown field or non-ISO date fails the build and names the field.
+- `src/content/schema.ts` — zod schemas (strict). A missing translation, unknown field, a date not written as `YYYY-MM-DD`, or conference dates outside its `year` fail the build and name the field. `assertConferenceFiles` (called from `ConferencePage.astro`) fails the build when a file name does not match its `year`.
 - `src/i18n/ui.ts` — interface strings (nav, section titles, buttons). Content never goes here.
 - `src/lib/` — pure functions (no Astro/DOM imports) used both at build time and in the browser.
 - `src/components/ConferencePage.astro` — loads collections and composes the page; `src/pages/index.astro` (uk, `/`) and `src/pages/en/index.astro` (en, `/en/`) only pick the language.
@@ -33,7 +33,7 @@ npm run logo -- <in.png> <out.png>       # strip the red year from a logo PNG
 
 - **Adding a new year:** copy `src/content/conferences/2026.yaml` to `<year>.yaml`, change `year`, `edition`, `dates`, `deadlines`, `links`; edit the rest as organizers ask. The logo year updates by itself.
 - **UA and EN differ on purpose** in `cost` (USD vs EUR, bank details vs "contact the Program Committee") and in `site.contacts`. Do not "sync" them without asking the owner.
-- **Dates are build-time *and* client-side.** `Dates.astro` renders states with the build date and the contract attributes `data-deadline`, `data-countdown` (+`data-lang`), `data-finished-after`; `src/scripts/date-states.ts` recomputes them on the visitor's date. Keep both sides in sync. All date math is in `Europe/Kyiv`; the deadline day itself counts as "today", not past.
+- **Dates are build-time *and* client-side.** `Dates.astro` renders states with the build date and the contract attributes `data-deadline`, `data-countdown` (+`data-lang`), `data-finished-after`, `data-hidden-after` (registration buttons/section); `src/scripts/date-states.ts` recomputes them on the visitor's date. Keep both sides in sync. All date math is in `Europe/Kyiv`; the deadline day itself counts as "today", not past.
 - **Logo:** `public/images/logo-base.png` is the original artwork without the year; `Logo.astro` draws the year as SVG text over it. The PNG is 326×161, so keep the rendered logo ≤ 160 px wide.
 - **Legacy URLs:** `public/index_eng.html` (meta refresh) and an inline script in `Base.astro` (`/?lang=en`) send old links to `/en/`.
 - **Deploy:** see `docs/deploy-render.md`. Until the domain moves to the Static Site, the old Node web service may still auto-deploy `master` — don't merge the redesign into `master` before that.
