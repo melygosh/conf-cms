@@ -32,9 +32,17 @@ describe('page sections', () => {
     expect(html).toContain('<details');
   });
 
-  it.each(pages)('%s lists every partner and the archive photos', (_, html) => {
+  it.each(pages)('%s lists every partner', (_, html) => {
     expect(html.match(/<a[^>]*class="partner"/g) ?? []).toHaveLength(site.partners.length);
-    for (const year of archive) if (year.photos) expect(html).toContain(`href="${attr(year.photos)}"`);
+  });
+
+  it.each(pages)('%s shows every archive year with its proceedings, photos and presentations', (_, html) => {
+    const section = html.slice(html.indexOf('id="archive"'), html.indexOf('id="partners"'));
+    for (const year of archive) {
+      expect(section, String(year.year)).toContain(`>${year.year}<`);
+      for (const href of [year.proceedings, year.photos, ...year.presentations.map((p) => p.href)])
+        if (href) expect(section).toContain(`href="${attr(href)}"`);
+    }
   });
 
   it.each(pages)('%s links every organizer card to its site in a new tab', (_, html) => {

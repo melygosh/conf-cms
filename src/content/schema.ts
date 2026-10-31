@@ -95,6 +95,8 @@ export const conferenceSchema = z
 export const archiveSchema = z
   .object({
     year: z.number().int(),
+    /** The book of abstracts in the KhPI repository. */
+    proceedings: url.optional(),
     photos: url.optional(),
     presentations: z
       .array(z.object({ author: z.string(), title: z.string(), href: url }).strict())

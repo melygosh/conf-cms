@@ -16,19 +16,33 @@ const t = ui[lang];
   archive.length > 0 && (
     <Section id="archive" title={t.sections.archive}>
       <div class="archive">
-        {archive.map((a) => (
-          <details class="card archive__year">
-            <summary>
-              <span class="archive__year-number">{a.year}</span>
-              {a.photos && (
-                <a class="archive__photos" href={a.photos} target="_blank" rel="noopener">
-                  {t.photos} ↗
-                </a>
-              )}
-            </summary>
-            {a.presentations.length > 0 && (
-              <>
-                <h4>{t.presentations}</h4>
+        {archive.map((a) => {
+          // A year without presentations has nothing to expand, so it is a plain card.
+          const Card = a.presentations.length > 0 ? 'details' : 'div';
+          const Head = a.presentations.length > 0 ? 'summary' : 'div';
+          return (
+            <Card class="card archive__year">
+              <Head class="archive__head">
+                <span class="archive__year-number">{a.year}</span>
+                <span class="archive__links">
+                  {a.proceedings && (
+                    <a href={a.proceedings} target="_blank" rel="noopener">
+                      {t.proceedings} ↗
+                    </a>
+                  )}
+                  {a.photos && (
+                    <a href={a.photos} target="_blank" rel="noopener">
+                      {t.photos} ↗
+                    </a>
+                  )}
+                </span>
+                {a.presentations.length > 0 && (
+                  <span class="archive__toggle">
+                    {t.presentations} ({a.presentations.length})
+                  </span>
+                )}
+              </Head>
+              {a.presentations.length > 0 && (
                 <ul class="archive__list">
                   {a.presentations.map((p) => (
                     <li>
@@ -39,10 +53,10 @@ const t = ui[lang];
                     </li>
                   ))}
                 </ul>
-              </>
-            )}
-          </details>
-        ))}
+              )}
+            </Card>
+          );
+        })}
       </div>
     </Section>
   )
@@ -51,15 +65,56 @@ const t = ui[lang];
 <style>
   .archive {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
     gap: 1rem;
   }
 
-  .archive__year summary {
+  /* An opened year with presentations takes the whole row. */
+  .archive__year[open] {
+    grid-column: 1 / -1;
+  }
+
+  .archive__head {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  summary.archive__head {
+    list-style: none;
     cursor: pointer;
+  }
+
+  summary.archive__head::-webkit-details-marker {
+    display: none;
+  }
+
+  .archive__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .archive__toggle::after {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.15rem) rotate(45deg);
+    transition: transform 0.15s;
+  }
+
+  .archive__year[open] .archive__toggle::after {
+    transform: translateY(0.1rem) rotate(-135deg);
+  }
+
+  .archive__year[open] .archive__head {
+    margin-bottom: 1.25rem;
   }
 
   .archive__year-number {
@@ -69,7 +124,10 @@ const t = ui[lang];
     color: var(--color-primary-deep);
   }
 
-  .archive__photos {
+  .archive__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
     font-weight: 700;
     font-size: 0.95rem;
   }

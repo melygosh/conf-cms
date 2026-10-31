@@ -43,6 +43,7 @@ export interface UiStrings {
   countdownPrefix: string;
   conferenceDates: string;
   openMap: string;
+  proceedings: string;
   photos: string;
   presentations: string;
   menu: string;
@@ -91,6 +92,7 @@ export const ui: Record<Lang, UiStrings> = {
     countdownPrefix: 'До кінця прийому тез:',
     conferenceDates: 'Конференція',
     openMap: 'Відкрити на мапі',
+    proceedings: 'Збірник тез',
     photos: 'Фото',
     presentations: 'Презентації',
     menu: 'Меню',
@@ -137,6 +139,7 @@ export const ui: Record<Lang, UiStrings> = {
     countdownPrefix: 'Days left to submit abstracts:',
     conferenceDates: 'Conference',
     openMap: 'Open in Google Maps',
+    proceedings: 'Book of abstracts',
     photos: 'Photos',
     presentations: 'Presentations',
     menu: 'Menu',

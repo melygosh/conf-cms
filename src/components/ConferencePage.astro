@@ -30,7 +30,7 @@ assertConferenceFiles(conferenceEntries);
 const conference = pickCurrent(conferenceEntries.map((e) => e.data));
 const archive = (await getCollection('archive'))
   .map((e) => e.data)
-  .filter((a) => a.photos || a.presentations.length > 0)
+  .filter((a) => a.proceedings || a.photos || a.presentations.length > 0)
   .sort((a, b) => b.year - a.year);
 const site = (await getEntry('site', 'site'))!.data;
 

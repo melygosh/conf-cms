@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { conferenceSchema } from '../../src/content/schema';
+import { archiveSchema, conferenceSchema } from '../../src/content/schema';
 import { rawConference } from '../fixtures/conference';
 
 const paths = (input: unknown) => {
@@ -49,5 +49,17 @@ describe('conferenceSchema', () => {
 
   it('rejects unknown top-level fields', () => {
     expect(conferenceSchema.safeParse({ ...rawConference(), extra: 1 }).success).toBe(false);
+  });
+});
+
+describe('archiveSchema', () => {
+  it('accepts a year with only a proceedings link', () => {
+    const a = archiveSchema.parse({ year: 2024, proceedings: 'https://repository.kpi.kharkov.ua/handle/KhPI-Press/74015' });
+    expect(a.proceedings).toBe('https://repository.kpi.kharkov.ua/handle/KhPI-Press/74015');
+    expect(a.presentations).toEqual([]);
+  });
+
+  it('rejects a proceedings value that is not a URL', () => {
+    expect(archiveSchema.safeParse({ year: 2024, proceedings: 'KhPI-Press/74015' }).success).toBe(false);
   });
 });
