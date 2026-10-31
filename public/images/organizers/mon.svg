@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155 97" role="img" aria-label="Міністерство освіти і науки України">
+  <!-- MOE Ukraine sign "О:", redrawn from the owner's PNG (ring + two squares). -->
+  <g fill="#1346fc">
+    <path fill-rule="evenodd" d="M48.5 0a48.5 48.5 0 1 1 0 97a48.5 48.5 0 1 1 0-97Zm0 20a28.5 28.5 0 1 0 0 57a28.5 28.5 0 1 0 0-57Z" />
+    <rect x="117" y="5" width="38" height="33" />
+    <rect x="117" y="59" width="38" height="33" />
+  </g>
+</svg>
