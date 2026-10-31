@@ -14,34 +14,35 @@ const { lang, conference: c } = Astro.props;
 
 <Section id="publication" title={ui[lang].sections.publication}>
   <p class="publication__lead">{c.publication.summary[lang]}</p>
-  <div class="prose publication__rules" set:html={md(c.publication.rules[lang])} />
-  <div class="card prose publication__format" set:html={md(c.publication.formatting[lang])} />
+  <div class="publication">
+    <div class="prose publication__rules" set:html={md(c.publication.rules[lang])} />
+    <div class="card prose publication__format" set:html={md(c.publication.formatting[lang])} />
+  </div>
 </Section>
 
 <style>
   .publication__lead {
-    margin: 0 0 1.5rem;
+    max-width: 52rem;
+    margin: 0 0 1.75rem;
     font-family: var(--font-serif);
     font-size: clamp(1.2rem, 2vw, 1.45rem);
     line-height: 1.5;
   }
 
-  .publication__rules {
-    margin-bottom: 2rem;
+  .publication {
+    display: grid;
+    gap: 2rem;
   }
 
   .publication__format {
     font-size: 0.95rem;
   }
 
-  .publication__format :global(ul) {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-    gap: 0.6rem 2.5rem;
-    margin-bottom: 0;
-  }
-
-  .publication__format :global(li + li) {
-    margin-top: 0;
+  @media (min-width: 1000px) {
+    .publication {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+      gap: 3rem;
+      align-items: start;
+    }
   }
 </style>

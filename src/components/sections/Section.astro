@@ -2,112 +2,75 @@
 interface Props {
   id: string;
   title: string;
-  /** Smaller line under the title. */
+  /** Smaller line next to the title. */
   subtitle?: string;
-  /** Show the running section number ("01", "02", …) above the title. */
+  /** Show the running section number ("01", "02", …) before the title. */
   numbered?: boolean;
-  tone?: 'plain' | 'surface' | 'dark';
-  /** Title column on the left, content on the right (wide screens). */
-  split?: boolean;
+  tone?: 'plain' | 'surface';
   /** Hide the section once this date has passed (see src/scripts/date-states.ts). */
   hiddenAfter?: string;
   hidden?: boolean;
 }
 
-const { id, title, subtitle, numbered = true, tone = 'plain', split = true, hiddenAfter, hidden } = Astro.props;
+const { id, title, subtitle, numbered = true, tone = 'plain', hiddenAfter, hidden } = Astro.props;
 ---
 
-<section
-  id={id}
-  class:list={['section', `section--${tone}`, { 'section--split': split }]}
-  data-hidden-after={hiddenAfter}
-  hidden={hidden}
->
-  <div class="container section__grid">
+<section id={id} class:list={['section', `section--${tone}`]} data-hidden-after={hiddenAfter} hidden={hidden}>
+  <div class="container">
     <header class="section__head">
-      {numbered && <p class="eyebrow section__eyebrow" aria-hidden="true" />}
+      {numbered && <span class="eyebrow section__number" aria-hidden="true" />}
       <h2 class="section__title">{title}</h2>
       {subtitle && <p class="section__subtitle">{subtitle}</p>}
     </header>
-    <div class="section__body">
-      <slot />
-    </div>
+    <slot />
   </div>
 </section>
 
 <style>
   .section {
-    padding: clamp(3.5rem, 8vw, 6rem) 0;
+    padding: clamp(2.75rem, 6vw, 4.5rem) 0;
   }
 
   .section--surface {
     background: var(--color-surface);
   }
 
-  .section--dark {
-    background: var(--color-primary-deep);
-    color: var(--color-on-dark);
-  }
-
-  .section--dark .section__title {
-    color: #fff;
-  }
-
-  .section--dark .section__eyebrow {
-    color: var(--color-on-dark-muted);
+  .section__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
   }
 
   /* Numbers come from a CSS counter, so hidden sections (e.g. an empty archive) don't leave gaps. */
-  .section__eyebrow {
-    margin-bottom: 0.75rem;
+  .section__number {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     counter-increment: section;
   }
 
-  .section__eyebrow::before {
+  .section__number::before {
     content: counter(section, decimal-leading-zero);
   }
 
-  .section__eyebrow::after {
+  .section__number::after {
     content: '';
-    display: block;
-    width: 2.5rem;
-    height: 3px;
-    margin-top: 0.75rem;
+    width: 1.75rem;
+    height: 2px;
     background: var(--color-accent);
   }
 
   .section__title {
-    margin: 0 0 2rem;
+    margin: 0;
     color: var(--color-primary-deep);
   }
 
   .section__subtitle {
-    margin: -1.25rem 0 2rem;
+    margin: 0;
     font-family: var(--font-serif);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--color-muted);
-  }
-
-  @media (min-width: 960px) {
-    .section--split .section__subtitle {
-      margin: 0.5rem 0 0;
-    }
-
-    .section--split .section__grid {
-      display: grid;
-      grid-template-columns: minmax(14rem, 1fr) 2.6fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .section--split .section__head {
-      position: sticky;
-      top: calc(var(--header-height) + 2rem);
-    }
-
-    .section--split .section__title {
-      margin-bottom: 0;
-      font-size: clamp(1.75rem, 2.6vw, 2.2rem);
-    }
   }
 </style>

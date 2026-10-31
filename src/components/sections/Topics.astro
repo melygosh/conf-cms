@@ -37,6 +37,7 @@ const t = ui[lang];
 
 <style>
   .topics__aim {
+    max-width: 52rem;
     margin: 0 0 2rem;
     font-family: var(--font-serif);
     font-size: clamp(1.2rem, 2vw, 1.45rem);
@@ -51,7 +52,7 @@ const t = ui[lang];
   /* A section with a topic list spans the row; short sections sit side by side. */
   .topics {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     margin: 0;
     padding: 0;
@@ -60,6 +61,12 @@ const t = ui[lang];
 
   .topic--wide {
     grid-column: 1 / -1;
+  }
+
+  @media (min-width: 760px) {
+    .topics {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .topic__number {
@@ -78,7 +85,7 @@ const t = ui[lang];
 
   .topic__items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
     gap: 0.6rem 2rem;
     margin: 1rem 0 0;
     padding: 0;
