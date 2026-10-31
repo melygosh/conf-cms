@@ -14,7 +14,8 @@
     "logo": "node scripts/strip-logo-year.mjs"
   },
   "dependencies": {
-    "astro": "^7.4.4"
+    "astro": "^7.4.4",
+    "marked": "^18.1.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
