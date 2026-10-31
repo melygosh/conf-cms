@@ -1,6 +1,6 @@
 # Переїзд imconf.com.ua на Render Static Site
 
-Зараз сайт працює як Node web service `national-technical-university-kharkiv` (Procfile + `server.js`). Новий сайт — статичний, тому на Render це окремий сервіс типу **Static Site**. Перетворити один тип сервісу на інший не можна.
+Старий сайт працює як Node web service `national-technical-university-kharkiv` (Procfile + `server.js`). Новий код уже в `master` (2026-10-31); `server.js` і `Procfile` там видалені, тож автодеплой старого сервісу з `master` падає на старті, а Render лишає працювати попередню, стару версію — живий сайт не зламаний, але й не оновлюється, доки домен не переїде. Новий сайт — статичний, тому на Render це окремий сервіс типу **Static Site**. Перетворити один тип сервісу на інший не можна.
 
 Стан DNS на 2026-10-31 (DNS-провайдер srv53):
 
@@ -16,7 +16,7 @@
 Render → **New → Static Site**:
 
 - Repository: `melygosh/conf-cms`
-- Branch: `redesign/astro`
+- Branch: `master`
 - Build command: `npm ci && npm run build`
 - Publish directory: `dist`
 - Environment: `NODE_VERSION` = `22`
@@ -31,9 +31,9 @@ Render → **New → Static Site**:
 - телефон (або вузьке вікно): меню відкривається, сторінка не скролиться вбік
 - обидві мапи (Карпати вгорі, ХПІ в контактах) відображаються
 
-## 3. Не зливати гілку в `master` до кроку 7
+## 3. Старий сервіс: не відкочувати вручну
 
-Відкрити старий сервіс `national-technical-university-kharkiv` → Settings і перевірити, чи ввімкнено Auto-Deploy з `master`. Якщо так, злиття видалить `server.js` і `Procfile`, і старий сервіс впаде ще до того, як домен переїде.
+У старому сервісі `national-technical-university-kharkiv` останній деплой буде **Failed** — це очікувано (у `master` більше немає `server.js`). Не тиснути Rollback/Redeploy і не міняти там нічого до кроку 4: він і далі віддає стару версію сайту.
 
 ## 4. Зняти домени зі старого сервісу
 
@@ -54,6 +54,4 @@ Render → **New → Static Site**:
 
 ## 7. Завершити
 
-1. Злити `redesign/astro` у `master`.
-2. Static Site → Settings → Branch: `master`.
-3. Видалити старий web service `national-technical-university-kharkiv`.
+Видалити старий web service `national-technical-university-kharkiv` і гілку `redesign/astro` (вона вже злита в `master`).
