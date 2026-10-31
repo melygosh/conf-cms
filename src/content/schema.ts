@@ -36,9 +36,11 @@ export const conferenceSchema = z
       .object({ place: localized(z.string()), description: localized(z.string()), mapEmbedUrl: url, mapLink: url })
       .strict(),
     links: z.object({ registration: localized(url), infoLetter: localized(url) }).strict(),
-    // Shown as cards; logo is a path under public/ (optional until the file is available).
+    // Shown as cards linking to the organizer's site; logo is a path under public/ (optional until a file exists).
     organizers: z
-      .array(z.object({ name: localized(z.string()), logo: z.string().startsWith('/').optional() }).strict())
+      .array(
+        z.object({ name: localized(z.string()), href: url, logo: z.string().startsWith('/').optional() }).strict(),
+      )
       .min(1),
     aim: localized(z.string()),
     sections: z.array(

@@ -39,6 +39,15 @@ describe('page sections', () => {
     expect(html).toContain('https://photos.app.goo.gl/V2orFOwz0o38lC543');
   });
 
+  it.each(pages)('%s links organizer cards to their sites in a new tab', (_, html) => {
+    const cards = html.match(/<a[^>]*class="organizer[^"]*"[^>]*>/g) ?? [];
+    expect(cards).toHaveLength(6);
+    for (const card of cards) {
+      expect(card).toMatch(/href="https?:\/\//);
+      expect(card).toContain('target="_blank"');
+    }
+  });
+
   it.each(pages)('%s has no empty links', (_, html) => {
     expect(html).not.toContain('href=""');
   });

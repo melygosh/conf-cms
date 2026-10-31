@@ -51,6 +51,10 @@ describe('2026 conference', () => {
     expect(c.organizers.find((o) => o.name.uk.includes('Харківський політехнічний'))?.logo).toBe('/images/organizers/khpi.png');
   });
 
+  it('links every organizer to its website', () => {
+    for (const o of c.organizers) expect(o.href, o.name.en).toMatch(/^https?:\/\//);
+  });
+
   it('counts down to the abstracts deadline', () => {
     expect(c.deadlines.filter((d) => d.countdown).map((d) => toIso(d.date))).toEqual(['2026-01-25']);
   });

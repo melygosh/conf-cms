@@ -43,26 +43,32 @@ organizers:
   - name:
       uk: Міністерство освіти і науки України
       en: Ministry of Education and Science of Ukraine
+    href: https://mon.gov.ua
     logo: /images/organizers/mon.svg
   - name:
       uk: Національний технічний університет «Харківський політехнічний інститут»
       en: National Technical University "Kharkiv Polytechnic Institute" (NTU "KhPI")
+    href: https://www.kpi.kharkov.ua
     logo: /images/organizers/khpi.png
   - name:
       uk: Українська асоціація управління проєктами
       en: Ukrainian Association of Project Management
+    href: https://upma.kiev.ua
     logo: /images/organizers/upma.svg
   - name:
       uk: Національний університет «Львівська політехніка»
       en: Lviv Polytechnic National University
+    href: https://lpnu.ua
     logo: /images/organizers/lpnu.svg
   - name:
       uk: Азербайджанський університет архітектури та будівництва
       en: Azerbaijan University of Architecture and Construction
+    href: https://azmiu.edu.az
     logo: /images/organizers/azmiu.svg
   - name:
       uk: Азербайджанська асоціація управління проєктами
       en: Azerbaijan Project Management Association
+    href: https://azpma.az
     logo: /images/organizers/azpma.svg
 
 aim:

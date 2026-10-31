@@ -20,9 +20,16 @@ const t = ui[lang];
   <ul class="organizers">
     {
       c.organizers.map((o) => (
-        <li class:list={['organizer', { 'organizer--with-logo': o.logo }]}>
-          {o.logo && <img class="organizer__watermark" src={o.logo} alt="" loading="lazy" />}
-          <span class="organizer__name">{o.name[lang]}</span>
+        <li>
+          <a
+            class:list={['organizer', { 'organizer--with-logo': o.logo }]}
+            href={o.href}
+            target="_blank"
+            rel="noopener"
+          >
+            {o.logo && <img class="organizer__watermark" src={o.logo} alt="" loading="lazy" />}
+            <span class="organizer__name">{o.name[lang]}</span>
+          </a>
         </li>
       ))
     }
@@ -74,7 +81,13 @@ const t = ui[lang];
     isolation: isolate;
     display: flex;
     align-items: center;
+    height: 100%;
     min-height: 6rem;
+    color: var(--color-text);
+    text-decoration: none;
+    transition:
+      box-shadow 0.2s,
+      transform 0.2s;
     padding: 1.1rem 1.25rem;
     border-radius: var(--radius);
     background: var(--color-surface);
@@ -99,7 +112,20 @@ const t = ui[lang];
     object-fit: contain;
     opacity: 0.4;
     transform: translateY(-50%);
+    transition: opacity 0.2s;
     pointer-events: none;
+  }
+
+  .organizer:hover,
+  .organizer:focus-visible {
+    color: var(--color-primary-deep);
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+
+  .organizer:hover .organizer__watermark,
+  .organizer:focus-visible .organizer__watermark {
+    opacity: 1;
   }
 
   .organizer__name {
