@@ -11,7 +11,7 @@ interface Props {
 const { lang, site } = Astro.props;
 ---
 
-<Section id="partners" title={ui[lang].sections.partners}>
+<Section id="partners" title={ui[lang].sections.partners} tone="surface">
   <ul class="partners">
     {
       site.partners.map((p) => (
@@ -28,8 +28,8 @@ const { lang, site } = Astro.props;
 <style>
   .partners {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+    gap: 1rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -38,14 +38,29 @@ const { lang, site } = Astro.props;
   .partner {
     display: grid;
     place-items: center;
-    height: 6rem;
-    padding: 0.75rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    height: 7rem;
+    padding: 1rem;
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    transition: background-color 0.2s;
   }
 
   .partner img {
     max-height: 100%;
     object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.75;
+    transition:
+      filter 0.2s,
+      opacity 0.2s;
+  }
+
+  .partner:hover {
+    background: var(--color-primary-soft);
+  }
+
+  .partner:hover img {
+    filter: none;
+    opacity: 1;
   }
 </style>

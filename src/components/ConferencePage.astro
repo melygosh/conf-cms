@@ -7,6 +7,7 @@ import { ui } from '../i18n/ui';
 import Footer from './Footer.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
+import PhotoStrip from './PhotoStrip.astro';
 import About from './sections/About.astro';
 import Archive from './sections/Archive.astro';
 import Authors from './sections/Authors.astro';
@@ -44,6 +45,7 @@ const description = `${t.editionLine(toRoman(conference.edition))}: ${conference
     <Hero lang={lang} conference={conference} />
     <Dates lang={lang} conference={conference} />
     <About lang={lang} conference={conference} />
+    <PhotoStrip />
     <Topics lang={lang} conference={conference} />
     <Publication lang={lang} conference={conference} />
     <Cost lang={lang} conference={conference} />

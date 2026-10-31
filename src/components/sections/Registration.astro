@@ -2,8 +2,7 @@
 import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
 import { isFinished } from '../../lib/conference';
-import { toIso } from '../../lib/dates';
-import Section from './Section.astro';
+import { formatRange, toIso } from '../../lib/dates';
 
 interface Props {
   lang: Lang;
@@ -15,14 +14,59 @@ const t = ui[lang];
 const endIso = toIso(c.dates.end);
 ---
 
-<Section id="registration" title={t.sections.registration} hiddenAfter={endIso} hidden={isFinished(c, new Date())}>
-  <p>
+<section
+  id="registration"
+  class="registration"
+  data-hidden-after={endIso}
+  hidden={isFinished(c, new Date())}
+  aria-labelledby="registration-title"
+>
+  <div class="container registration__inner">
+    <div>
+      <h2 id="registration-title" class="registration__title">{t.sections.registration}</h2>
+      <p class="registration__meta">{formatRange(toIso(c.dates.start), endIso, lang)} · {c.venue.place[lang]}</p>
+    </div>
     <a
-      class="button button--accent"
+      class="button button--accent registration__button"
       href={c.links.registration[lang]}
       target="_blank"
       rel="noopener"
-      data-hidden-after={endIso}>{t.registerLong}</a
+      data-hidden-after={endIso}>{t.registerLong} →</a
     >
-  </p>
-</Section>
+  </div>
+</section>
+
+<style>
+  .registration {
+    padding: clamp(3rem, 7vw, 5rem) 0;
+    background:
+      radial-gradient(circle at 85% 20%, rgb(29 60 143 / 55%), transparent 55%),
+      var(--color-primary-deep);
+    color: var(--color-on-dark);
+  }
+
+  .registration__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+  }
+
+  .registration__title {
+    margin: 0;
+    color: #fff;
+  }
+
+  .registration__meta {
+    margin: 0.5rem 0 0;
+    color: var(--color-on-dark-muted);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+  }
+
+  .registration__button {
+    font-size: 1.05rem;
+    padding: 1rem 2rem;
+  }
+</style>

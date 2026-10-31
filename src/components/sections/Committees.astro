@@ -10,14 +10,53 @@ interface Props {
 }
 
 const { lang, conference: c } = Astro.props;
+// Entries are written as "**Name**, title…"; the name gets its own line, so drop the joining comma.
+const html = md(c.committees[lang]).replace(/<\/strong>,\s*/g, '</strong>');
 ---
 
-<Section id="committees" title={ui[lang].sections.committees} tone="tinted">
-  <div class="prose committees" set:html={md(c.committees[lang])} />
+<Section id="committees" title={ui[lang].sections.committees} tone="surface">
+  <div class="committees" set:html={html} />
 </Section>
 
 <style>
+  /* The Markdown is a flat run of h3 (committee), h4 (role) and p (person); lay people out as a grid of cards. */
+  .committees {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .committees :global(h3) {
+    grid-column: 1 / -1;
+    margin: 2.5rem 0 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .committees :global(h3:first-child) {
+    margin-top: 0;
+  }
+
+  .committees :global(h4) {
+    grid-column: 1 / -1;
+    margin: 1.25rem 0 0;
+  }
+
   .committees :global(p) {
-    margin: 0.4rem 0;
+    margin: 0;
+    padding: 1rem 1.1rem;
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  .committees :global(p strong) {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--color-text);
   }
 </style>

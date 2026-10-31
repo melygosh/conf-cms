@@ -13,41 +13,78 @@ const { lang, conference: c } = Astro.props;
 ---
 
 <Section id="authors" title={ui[lang].sections.authors}>
-  {
-    c.authors.map((a) => (
-      <details class="authors__item">
-        <summary>{a.title[lang]}</summary>
-        <div class="prose authors__body" set:html={md(a.body[lang])} />
-      </details>
-    ))
-  }
+  <div class="accordion">
+    {
+      c.authors.map((a) => (
+        <details class="accordion__item">
+          <summary>{a.title[lang]}</summary>
+          <div class="prose accordion__body" set:html={md(a.body[lang])} />
+        </details>
+      ))
+    }
+  </div>
 </Section>
 
 <style>
-  .authors__item {
+  .accordion {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .accordion__item {
     border-bottom: 1px solid var(--color-border);
   }
 
-  .authors__item summary {
-    padding: 1rem 0;
+  .accordion__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 0;
     font-family: var(--font-serif);
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+    list-style: none;
     cursor: pointer;
   }
 
-  .authors__body {
-    padding-bottom: 1rem;
+  .accordion__item summary::-webkit-details-marker {
+    display: none;
   }
 
-  .authors__body :global(img) {
+  .accordion__item summary::after {
+    content: '+';
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+
+  .accordion__item[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .accordion__body {
+    padding-bottom: 1.5rem;
+  }
+
+  .accordion__body :global(img) {
     float: right;
-    width: min(12rem, 35%);
+    width: min(11rem, 35%);
     margin: 0 0 1rem 1.5rem;
-    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
   }
 
-  .authors__body::after {
+  .accordion__body::after {
     display: block;
     clear: both;
     content: '';

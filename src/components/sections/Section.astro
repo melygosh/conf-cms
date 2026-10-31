@@ -2,33 +2,98 @@
 interface Props {
   id: string;
   title: string;
-  tone?: 'plain' | 'tinted';
+  /** Show the running section number ("01", "02", …) above the title. */
+  numbered?: boolean;
+  tone?: 'plain' | 'surface' | 'dark';
+  /** Title column on the left, content on the right (wide screens). */
+  split?: boolean;
   /** Hide the section once this date has passed (see src/scripts/date-states.ts). */
   hiddenAfter?: string;
   hidden?: boolean;
 }
 
-const { id, title, tone = 'plain', hiddenAfter, hidden } = Astro.props;
+const { id, title, numbered = true, tone = 'plain', split = true, hiddenAfter, hidden } = Astro.props;
 ---
 
-<section id={id} class:list={['section', `section--${tone}`]} data-hidden-after={hiddenAfter} hidden={hidden}>
-  <div class="container">
-    <h2 class="section__title">{title}</h2>
-    <slot />
+<section
+  id={id}
+  class:list={['section', `section--${tone}`, { 'section--split': split }]}
+  data-hidden-after={hiddenAfter}
+  hidden={hidden}
+>
+  <div class="container section__grid">
+    <header class="section__head">
+      {numbered && <p class="eyebrow section__eyebrow" aria-hidden="true" />}
+      <h2 class="section__title">{title}</h2>
+    </header>
+    <div class="section__body">
+      <slot />
+    </div>
   </div>
 </section>
 
 <style>
   .section {
-    padding: clamp(2.5rem, 6vw, 4rem) 0;
-    border-top: 1px solid var(--color-border);
+    padding: clamp(3.5rem, 8vw, 6rem) 0;
   }
 
-  .section--tinted {
+  .section--surface {
     background: var(--color-surface);
   }
 
+  .section--dark {
+    background: var(--color-primary-deep);
+    color: var(--color-on-dark);
+  }
+
+  .section--dark .section__title {
+    color: #fff;
+  }
+
+  .section--dark .section__eyebrow {
+    color: var(--color-on-dark-muted);
+  }
+
+  /* Numbers come from a CSS counter, so hidden sections (e.g. an empty archive) don't leave gaps. */
+  .section__eyebrow {
+    margin-bottom: 0.75rem;
+    counter-increment: section;
+  }
+
+  .section__eyebrow::before {
+    content: counter(section, decimal-leading-zero);
+  }
+
+  .section__eyebrow::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    margin-top: 0.75rem;
+    background: var(--color-accent);
+  }
+
   .section__title {
-    margin-top: 0;
+    margin: 0 0 2rem;
+    color: var(--color-primary-deep);
+  }
+
+  @media (min-width: 960px) {
+    .section--split .section__grid {
+      display: grid;
+      grid-template-columns: minmax(14rem, 1fr) 2.6fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .section--split .section__head {
+      position: sticky;
+      top: calc(var(--header-height) + 2rem);
+    }
+
+    .section--split .section__title {
+      margin-bottom: 0;
+      font-size: clamp(1.75rem, 2.6vw, 2.2rem);
+    }
   }
 </style>

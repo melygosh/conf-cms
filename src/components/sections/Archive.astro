@@ -14,41 +14,82 @@ const t = ui[lang];
 
 {
   archive.length > 0 && (
-    <Section id="archive" title={t.sections.archive} tone="tinted">
-      {archive.map((a) => (
-        <details class="archive__year">
-          <summary>{a.year}</summary>
-          {a.photos && (
-            <p>
-              <a href={a.photos} target="_blank" rel="noopener">
-                {t.photos}
-              </a>
-            </p>
-          )}
-          {a.presentations.length > 0 && (
-            <>
-              <h4>{t.presentations}</h4>
-              <ul>
-                {a.presentations.map((p) => (
-                  <li>
-                    {p.author} — <a href={p.href} target="_blank" rel="noopener">{p.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-        </details>
-      ))}
+    <Section id="archive" title={t.sections.archive}>
+      <div class="archive">
+        {archive.map((a) => (
+          <details class="card archive__year">
+            <summary>
+              <span class="archive__year-number">{a.year}</span>
+              {a.photos && (
+                <a class="archive__photos" href={a.photos} target="_blank" rel="noopener">
+                  {t.photos} ↗
+                </a>
+              )}
+            </summary>
+            {a.presentations.length > 0 && (
+              <>
+                <h4>{t.presentations}</h4>
+                <ul class="archive__list">
+                  {a.presentations.map((p) => (
+                    <li>
+                      <a href={p.href} target="_blank" rel="noopener">
+                        {p.title}
+                      </a>
+                      <span class="archive__author">{p.author}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </details>
+        ))}
+      </div>
     </Section>
   )
 }
 
 <style>
+  .archive {
+    display: grid;
+    gap: 1rem;
+  }
+
   .archive__year summary {
-    padding: 0.75rem 0;
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
     cursor: pointer;
+  }
+
+  .archive__year-number {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+  }
+
+  .archive__photos {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .archive__list {
+    display: grid;
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .archive__list a {
+    display: block;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .archive__author {
+    font-size: 0.88rem;
+    color: var(--color-muted);
   }
 </style>

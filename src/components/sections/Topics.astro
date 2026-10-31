@@ -12,31 +12,86 @@ const { lang, conference: c } = Astro.props;
 const t = ui[lang];
 ---
 
-<Section id="topics" title={t.sections.topics} tone="tinted">
-  <h4>{t.sections.aim}</h4>
-  <p>{c.aim[lang]}</p>
-  {
-    c.sections.map((s, i) => (
-      <div class="topic">
-        <h4>{t.sections.section(i + 1)}</h4>
-        <h3 class="topic__name">{s.name[lang]}</h3>
-        {s.items && (
-          <ul>
-            {s.items[lang].map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        )}
-        {s.text && <p>{s.text[lang]}</p>}
-      </div>
-    ))
-  }
-  <h4>{t.sections.languages}</h4>
-  <p>{c.languages[lang]}</p>
+<Section id="topics" title={t.sections.topics} tone="surface">
+  <p class="topics__aim"><span class="topics__aim-label">{t.sections.aim}.</span> {c.aim[lang]}</p>
+  <ol class="topics">
+    {
+      c.sections.map((s, i) => (
+        <li class="card topic">
+          <p class="topic__number">{t.sections.section(i + 1)}</p>
+          <h3 class="topic__name">{s.name[lang]}</h3>
+          {s.items && (
+            <ul class="topic__items">
+              {s.items[lang].map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+          {s.text && <p class="topic__text">{s.text[lang]}</p>}
+        </li>
+      ))
+    }
+  </ol>
+  <p class="topics__languages"><strong>{t.sections.languages}:</strong> {c.languages[lang]}</p>
 </Section>
 
 <style>
+  .topics__aim {
+    margin: 0 0 2rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2vw, 1.45rem);
+    line-height: 1.5;
+  }
+
+  .topics__aim-label {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .topics {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .topic__number {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+  }
+
   .topic__name {
-    margin-top: 0;
+    margin: 0.4rem 0 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .topic__items {
+    margin: 0;
+    padding-left: 1.1rem;
+    columns: 2 18rem;
+    column-gap: 2.5rem;
+  }
+
+  .topic__items li {
+    break-inside: avoid;
+    margin-bottom: 0.4rem;
+  }
+
+  .topic__items li::marker {
+    color: var(--color-primary);
+  }
+
+  .topic__text {
+    margin: 0;
+    color: var(--color-muted);
+  }
+
+  .topics__languages {
+    margin: 1.5rem 0 0;
   }
 </style>

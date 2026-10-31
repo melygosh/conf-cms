@@ -1,16 +1,18 @@
 ---
 // The original logo artwork with the year removed (scripts/strip-logo-year.mjs);
 // the year is drawn on top so the logo never has to be redrawn for a new conference.
+// The PNG is 326×161: keep the rendered width ≤ ~180 px to stay sharp on retina screens.
 interface Props {
   year: number;
   width?: number;
+  class?: string;
 }
 
-const { year, width = 160 } = Astro.props;
+const { year, width = 160, class: className } = Astro.props;
 ---
 
 <svg
-  class="logo"
+  class:list={['logo', className]}
   viewBox="0 0 326 161"
   width={width}
   height={Math.round((width * 161) / 326)}
@@ -38,7 +40,6 @@ const { year, width = 160 } = Astro.props;
 <style>
   .logo {
     display: block;
-    max-width: 160px;
     height: auto;
   }
 </style>

@@ -13,9 +13,9 @@ const { lang, site } = Astro.props;
 const t = ui[lang];
 ---
 
-<Section id="contacts" title={t.sections.contacts} tone="tinted">
+<Section id="contacts" title={t.sections.contacts}>
   <div class="contacts">
-    <div class="prose contacts__text" set:html={md(site.contacts[lang])} />
+    <div class="contacts__text" set:html={md(site.contacts[lang])} />
     <iframe
       class="contacts__map"
       src={site.khpiMapEmbedUrl}
@@ -29,17 +29,54 @@ const t = ui[lang];
 <style>
   .contacts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
     gap: 2rem;
   }
 
+  /* The Markdown is "### Heading" + paragraph pairs; each pair stacks into one card-like column. */
+  .contacts__text {
+    display: grid;
+    gap: 0 1rem;
+  }
+
   .contacts__text :global(h3) {
-    font-size: 1.05rem;
+    margin: 1rem 0 0;
+    padding: 1.25rem 1.25rem 0.25rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background: var(--color-surface);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+  }
+
+  .contacts__text :global(p) {
+    margin: 0;
+    padding: 0.25rem 1.25rem 1.25rem;
+    border-radius: 0 0 var(--radius) var(--radius);
+    background: var(--color-surface);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 760px) {
+    .contacts__text {
+      grid-template-rows: auto 1fr;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+    }
+
+    .contacts__text :global(h3) {
+      margin-top: 0;
+    }
   }
 
   .contacts__map {
+    display: block;
     width: 100%;
-    min-height: 18rem;
-    border: 1px solid var(--color-border);
+    height: 20rem;
+    border: 0;
+    border-radius: var(--radius);
   }
 </style>

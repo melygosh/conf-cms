@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import politekhnik from '../../assets/photos/politekhnik-2.jpg';
 import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
 import { md } from '../../lib/markdown';
@@ -15,40 +17,119 @@ const t = ui[lang];
 
 <Section id="about" title={t.sections.about}>
   <div class="about">
-    <div>
-      <h3>{t.sections.organizers}</h3>
-      <div class="prose" set:html={md(c.organizers[lang])} />
+    <div class="about__organizers">
+      <h4>{t.sections.organizers}</h4>
+      <div class="organizers" set:html={md(c.organizers[lang])} />
     </div>
-    <div>
-      <h3>{t.sections.venue}</h3>
-      <div class="prose" set:html={md(c.venue.description[lang])} />
-      <iframe
-        class="about__map"
-        src={c.venue.mapEmbedUrl}
-        title={`${t.sections.venue}: ${c.venue.place[lang]}`}
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
-      <p><a href={c.venue.mapLink} target="_blank" rel="noopener">{t.openMap}</a></p>
+    <div class="about__venue card">
+      <Image
+        class="about__photo"
+        src={politekhnik}
+        widths={[425, 850]}
+        sizes="(min-width: 960px) 30rem, 100vw"
+        alt={c.venue.place[lang]}
+      />
+      <div class="about__venue-text">
+        <h4>{t.sections.venue}</h4>
+        <h3 class="about__place">{c.venue.place[lang]}</h3>
+        <div class="prose" set:html={md(c.venue.description[lang])} />
+      </div>
     </div>
   </div>
+  <figure class="about__map">
+    <iframe
+      src={c.venue.mapEmbedUrl}
+      title={`${t.sections.venue}: ${c.venue.place[lang]}`}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+    <figcaption><a href={c.venue.mapLink} target="_blank" rel="noopener">{t.openMap} ↗</a></figcaption>
+  </figure>
 </Section>
 
 <style>
   .about {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-    gap: 2rem 3rem;
+    gap: 2rem;
   }
 
-  .about h3 {
+  .about__organizers h4,
+  .about__venue h4 {
     margin-top: 0;
   }
 
-  .about__map {
+  .organizers :global(ul) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .organizers :global(li) {
+    margin: 0;
+    padding: 0.9rem 1rem 0.9rem 1.1rem;
+    border-left: 3px solid var(--color-primary);
+    background: var(--color-surface);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .about__venue {
+    display: grid;
+    gap: 1.5rem;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .about__venue :global(.about__photo) {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 3;
-    border: 1px solid var(--color-border);
+    height: 100%;
+    max-height: 22rem;
+    object-fit: cover;
+  }
+
+  .about__venue-text {
+    padding: 0 clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .about__place {
+    margin: 0 0 0.75rem;
+  }
+
+  @media (min-width: 760px) {
+    .about__venue {
+      grid-template-columns: 1fr 1.2fr;
+      gap: 0;
+    }
+
+    .about__venue-text {
+      padding: 1.75rem;
+    }
+
+    .about__venue :global(.about__photo) {
+      max-height: none;
+    }
+  }
+
+  .about__map {
+    margin: 2rem 0 0;
+  }
+
+  .about__map iframe {
+    display: block;
+    width: 100%;
+    height: 22rem;
+    border: 0;
+    border-radius: var(--radius);
+  }
+
+  .about__map figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 </style>

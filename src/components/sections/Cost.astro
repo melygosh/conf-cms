@@ -11,43 +11,92 @@ interface Props {
 
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
+const [, ukraineHeader, abroadHeader] = c.cost.headers[lang];
 ---
 
-<Section id="cost" title={t.sections.cost} tone="tinted">
-  <div class="table-scroll">
-    <table>
-      <thead>
-        <tr>{c.cost.headers[lang].map((h) => <th scope="col">{h}</th>)}</tr>
-      </thead>
-      <tbody>
-        {
-          c.cost.rows.map((r) => (
-            <tr>
-              <td set:html={mdInline(r.label[lang])} />
-              <td>{r.ukraine[lang]}</td>
-              <td>{r.abroad[lang]}</td>
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
+<Section id="cost" title={t.sections.cost} tone="surface">
+  <div class="prices">
+    {
+      c.cost.rows.map((r) => (
+        <div class="card price">
+          <p class="price__label" set:html={mdInline(r.label[lang])} />
+          <dl class="price__values">
+            <div>
+              <dt>{ukraineHeader}</dt>
+              <dd>{r.ukraine[lang]}</dd>
+            </div>
+            <div>
+              <dt>{abroadHeader}</dt>
+              <dd>{r.abroad[lang]}</dd>
+            </div>
+          </dl>
+        </div>
+      ))
+    }
   </div>
   <div class="prose cost__notes" set:html={md(c.cost.notes[lang])} />
-  <h3>{t.sections.payment}</h3>
-  <div class="prose" set:html={md(c.cost.payment[lang])} />
+  <div class="cost__payment">
+    <h4>{t.sections.payment}</h4>
+    <div class="prose" set:html={md(c.cost.payment[lang])} />
+  </div>
 </Section>
 
 <style>
-  .table-scroll {
-    overflow-x: auto;
+  .prices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: 1rem;
   }
 
-  .table-scroll table {
-    min-width: 32rem;
+  .price__label {
+    margin: 0 0 1.25rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .price__values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .price__values dt {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+  }
+
+  .price__values dd {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-primary-deep);
   }
 
   .cost__notes {
-    font-size: 0.9rem;
+    margin-top: 1.25rem;
+    font-size: 0.88rem;
     color: var(--color-muted);
+  }
+
+  .cost__notes :global(p) {
+    margin: 0.4rem 0;
+  }
+
+  .cost__payment {
+    margin-top: 2rem;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: var(--color-primary-soft);
+  }
+
+  .cost__payment h4 {
+    margin-top: 0;
   }
 </style>

@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import session1 from '../assets/photos/session-1.jpg';
+import session2 from '../assets/photos/session-2.jpg';
+---
+
+<!-- Real sessions of past conferences in Slavsko: breaks the text and shows what the event is like. -->
+<div class="photo-strip" aria-hidden="true">
+  <Image src={session1} widths={[640, 1000, 1400]} sizes="(min-width: 760px) 50vw, 100vw" alt="" loading="lazy" />
+  <Image src={session2} widths={[640, 1000, 1400]} sizes="(min-width: 760px) 50vw, 100vw" alt="" loading="lazy" />
+</div>
+
+<style>
+  .photo-strip {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .photo-strip :global(img) {
+    display: block;
+    width: 100%;
+    height: clamp(14rem, 32vw, 26rem);
+    object-fit: cover;
+  }
+
+  @media (min-width: 760px) {
+    .photo-strip {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

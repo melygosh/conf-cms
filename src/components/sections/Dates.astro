@@ -19,40 +19,54 @@ const countdownIso = countdown ? toIso(countdown.date) : null;
 const target = countdownTarget(c, now);
 const startIso = toIso(c.dates.start);
 const endIso = toIso(c.dates.end);
+
+/** "25 січня 2026" → big "25", small "січня 2026". */
+const split = (formatted: string) => {
+  const [day, ...rest] = formatted.split(' ');
+  return { day, rest: rest.join(' ') };
+};
 ---
 
-<section id="dates" class="dates">
+<section id="dates" class="dates" aria-labelledby="dates-title">
   <div class="container">
-    <h2 class="dates__title">{t.sections.dates}</h2>
-    <table>
-      <tbody>
+    <div class="dates__panel">
+      <div class="dates__head">
+        <h2 id="dates-title" class="dates__title">{t.sections.dates}</h2>
+        {
+          countdownIso && (
+            <p class="dates__countdown" data-countdown={countdownIso} data-lang={lang} hidden={!target}>
+              {t.countdownPrefix} <strong>{pluralDays(Math.max(0, daysUntil(countdownIso, now)), lang)}</strong>
+            </p>
+          )
+        }
+        <p class="dates__finished" data-finished-after={endIso} hidden={!isFinished(c, now)}>{t.finished}</p>
+      </div>
+      <ol class="dates__list">
         {
           c.deadlines.map((d) => {
             const iso = toIso(d.date);
+            const { day, rest } = split(formatDate(iso, lang));
             return (
-              <tr data-deadline={iso} data-state={deadlineState(iso, now)}>
-                <th scope="row">{d.title[lang]}</th>
-                <td>{d.note?.[lang]}</td>
-                <td class="dates__date">{formatDate(iso, lang)}</td>
-              </tr>
+              <li class="date-card" data-deadline={iso} data-state={deadlineState(iso, now)}>
+                <p class="date-card__when">
+                  <span class="date-card__day">{day}</span> {rest}
+                </p>
+                <p class="date-card__title">{d.title[lang]}</p>
+                {d.note && <p class="date-card__note">{d.note[lang]}</p>}
+              </li>
             );
           })
         }
-        <tr class="dates__conference" data-deadline={endIso} data-state={deadlineState(endIso, now)}>
-          <th scope="row">{t.conferenceDates}</th>
-          <td></td>
-          <td class="dates__date">{formatRange(startIso, endIso, lang)}</td>
-        </tr>
-      </tbody>
-    </table>
-    {
-      countdownIso && (
-        <p class="dates__countdown" data-countdown={countdownIso} data-lang={lang} hidden={!target}>
-          {t.countdownPrefix} <strong>{pluralDays(Math.max(0, daysUntil(countdownIso, now)), lang)}</strong>
-        </p>
-      )
-    }
-    <p class="dates__finished" data-finished-after={endIso} hidden={!isFinished(c, now)}>{t.finished}</p>
+        <li class="date-card date-card--conference" data-deadline={endIso} data-state={deadlineState(endIso, now)}>
+          <p class="date-card__when">
+            <span class="date-card__day">{split(formatRange(startIso, endIso, lang)).day}</span>
+            {split(formatRange(startIso, endIso, lang)).rest}
+          </p>
+          <p class="date-card__title">{t.conferenceDates}</p>
+          <p class="date-card__note">{c.venue.place[lang]}</p>
+        </li>
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -62,96 +76,122 @@ const endIso = toIso(c.dates.end);
 
 <style>
   .dates {
-    padding: 0 0 clamp(2.5rem, 6vw, 4rem);
+    position: relative;
+    z-index: 1;
+    margin-top: clamp(-5rem, -8vw, -3rem);
+  }
+
+  .dates__panel {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: calc(var(--radius) * 1.5);
+    background: var(--color-primary-deep);
+    color: var(--color-on-dark);
+    box-shadow: 0 20px 50px rgb(16 36 58 / 25%);
+  }
+
+  .dates__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .dates__title {
-    margin-top: 0;
-    font-size: 1.1rem;
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-muted);
-  }
-
-  .dates table {
-    max-width: 48rem;
-  }
-
-  .dates th {
-    font-size: 1rem;
-    text-transform: none;
-    letter-spacing: 0;
-    color: var(--color-text);
-    font-weight: 600;
-  }
-
-  .dates td {
-    color: var(--color-muted);
-  }
-
-  .dates .dates__date {
-    color: var(--color-text);
-    font-weight: 700;
-    white-space: nowrap;
-    text-align: right;
-  }
-
-  .dates .dates__conference .dates__date,
-  .dates .dates__conference th {
-    color: var(--color-accent);
-  }
-
-  .dates tr[data-state='past'] th,
-  .dates tr[data-state='past'] td {
-    color: var(--color-muted);
-    font-weight: 400;
-    text-decoration: line-through;
-    text-decoration-color: var(--color-border);
-  }
-
-  .dates .dates__conference[data-state='past'] th,
-  .dates .dates__conference[data-state='past'] td {
-    text-decoration: none;
+    margin: 0;
+    font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+    color: #fff;
   }
 
   .dates__countdown,
   .dates__finished {
-    margin: 1rem 0 0;
+    margin: 0;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
     font-weight: 600;
   }
 
-  .dates__finished {
-    color: var(--color-accent);
+  .dates__countdown {
+    background: rgb(255 255 255 / 10%);
   }
 
-  @media (max-width: 560px) {
-    .dates tr {
-      display: grid;
-      grid-template-columns: 1fr auto;
-    }
+  .dates__countdown strong {
+    color: #fff;
+  }
 
-    .dates td:empty {
-      display: none;
-    }
+  .dates__finished {
+    background: var(--color-accent);
+    color: #fff;
+  }
 
-    .dates td:not(.dates__date) {
-      grid-column: 1;
-      padding-top: 0;
-    }
+  .dates__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
-    .dates th,
-    .dates td {
-      border-bottom: none;
-    }
+  .date-card {
+    padding: 1.1rem 1.25rem 1.25rem;
+    border-radius: var(--radius);
+    background: rgb(255 255 255 / 6%);
+    border: 1px solid rgb(255 255 255 / 10%);
+    transition: opacity 0.2s;
+  }
 
-    .dates tr {
-      border-bottom: 1px solid var(--color-border);
-    }
+  .date-card p {
+    margin: 0;
+  }
 
-    .dates .dates__date {
-      grid-column: 2;
-      grid-row: 1;
-    }
+  .date-card__when {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--color-on-dark-muted);
+  }
+
+  .date-card__day {
+    display: block;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.05;
+    color: #fff;
+  }
+
+  .date-card__title {
+    margin-top: 0.75rem !important;
+    font-weight: 800;
+    line-height: 1.35;
+    color: #fff;
+  }
+
+  .date-card__note {
+    margin-top: 0.25rem !important;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--color-on-dark-muted);
+  }
+
+  .date-card[data-state='past'] {
+    opacity: 0.45;
+  }
+
+  .date-card[data-state='today'] {
+    border-color: #fff;
+  }
+
+  .date-card--conference,
+  .date-card--conference[data-state='past'] {
+    opacity: 1;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .date-card--conference .date-card__when,
+  .date-card--conference .date-card__note {
+    color: rgb(255 255 255 / 85%);
   }
 </style>
