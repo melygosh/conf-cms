@@ -1,32 +1,36 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { ui } from '../../src/i18n/ui';
+import { toRoman } from '../../src/lib/conference';
+import { formatRange, toIso } from '../../src/lib/dates';
+import { attr, conference as c, endIso, pages } from './expected';
 
-const uk = readFileSync('dist/index.html', 'utf8');
-const en = readFileSync('dist/en/index.html', 'utf8');
-
-const UK_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScH4NPI31ig5qQ7ENp5DNdq-89fkvnv0CWZfmoMKaqpb7DwSA/viewform?usp=header';
-const EN_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header';
+const [[, uk], [, en]] = pages;
+const range = (lang: 'uk' | 'en') => formatRange(toIso(c.dates.start), endIso, lang);
 
 describe('Ukrainian page', () => {
   it('is in Ukrainian', () => expect(uk).toContain('<html lang="uk"'));
-  it('draws the year into the logo', () => expect(uk).toMatch(/<text[^>]*>2026<\/text>/));
+  it('draws the current year into the logo', () => expect(uk).toMatch(new RegExp(`<text[^>]*>${c.year}</text>`)));
   it('shows the edition and dates', () => {
-    expect(uk).toContain('XVI міжнародна науково-практична конференція');
-    expect(uk).toContain('17–19 лютого 2026');
+    expect(uk).toContain(ui.uk.editionLine(toRoman(c.edition)));
+    expect(uk).toContain(range('uk'));
   });
-  it('links the Ukrainian registration form', () => expect(uk).toContain(`href="${UK_FORM}"`));
+  it('links the Ukrainian registration form', () => expect(uk).toContain(`href="${attr(c.links.registration.uk)}"`));
   it('switches to English', () => expect(uk).toContain('href="/en/"'));
 });
 
 describe('English page', () => {
   it('is in English', () => expect(en).toContain('<html lang="en"'));
-  it('shows the dates', () => expect(en).toContain('17–19 February 2026'));
-  it('links the English registration form', () => expect(en).toContain(`href="${EN_FORM}"`));
+  it('shows the edition and dates', () => {
+    expect(en).toContain(ui.en.editionLine(toRoman(c.edition)));
+    expect(en).toContain(range('en'));
+  });
+  it('links the English registration form', () => expect(en).toContain(`href="${attr(c.links.registration.en)}"`));
   it('switches to Ukrainian', () => expect(en).toContain('href="/"'));
 });
 
 describe('both pages', () => {
-  it.each([['uk', uk], ['en', en]])('%s has no leaked placeholders or legacy libraries', (_, html) => {
+  it.each(pages)('%s has no leaked placeholders or legacy libraries', (_, html) => {
     for (const bad of ['undefined', '[object Object]', 'bootstrap', 'jquery']) {
       expect(html.toLowerCase()).not.toContain(bad.toLowerCase());
     }

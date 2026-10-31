@@ -1,9 +1,6 @@
-import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-
-const uk = readFileSync('dist/index.html', 'utf8');
-const en = readFileSync('dist/en/index.html', 'utf8');
-const pages = [['uk', uk], ['en', en]] as const;
+import { md, mdInline } from '../../src/lib/markdown';
+import { archive, attr, conference as c, countdownIso, deadlineIsos, endIso, pages, site } from './expected';
 
 const SECTION_IDS = ['about', 'topics', 'publication', 'dates', 'cost', 'authors', 'committees', 'registration', 'archive', 'partners', 'contacts'];
 
@@ -13,37 +10,39 @@ describe('page sections', () => {
   });
 
   it.each(pages)('%s embeds the venue map and the KhPI map', (_, html) => {
-    expect(html).toMatch(/<iframe[^>]*src="[^"]*!2d23\.46006058048362/);
-    expect(html).toMatch(/<iframe[^>]*src="[^"]*!2d36\.2498081/);
+    expect(html).toContain(`src="${attr(c.venue.mapEmbedUrl)}"`);
+    expect(html).toContain(`src="${attr(site.khpiMapEmbedUrl)}"`);
   });
 
   it.each(pages)('%s marks deadlines and the countdown for the client script', (_, html) => {
-    expect(html).toContain('data-deadline="2026-01-25"');
-    expect(html).toContain('data-deadline="2026-02-16"');
-    expect(html).toContain('data-countdown="2026-01-25"');
-    expect(html).toContain('data-finished-after="2026-02-19"');
+    for (const iso of deadlineIsos) expect(html).toContain(`data-deadline="${iso}"`);
+    expect(html).toContain(`data-countdown="${countdownIso}"`);
+    expect(html).toContain(`data-finished-after="${endIso}"`);
   });
 
-  it.each(pages)('%s ties registration to the conference end date', (_, html) => {
-    expect(html).toMatch(/<a[^>]*data-hidden-after="2026-02-19"[^>]*docs\.google\.com\/forms|<a[^>]*docs\.google\.com\/forms[^>]*data-hidden-after="2026-02-19"/);
-    expect(html).toMatch(/id="registration"[^>]*data-hidden-after="2026-02-19"|data-hidden-after="2026-02-19"[^>]*id="registration"/);
+  it.each(pages)('%s ties registration to the conference end date', (lang, html) => {
+    const form = attr(c.links.registration[lang]);
+    const registerLinks = html.match(/<a[^>]*>/g)!.filter((a) => a.includes(`href="${form}"`) && a.includes('class="button'));
+    expect(registerLinks.length).toBeGreaterThan(0);
+    for (const a of registerLinks) expect(a).toContain(`data-hidden-after="${endIso}"`);
+    expect(html).toMatch(new RegExp(`id="registration"[^>]*data-hidden-after="${endIso}"`));
   });
 
   it.each(pages)('%s uses native disclosure for the authors section', (_, html) => {
     expect(html).toContain('<details');
   });
 
-  it.each(pages)('%s lists 7 partners and the 2018 photos', (_, html) => {
-    const partners = html.match(/<a[^>]*class="partner"/g) ?? [];
-    expect(partners).toHaveLength(7);
-    expect(html).toContain('https://photos.app.goo.gl/V2orFOwz0o38lC543');
+  it.each(pages)('%s lists every partner and the archive photos', (_, html) => {
+    expect(html.match(/<a[^>]*class="partner"/g) ?? []).toHaveLength(site.partners.length);
+    for (const year of archive) if (year.photos) expect(html).toContain(`href="${attr(year.photos)}"`);
   });
 
-  it.each(pages)('%s links organizer cards to their sites in a new tab', (_, html) => {
+  it.each(pages)('%s links every organizer card to its site in a new tab', (_, html) => {
     const cards = html.match(/<a[^>]*class="organizer[^"]*"[^>]*>/g) ?? [];
-    expect(cards).toHaveLength(6);
-    for (const card of cards) {
-      expect(card).toMatch(/href="https?:\/\//);
+    expect(cards).toHaveLength(c.organizers.length);
+    for (const o of c.organizers) {
+      const card = cards.find((a) => a.includes(`href="${attr(o.href)}"`));
+      expect(card, o.href).toBeDefined();
       expect(card).toContain('target="_blank"');
     }
   });
@@ -52,11 +51,19 @@ describe('page sections', () => {
     expect(html).not.toContain('href=""');
   });
 
-  it('keeps per-language prices and payment details', () => {
-    expect(uk).toContain('5 USD');
-    expect(uk).toContain('UA283052990000026002045921275');
-    expect(en).toContain('5 EUR');
-    expect(en).toContain('contact the Program Committee');
-    expect(en).not.toContain('UA283052990000026002045921275');
+  it.each(pages)('%s shows its own prices and payment details', (lang, html) => {
+    for (const row of c.cost.rows) {
+      expect(html).toContain(mdInline(row.label[lang]));
+      if (row.abroad[lang].trim() !== '-') expect(html).toContain(row.abroad[lang]);
+    }
+    expect(html).toContain(md(c.cost.payment[lang]));
+  });
+
+  it('does not leak one language’s payment details into the other', () => {
+    const [[, uk], [, en]] = pages;
+    if (c.cost.payment.uk !== c.cost.payment.en) {
+      expect(uk).not.toContain(md(c.cost.payment.en));
+      expect(en).not.toContain(md(c.cost.payment.uk));
+    }
   });
 });
