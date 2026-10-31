@@ -45,6 +45,12 @@ describe('2026 conference', () => {
     expect(c.links.registration.uk).not.toBe(c.links.registration.en);
   });
 
+  it('lists the six organizers, and every organizer logo exists', () => {
+    expect(c.organizers).toHaveLength(6);
+    for (const o of c.organizers) if (o.logo) expect(existsSync(join('public', o.logo)), o.logo).toBe(true);
+    expect(c.organizers.find((o) => o.name.uk.includes('Харківський політехнічний'))?.logo).toBe('/images/organizers/khpi.png');
+  });
+
   it('counts down to the abstracts deadline', () => {
     expect(c.deadlines.filter((d) => d.countdown).map((d) => toIso(d.date))).toEqual(['2026-01-25']);
   });

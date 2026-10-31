@@ -17,7 +17,24 @@ const t = ui[lang];
 
 <Section id="about" title={t.sections.about}>
   <h4 class="about__label">{t.sections.organizers}</h4>
-  <div class="organizers" set:html={md(c.organizers[lang])} />
+  <ul class="organizers">
+    {
+      c.organizers.map((o) => (
+        <li class="organizer">
+          <span class="organizer__logo">
+            {o.logo ? (
+              <img src={o.logo} alt="" loading="lazy" />
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3 3 8v2h18V8l-9-5Zm-7 9v6H4v2h16v-2h-1v-6h-2v6h-3v-6h-4v6H7v-6H5Z" fill="currentColor" />
+              </svg>
+            )}
+          </span>
+          <span class="organizer__name">{o.name[lang]}</span>
+        </li>
+      ))
+    }
+  </ul>
 
   <article class="venue">
     <Image
@@ -50,7 +67,7 @@ const t = ui[lang];
     margin-top: 0;
   }
 
-  .organizers :global(ul) {
+  .organizers {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
     gap: 0.75rem;
@@ -59,14 +76,43 @@ const t = ui[lang];
     list-style: none;
   }
 
-  .organizers :global(li) {
-    margin: 0;
-    padding: 0.9rem 1rem 0.9rem 1.1rem;
-    border-left: 3px solid var(--color-primary);
+  .organizer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius);
     background: var(--color-surface);
-    border-radius: 0 var(--radius) var(--radius) 0;
+    box-shadow: 0 1px 2px rgb(16 36 58 / 6%);
+  }
+
+  .organizer__logo {
+    flex: none;
+    display: grid;
+    place-items: center;
+    /* Wide enough for horizontal logos, tall enough for round seals. */
+    width: 6rem;
+    height: 3.75rem;
+  }
+
+  .organizer__logo img {
+    width: auto;
+    height: auto;
+    max-width: 6rem;
+    max-height: 3.75rem;
+    object-fit: contain;
+  }
+
+  .organizer__logo svg {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-muted);
+    opacity: 0.6;
+  }
+
+  .organizer__name {
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.35;
   }
 
   .venue {

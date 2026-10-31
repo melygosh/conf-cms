@@ -40,20 +40,29 @@ links:
     en: https://drive.google.com/file/d/1ElIhfmjbDcbgkylnpDjZhMhthZdkqVOa/view?usp=sharing
 
 organizers:
-  uk: |
-    - Міністерство освіти і науки України
-    - Національний технічний університет «Харківський політехнічний інститут»
-    - Українська асоціація управління проєктами
-    - Національний університет «Львівська політехніка»
-    - Азербайджанський університет архітектури та будівництва
-    - Азербайджанська асоціація управління проєктами
-  en: |
-    - Ministry of Education and Science of Ukraine
-    - National Technical University "Kharkiv Polytechnic Institute" (NTU "KhPI")
-    - Lviv Polytechnic National University
-    - Azerbaijan University of Architecture and Construction
-    - Ukrainian Association of Project Management
-    - Azerbaijan Project Management Association
+  - name:
+      uk: Міністерство освіти і науки України
+      en: Ministry of Education and Science of Ukraine
+  - name:
+      uk: Національний технічний університет «Харківський політехнічний інститут»
+      en: National Technical University "Kharkiv Polytechnic Institute" (NTU "KhPI")
+    logo: /images/organizers/khpi.png
+  - name:
+      uk: Українська асоціація управління проєктами
+      en: Ukrainian Association of Project Management
+    logo: /assets/images/partner/partner-1.png
+  - name:
+      uk: Національний університет «Львівська політехніка»
+      en: Lviv Polytechnic National University
+    logo: /images/organizers/lpnu.svg
+  - name:
+      uk: Азербайджанський університет архітектури та будівництва
+      en: Azerbaijan University of Architecture and Construction
+    logo: /assets/images/partner/partner-4.png
+  - name:
+      uk: Азербайджанська асоціація управління проєктами
+      en: Azerbaijan Project Management Association
+    logo: /assets/images/partner/partner-6.png
 
 aim:
   uk: Обговорення нових ідей в галузі стратегічного управління, управління портфелями, програмами, проєктами.
