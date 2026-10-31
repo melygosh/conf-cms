@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" role="img" aria-label="Українська асоціація управління проєктами">
-  <!-- UPMA sign "»", redrawn from the upma.kiev.ua favicon. -->
-  <g fill="none" stroke="#da090c" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Українська асоціація управління проєктами">
+  <!-- UPMA sign "»" (redrawn from the upma.kiev.ua favicon), knocked out of a brand-red disc
+       so it reads as round next to the university seals. -->
+  <circle cx="50" cy="50" r="50" fill="#da090c" />
+  <g transform="translate(26 30) scale(.4)" fill="none" stroke="#fff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
     <path d="M18 14 54 50 18 86" />
     <path d="M64 14 100 50 64 86" />
   </g>

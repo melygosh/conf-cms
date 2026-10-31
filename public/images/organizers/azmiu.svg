@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Азербайджанський університет архітектури та будівництва">
+  <!-- AzMIU sign (roof, up-arrow, U-shaped base), redrawn from the azmiu.edu.az favicon the owner shared,
+       knocked out of a brand-blue disc to match the other organizer marks. -->
+  <circle cx="50" cy="50" r="50" fill="#1a5ff0" />
+  <g transform="translate(20 20) scale(.6)" fill="#fff">
+    <polygon points="6,52 50,8 94,52 79,52 50,23 21,52" />
+    <polygon points="34,48 50,32 66,48 58,48 50,40 42,48" />
+    <rect x="46" y="42" width="8" height="34" />
+    <polygon points="26,56 35,56 35,84 65,84 65,56 74,56 74,93 26,93" />
+  </g>
+</svg>
