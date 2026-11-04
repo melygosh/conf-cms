@@ -65,7 +65,8 @@ a {
   }
 }
 
-/* The part of a page that holds its content; `npm run letter` fails when content is taller than this box. */
+/* The part of a page that holds its content. `npm run letter` fails when the content of any [data-fit] box
+   (this one, the cover strip, the back sign) is taller or wider than the box. */
 .page__body {
   position: absolute;
   inset: 0 0 64px;

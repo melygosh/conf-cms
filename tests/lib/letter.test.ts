@@ -54,6 +54,12 @@ describe('parseCommittees', () => {
     ]);
   });
 
+  it('reads a role heading followed directly by a member, without a blank line', () => {
+    expect(parseCommittees('### A\n#### Chair\n**X**, prof.\n\n**Y**, doc.')).toEqual([
+      { title: 'A', groups: [{ role: 'Chair', members: ['**X**, prof.', '**Y**, doc.'] }] },
+    ]);
+  });
+
   it.each(['uk', 'en'] as const)('keeps every 2026 %s committee member', (lang) => {
     const c = conferenceSchema.parse(parse(readFileSync('src/content/conferences/2026.yaml', 'utf8')));
     const parsed = parseCommittees(c.committees[lang]);
@@ -64,14 +70,24 @@ describe('parseCommittees', () => {
 });
 
 describe('findOverflow', () => {
-  it('names the pages whose content is taller than the page', () => {
-    expect(
-      findOverflow([
-        { scrollHeight: 900, clientHeight: 1000 },
-        { scrollHeight: 1040, clientHeight: 1000 },
-        { scrollHeight: 1001, clientHeight: 1000 },
-      ]),
-    ).toEqual([2]);
+  const box = (page: number, h: [number, number], w: [number, number] = [700, 700]) => ({
+    page,
+    scrollHeight: h[0],
+    clientHeight: h[1],
+    scrollWidth: w[0],
+    clientWidth: w[1],
+  });
+
+  it('names the pages whose content is taller than its box', () => {
+    expect(findOverflow([box(1, [900, 1000]), box(2, [1040, 1000]), box(3, [1001, 1000])])).toEqual([2]);
+  });
+
+  it('catches text wider than its box, e.g. a long amount in the cover strip', () => {
+    expect(findOverflow([box(1, [190, 190], [740, 700])])).toEqual([1]);
+  });
+
+  it('names a page once however many of its boxes overflow', () => {
+    expect(findOverflow([box(1, [200, 190]), box(1, [1000, 900]), box(7, [10, 10], [900, 700])])).toEqual([1, 7]);
   });
 });
 

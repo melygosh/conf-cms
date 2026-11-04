@@ -29,7 +29,7 @@ const contacts = site.contacts[lang]
 
 <section class="page back">
   <div class="photo photo--back" style={`background-image: url(${photo}); background-position: 40% 100%;`}></div>
-  <div class="page__body back__body">
+  <div class="page__body back__body" data-fit>
     <div class="kick kick--red">06 / {t.pages.contacts}</div>
     <h2>{t.titles.contacts}</h2>
     <div class="back__register">
@@ -58,7 +58,7 @@ const contacts = site.contacts[lang]
       }
     </div>
   </div>
-  <div class="back__sign">
+  <div class="back__sign" data-fit>
     <Logo year={c.year} width={150} />
     <a href="https://imconf.com.ua/">{t.site}</a>
   </div>
@@ -134,6 +134,7 @@ const contacts = site.contacts[lang]
     align-items: center;
     justify-content: space-between;
     border-radius: 14px;
+    overflow: hidden;
     padding: 12px 22px;
     background: rgb(255 255 255 / 92%);
   }

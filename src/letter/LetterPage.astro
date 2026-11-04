@@ -29,7 +29,7 @@ const photo = (await getImage({ src: carpathians, width: 1600, format: 'jpg' }))
 const qr = await qrSvg(c.links.registration[lang]);
 ---
 
-<LetterLayout lang={lang} title={`${ui[lang].letter.title} · ${c.title[lang]} ${c.year}`}>
+<LetterLayout lang={lang} title={`${ui[lang].letter.title} · ${c.title[lang]} ${c.year}`} check={c.links.infoLetter ? undefined : c.year}>
   <Cover lang={lang} conference={c} photo={photo} qr={qr} />
   <About lang={lang} conference={c} />
   <Topics lang={lang} conference={c} />

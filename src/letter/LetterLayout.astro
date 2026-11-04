@@ -5,9 +5,11 @@ import './letter.css';
 interface Props {
   lang: Lang;
   title: string;
+  /** The year whose committed PDFs the build must check (absent when the year links its own info letter). */
+  check?: number;
 }
 
-const { lang, title } = Astro.props;
+const { lang, title, check } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,6 +18,7 @@ const { lang, title } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex">
+    {check && <meta name="letter-check" content={String(check)} />}
     <title>{title}</title>
     <link rel="icon" href="/favicon.ico" />
   </head>

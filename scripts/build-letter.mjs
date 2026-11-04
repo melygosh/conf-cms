@@ -8,7 +8,7 @@ import { extname, join } from 'node:path';
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { parse } from 'yaml';
 import { findOverflow } from '../src/lib/letter.ts';
-import { letterHash, letterInputs, letterPaths } from '../src/lib/letter-freshness.ts';
+import { letterPaths, renderedLetterHash } from '../src/lib/letter-freshness.ts';
 
 const PORT = 4339;
 const LANGS = { uk: '/letter/', en: '/en/letter/' };
@@ -67,10 +67,19 @@ try {
   for (const [lang, path] of Object.entries(LANGS)) {
     await page.goto(`http://127.0.0.1:${PORT}${path}`, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
-    const sizes = await page.$$eval('.page__body', (els) =>
-      els.map((e) => ({ scrollHeight: e.scrollHeight, clientHeight: e.clientHeight })),
-    );
-    for (const n of findOverflow(sizes)) problems.push(`${lang}: page ${n} overflows`);
+    const pageCount = await page.$$eval('section.page', (els) => els.length);
+    if (pageCount !== 7) problems.push(`${lang}: ${path} has ${pageCount} pages instead of 7`);
+    const boxes = await page.$$eval('[data-fit]', (els) => {
+      const pages = [...document.querySelectorAll('section.page')];
+      return els.map((e) => ({
+        page: pages.indexOf(e.closest('section.page')) + 1,
+        scrollHeight: e.scrollHeight,
+        clientHeight: e.clientHeight,
+        scrollWidth: e.scrollWidth,
+        clientWidth: e.clientWidth,
+      }));
+    });
+    for (const n of findOverflow(boxes)) problems.push(`${lang}: page ${n} overflows`);
     pdfs[lang] = await page.pdf({ preferCSSPageSize: true, printBackground: true });
   }
 
@@ -81,7 +90,7 @@ try {
     const paths = letterPaths(year);
     mkdirSync('public/letters', { recursive: true });
     for (const lang of Object.keys(LANGS)) writeFileSync(paths.pdf[lang], pdfs[lang]);
-    writeFileSync(paths.hash, `${letterHash(letterInputs(year))}\n`);
+    writeFileSync(paths.hash, `${renderedLetterHash('dist')}\n`);
     console.log(`Wrote ${paths.pdf.uk}, ${paths.pdf.en} and ${paths.hash}`);
   }
 } catch (e) {

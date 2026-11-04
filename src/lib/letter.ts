@@ -59,7 +59,9 @@ export function parseCommittees(markdown: string): Committee[] {
     const [title, ...rest] = block.split('\n');
     const committee: Committee = { title: title.trim(), groups: [] };
     let group: Committee['groups'][number] | undefined;
-    for (const para of rest.join('\n').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)) {
+    // A role heading is its own paragraph even without blank lines around it (valid Markdown).
+    const body = rest.join('\n').replace(/^(#### .*)$/gm, '\n$1\n');
+    for (const para of body.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)) {
       if (para.startsWith('#### ')) {
         group = { role: para.slice(5).trim(), members: [] };
         committee.groups.push(group);
@@ -76,9 +78,14 @@ export function parseCommittees(markdown: string): Committee[] {
   return committees;
 }
 
-/** 1-based numbers of the pages whose content is taller than the page (1px of rounding allowed). */
-export function findOverflow(pages: { scrollHeight: number; clientHeight: number }[]): number[] {
-  return pages.flatMap((p, i) => (p.scrollHeight > p.clientHeight + 1 ? [i + 1] : []));
+export type FitBox = { page: number; scrollHeight: number; clientHeight: number; scrollWidth: number; clientWidth: number };
+
+/** Pages (1-based, sorted, once each) with a fixed-size box whose content is taller or wider than it (1px of rounding allowed). */
+export function findOverflow(boxes: FitBox[]): number[] {
+  const pages = boxes
+    .filter((b) => b.scrollHeight > b.clientHeight + 1 || b.scrollWidth > b.clientWidth + 1)
+    .map((b) => b.page);
+  return [...new Set(pages)].sort((a, b) => a - b);
 }
 
 const dm = (iso: string) => `${iso.slice(8, 10)}.${iso.slice(5, 7)}`;

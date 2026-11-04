@@ -22,7 +22,7 @@ const fee = c.cost[lang].items[0];
 
 <section class="page cover">
   <div class="photo" style={`background-image: url(${photo}); background-position: 62% 100%;`}></div>
-  <div class="page__body cover__body">
+  <div class="page__body cover__body" data-fit>
     <div class="cover__top">
       <Logo year={c.year} width={176} />
       <div class="kick">{t.title}</div>
@@ -38,7 +38,7 @@ const fee = c.cost[lang].items[0];
       </div>
     </div>
   </div>
-  <div class="cover__strip">
+  <div class="cover__strip" data-fit>
     {
       registration && (
         <div>
@@ -132,6 +132,7 @@ const fee = c.cost[lang].items[0];
     display: grid;
     grid-template-columns: repeat(3, 1fr) 136px;
     gap: 22px;
+    overflow: hidden;
     padding: 30px var(--pad-x);
     background: rgb(233 238 248 / 93%);
   }
