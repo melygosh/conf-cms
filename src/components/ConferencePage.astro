@@ -4,6 +4,7 @@ import type { Lang } from '../content/schema';
 import Base from '../layouts/Base.astro';
 import { assertConferenceFiles, pickCurrent, toRoman } from '../lib/conference';
 import { ui } from '../i18n/ui';
+import { checkLetterFreshness } from '../lib/letter-freshness';
 import Footer from './Footer.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
@@ -33,6 +34,14 @@ const archive = (await getCollection('archive'))
   .filter((a) => a.proceedings || a.photos || a.presentations.length > 0)
   .sort((a, b) => b.year - a.year);
 const site = (await getEntry('site', 'site'))!.data;
+
+// The hero links the committed info letter PDF; never deploy one that is missing or older than the data.
+// `npm run letter` builds with LETTER_BUILD=1 because it is the step that makes the PDF fresh.
+const letter = checkLetterFreshness(conference);
+if (!letter.ok && process.env.LETTER_BUILD !== '1') {
+  if (import.meta.env.DEV) console.warn(letter.message);
+  else throw new Error(letter.message);
+}
 
 const t = ui[lang];
 const title = `${conference.title[lang]} ${conference.year}`;
