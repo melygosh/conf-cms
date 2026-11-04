@@ -1,0 +1,57 @@
+---
+// The link to the registration form, used in the hero, the publication rules and the registration band.
+// Inert after the registration deadline, hidden after the conference; both are recomputed on the
+// visitor's date by src/scripts/date-states.ts (data-closed-after, data-hidden-after).
+import type { Conference, Lang } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { isFinished, registrationClose } from '../lib/conference';
+import { deadlineState, toIso } from '../lib/dates';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+  label: string;
+  class?: string;
+  [attr: string]: unknown;
+}
+
+const { lang, conference: c, label, class: className, ...rest } = Astro.props;
+const now = new Date();
+const closeIso = registrationClose(c);
+const closed = closeIso !== null && deadlineState(closeIso, now) === 'past';
+---
+
+<a
+  class:list={['button button--accent register-button', className]}
+  href={c.links.registration[lang]}
+  target="_blank"
+  rel="noopener"
+  data-closed-after={closeIso ?? undefined}
+  data-hidden-after={toIso(c.dates.end)}
+  aria-disabled={closed ? 'true' : undefined}
+  tabindex={closed ? -1 : undefined}
+  hidden={isFinished(c, now)}
+  {...rest}
+  ><span class="register-button__open">{label}</span><span class="register-button__closed">{ui[lang].registrationClosed}</span></a
+>
+
+<style>
+  .register-button__closed {
+    display: none;
+  }
+
+  .register-button[aria-disabled='true'] {
+    background: var(--color-muted);
+    cursor: default;
+    pointer-events: none;
+    transform: none;
+  }
+
+  .register-button[aria-disabled='true'] .register-button__open {
+    display: none;
+  }
+
+  .register-button[aria-disabled='true'] .register-button__closed {
+    display: inline;
+  }
+</style>

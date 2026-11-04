@@ -25,6 +25,7 @@ export function rawConference(): Record<string, unknown> {
     languages: l('Українська', 'Ukrainian'),
     publication: { summary: l('s', 's'), rules: l('r', 'r'), formatting: l('f', 'f') },
     deadlines: [
+      { date: '2026-01-20', title: l('Заявка', 'Registration'), registration: true },
       { date: '2026-01-25', title: l('Тези', 'Abstracts'), countdown: true },
       { date: '2026-02-16', title: l('Статті', 'Papers') },
     ],

@@ -4,7 +4,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
 import { archiveSchema, conferenceSchema, siteSchema, type Lang } from '../../src/content/schema';
-import { pickCurrent } from '../../src/lib/conference';
+import { pickCurrent, registrationClose } from '../../src/lib/conference';
 import { toIso } from '../../src/lib/dates';
 
 const load = (path: string) => parse(readFileSync(path, 'utf8'));
@@ -16,6 +16,7 @@ export const archive = yamlIn('src/content/archive').map((p) => archiveSchema.pa
 
 export const endIso = toIso(conference.dates.end);
 export const deadlineIsos = conference.deadlines.map((d) => toIso(d.date));
+export const registrationIso = registrationClose(conference);
 export const countdownIso = toIso(conference.deadlines.find((d) => d.countdown)!.date);
 
 export const pages: [Lang, string][] = [

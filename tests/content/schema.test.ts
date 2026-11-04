@@ -18,6 +18,12 @@ describe('conferenceSchema', () => {
     expect(paths(raw)).toContainEqual(['title', 'en']);
   });
 
+  it('rejects a second registration deadline', () => {
+    const raw = rawConference() as { deadlines: { registration?: boolean }[] };
+    raw.deadlines[1].registration = true;
+    expect(paths(raw)).toContainEqual(['deadlines', 1, 'registration']);
+  });
+
   it('rejects a human-written date and names the field', () => {
     const raw = rawConference() as { deadlines: { date: string }[] };
     raw.deadlines[0].date = '25 січня';

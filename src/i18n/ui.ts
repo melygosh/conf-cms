@@ -37,6 +37,8 @@ export interface UiStrings {
   };
   register: string;
   registerLong: string;
+  submitAbstract: string;
+  registrationClosed: string;
   infoLetter: string;
   editionLine: (roman: string) => string;
   finished: string;
@@ -84,8 +86,10 @@ export const ui: Record<Lang, UiStrings> = {
       partners: 'Партнери',
       contacts: 'Контакти',
     },
-    register: 'Реєстрація',
+    register: 'Реєстрація та подання тез',
     registerLong: 'Зареєструватися на конференцію',
+    submitAbstract: 'Подати тези через форму реєстрації',
+    registrationClosed: 'Реєстрацію завершено',
     infoLetter: 'Інформаційний лист',
     editionLine: (roman) => `${roman} міжнародна науково-практична конференція`,
     finished: 'Конференція відбулася',
@@ -131,8 +135,10 @@ export const ui: Record<Lang, UiStrings> = {
       partners: 'Partners',
       contacts: 'Contacts',
     },
-    register: 'Registration',
+    register: 'Register & submit abstracts',
     registerLong: 'Register for the conference',
+    submitAbstract: 'Submit abstracts via the registration form',
+    registrationClosed: 'Registration closed',
     infoLetter: 'Call for Papers',
     editionLine: (roman) => `${roman} International Scientific and Practical Conference`,
     finished: 'The conference has taken place',

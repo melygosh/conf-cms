@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertConferenceFiles, countdownTarget, isFinished, pickCurrent, toRoman } from '../../src/lib/conference';
+import { assertConferenceFiles, countdownTarget, isFinished, pickCurrent, registrationClose, toRoman } from '../../src/lib/conference';
 import { conference } from '../fixtures/conference';
 
 describe('pickCurrent', () => {
@@ -29,6 +29,17 @@ describe('countdownTarget', () => {
 
   it('is null once every deadline has passed', async () => {
     expect(countdownTarget(await conference(), new Date('2026-02-20T10:00:00Z'))).toBeNull();
+  });
+});
+
+describe('registrationClose', () => {
+  it('is the date of the deadline marked registration', async () => {
+    expect(registrationClose(await conference())).toBe('2026-01-20');
+  });
+
+  it('is null when no deadline is marked', async () => {
+    const c = await conference();
+    expect(registrationClose({ ...c, deadlines: c.deadlines.map((d) => ({ ...d, registration: false })) })).toBeNull();
   });
 });
 

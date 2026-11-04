@@ -63,6 +63,8 @@ export const conferenceSchema = z
           title: localized(z.string()),
           note: localized(z.string()).optional(),
           countdown: z.boolean().default(false),
+          /** Registration (and the form's buttons) closes after this deadline. */
+          registration: z.boolean().default(false),
         })
         .strict(),
     ),
@@ -90,6 +92,11 @@ export const conferenceSchema = z
     if (c.dates.end < c.dates.start) {
       ctx.addIssue({ code: 'custom', path: ['dates', 'end'], message: 'Conference ends before it starts' });
     }
+    c.deadlines.forEach((d, i) => {
+      if (d.registration && c.deadlines.findIndex((x) => x.registration) !== i) {
+        ctx.addIssue({ code: 'custom', path: ['deadlines', i, 'registration'], message: 'Only one deadline can close registration' });
+      }
+    });
   });
 
 export const archiveSchema = z

@@ -119,11 +119,13 @@ publication:
     en: The conference materials will be published in the form of a collection of abstracts and in the NTU "KhPI" Bulletin.
   rules:
     uk: |
-      - Тези приймаються обсягом 2 сторінки тексту формату А4, включно з рисунками, в редакторі MS Word (тези необхідно прикріпити до форми реєстрації, або надіслати на електронну адресу програмного комітету **publish.conf@gmail.com**).
+      - Тези приймаються **лише через форму реєстрації**: файл прикріплюється до форми.
+      - Обсяг тез — 2 сторінки тексту формату А4, включно з рисунками, у редакторі MS Word.
       - Мова конференції: **англійська та українська**.
       - Назва файлу повинна відповідати прізвищу першого автора.
     en: |
-      - Abstracts are accepted in the amount of 2 pages of A4 text, including figures, in MS Word (abstracts must be attached to the registration form or sent to the program committee's email address **publish.conf@gmail.com**).
+      - Abstracts are accepted **only through the registration form**: attach the file to the form.
+      - Abstracts are 2 pages of A4 text, including figures, in MS Word.
       - Conference language: **English**.
       - The file name should correspond to the surname of the first author.
   formatting:
@@ -148,6 +150,7 @@ publication:
 
 deadlines:
   - date: 2026-01-25
+    registration: true
     title:
       uk: Подача заявки учасниками
       en: Conference registration
@@ -245,12 +248,12 @@ authors:
     body:
       uk: |
         1. *[Заявка на участь](https://docs.google.com/forms/d/e/1FAIpQLScH4NPI31ig5qQ7ENp5DNdq-89fkvnv0CWZfmoMKaqpb7DwSA/viewform?usp=header)*
-        2. *Електронний варіант тез доповіді*
+        2. *Електронний варіант тез доповіді (прикріплюється до заявки)*
         3. *Електронний варіант статті (електронною поштою) за бажанням.*
         4. *Копія чеку про сплату організаційного внеску та вартості публікації статті.*
       en: |
         1. *[Application for participation](https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header)*
-        2. *Electronic version of the abstracts of the report*
+        2. *Electronic version of the abstracts (attached to the application)*
         3. *Electronic version of the article (by email) if desired.*
         4. *Copy of the payment check (the organizational fee and the publication cost payment).*
 

@@ -11,7 +11,7 @@ const BUILT_IN_NOVEMBER = `
   </tbody></table>
   <p data-countdown="2026-01-25" data-lang="uk">До кінця прийому тез: <strong>71 день</strong></p>
   <p data-finished-after="2026-02-19" hidden>Конференція відбулася</p>
-  <a class="register" data-hidden-after="2026-02-19" href="https://example.com/form">Реєстрація</a>
+  <a class="register" data-hidden-after="2026-02-19" data-closed-after="2026-01-25" href="https://example.com/form">Реєстрація</a>
 `;
 
 const state = (iso: string) => document.querySelector(`[data-deadline="${iso}"]`)!.getAttribute('data-state');
@@ -36,6 +36,17 @@ describe('applyDateStates', () => {
     applyDateStates(document, new Date('2026-01-24T22:30:00Z'));
     expect(state('2026-01-25')).toBe('today');
     expect(countdown().textContent).toContain('0 днів');
+  });
+
+  it('keeps registration open on its deadline day in Kyiv and disables it the day after', () => {
+    applyDateStates(document, new Date('2026-01-25T20:00:00Z'));
+    expect(register().getAttribute('aria-disabled')).toBeNull();
+    expect(register().hasAttribute('tabindex')).toBe(false);
+
+    applyDateStates(document, new Date('2026-01-25T22:30:00Z'));
+    expect(register().getAttribute('aria-disabled')).toBe('true');
+    expect(register().tabIndex).toBe(-1);
+    expect(register().hidden).toBe(false);
   });
 
   it('hides the countdown and shows "finished" after the conference, with no negative numbers', () => {

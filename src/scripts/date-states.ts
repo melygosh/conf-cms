@@ -1,5 +1,6 @@
 // The page is built once, but read for months: recompute the date-dependent
-// parts on the visitor's date. Markup contract: src/components/sections/Dates.astro.
+// parts on the visitor's date. Markup contract: src/components/sections/Dates.astro
+// and src/components/RegisterButton.astro.
 import type { Lang } from '../content/schema';
 import { daysUntil, deadlineState, pluralDays } from '../lib/dates';
 
@@ -18,6 +19,17 @@ export function applyDateStates(root: ParentNode, now: Date): void {
 
   root.querySelectorAll<HTMLElement>('[data-finished-after]').forEach((el) => {
     el.hidden = deadlineState(el.dataset.finishedAfter!, now) !== 'past';
+  });
+
+  // Registration buttons stay visible but inert once registration has closed.
+  root.querySelectorAll<HTMLElement>('[data-closed-after]').forEach((el) => {
+    if (deadlineState(el.dataset.closedAfter!, now) === 'past') {
+      el.setAttribute('aria-disabled', 'true');
+      el.tabIndex = -1;
+    } else {
+      el.removeAttribute('aria-disabled');
+      el.removeAttribute('tabindex');
+    }
   });
 
   root.querySelectorAll<HTMLElement>('[data-hidden-after]').forEach((el) => {

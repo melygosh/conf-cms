@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { ui } from '../../src/i18n/ui';
 import { md, mdInline } from '../../src/lib/markdown';
-import { archive, attr, conference as c, countdownIso, deadlineIsos, endIso, pages, site } from './expected';
+import { archive, attr, conference as c, countdownIso, deadlineIsos, endIso, pages, registrationIso, site } from './expected';
 
 const SECTION_IDS = ['about', 'topics', 'publication', 'dates', 'cost', 'authors', 'committees', 'registration', 'archive', 'partners', 'contacts'];
 
@@ -24,8 +25,25 @@ describe('page sections', () => {
     const form = attr(c.links.registration[lang]);
     const registerLinks = html.match(/<a[^>]*>/g)!.filter((a) => a.includes(`href="${form}"`) && a.includes('class="button'));
     expect(registerLinks.length).toBeGreaterThan(0);
-    for (const a of registerLinks) expect(a).toContain(`data-hidden-after="${endIso}"`);
+    expect(registerLinks).toHaveLength(3); // hero, publication, registration band
+    for (const a of registerLinks) {
+      expect(a).toContain(`data-hidden-after="${endIso}"`);
+      if (registrationIso) expect(a).toContain(`data-closed-after="${registrationIso}"`);
+    }
     expect(html).toMatch(new RegExp(`id="registration"[^>]*data-hidden-after="${endIso}"`));
+  });
+
+  it.each(pages)('%s sends abstracts to the registration form from the publication rules', (lang, html) => {
+    const section = html.slice(html.indexOf('id="publication"'), html.indexOf('id="cost"'));
+    expect(section).toContain(`href="${attr(c.links.registration[lang])}"`);
+  });
+
+  it.each(pages)('%s has one hero button for both registration and abstracts', (lang, html) => {
+    const hero = html.slice(html.indexOf('class="hero"'), html.indexOf('id="dates"'));
+    const toForm = hero.match(/<a[^>]*>.*?<\/a>/g)!.filter((a) => a.includes(`href="${attr(c.links.registration[lang])}"`));
+    expect(toForm).toHaveLength(1);
+    expect(toForm[0]).toContain(`>${attr(ui[lang].register)}<`);
+    expect(toForm[0]).toContain(`>${attr(ui[lang].registrationClosed)}<`);
   });
 
   it.each(pages)('%s uses native disclosure for the authors section', (_, html) => {

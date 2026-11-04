@@ -46,6 +46,12 @@ export function countdownTarget(conf: Conference, now: Date): { iso: string; tit
   return next ? { iso: toIso(next.date), title: next.title } : null;
 }
 
+/** The day after which registration is closed, or null when no deadline closes it. */
+export function registrationClose(conf: Conference): string | null {
+  const d = conf.deadlines.find((x) => x.registration);
+  return d ? toIso(d.date) : null;
+}
+
 export function isFinished(conf: Conference, now: Date): boolean {
   return deadlineState(toIso(conf.dates.end), now) === 'past';
 }

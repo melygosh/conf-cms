@@ -3,6 +3,7 @@ import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
 import { isFinished } from '../../lib/conference';
 import { formatRange, toIso } from '../../lib/dates';
+import RegisterButton from '../RegisterButton.astro';
 
 interface Props {
   lang: Lang;
@@ -26,13 +27,7 @@ const endIso = toIso(c.dates.end);
       <h2 id="registration-title" class="registration__title">{t.sections.registration}</h2>
       <p class="registration__meta">{formatRange(toIso(c.dates.start), endIso, lang)} · {c.venue.place[lang]}</p>
     </div>
-    <a
-      class="button button--accent registration__button"
-      href={c.links.registration[lang]}
-      target="_blank"
-      rel="noopener"
-      data-hidden-after={endIso}>{t.registerLong} →</a
-    >
+    <RegisterButton lang={lang} conference={c} label={`${t.registerLong} →`} class="registration__button" />
   </div>
 </section>
 

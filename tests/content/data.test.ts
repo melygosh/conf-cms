@@ -14,6 +14,13 @@ describe('content files', () => {
     expect(r.success, JSON.stringify(r.error?.issues)).toBe(true);
   });
 
+  // Abstracts go only through the registration form: an email here is how they got lost and duplicated in 2026.
+  it.each(yamlFiles('src/content/conferences'))('%s does not offer email for abstracts', (path) => {
+    const { rules } = conferenceSchema.parse(load(path)).publication;
+    expect(rules.uk).not.toMatch(/@|mailto:/);
+    expect(rules.en).not.toMatch(/@|mailto:/);
+  });
+
   it.each(yamlFiles('src/content/archive'))('%s matches the archive schema', (path) => {
     const r = archiveSchema.safeParse(load(path));
     expect(r.success, JSON.stringify(r.error?.issues)).toBe(true);
@@ -39,6 +46,10 @@ describe('2026 conference', () => {
     const abroad = c.cost.rows.map((r) => r.abroad);
     expect(abroad.some((a) => a.uk.includes('5 USD'))).toBe(true);
     expect(abroad.some((a) => a.en.includes('5 EUR'))).toBe(true);
+  });
+
+  it('closes registration on 25 January', () => {
+    expect(toIso(c.deadlines.find((d) => d.registration)!.date)).toBe('2026-01-25');
   });
 
   it('has separate registration forms per language', () => {
