@@ -1,0 +1,30 @@
+---
+// An inner page of the letter: kicker, title, content and the footer with the page number.
+import type { Conference, Lang } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { toRoman } from '../lib/conference';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+  /** Page number, 2–6. */
+  n: number;
+  kicker: string;
+  title: string;
+}
+
+const { lang, conference: c, n, kicker, title } = Astro.props;
+const t = ui[lang];
+---
+
+<section class="page">
+  <div class="page__body">
+    <div class="kick kick--red">{String(n - 1).padStart(2, '0')} / {kicker}</div>
+    <h2>{title}</h2>
+    <slot />
+  </div>
+  <footer class="page__foot">
+    <span>{t.editionLine(toRoman(c.edition))} · {c.year}</span>
+    <span><b>{t.letter.site}</b> · {n} / 7</span>
+  </footer>
+</section>

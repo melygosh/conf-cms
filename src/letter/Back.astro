@@ -1,0 +1,148 @@
+---
+import Logo from '../components/Logo.astro';
+import type { Conference, Lang, Site } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { formatDate, toIso } from '../lib/dates';
+import { md, mdInline } from '../lib/markdown';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+  site: Site;
+  photo: string;
+  qr: string;
+}
+
+const { lang, conference: c, site, photo, qr } = Astro.props;
+const t = ui[lang].letter;
+const registration = c.deadlines.find((d) => d.registration);
+const firstStep = c.submission[lang][0];
+// Contacts Markdown is "### Heading" blocks; each becomes a card.
+const contacts = site.contacts[lang]
+  .split(/^### /m)
+  .filter((b) => b.trim())
+  .map((b) => {
+    const [title, ...rest] = b.split('\n');
+    return { title: title.trim(), html: md(rest.join('\n')) };
+  });
+---
+
+<section class="page back">
+  <div class="photo photo--back" style={`background-image: url(${photo}); background-position: 40% 100%;`}></div>
+  <div class="page__body back__body">
+    <div class="kick kick--red">06 / {t.pages.contacts}</div>
+    <h2>{t.titles.contacts}</h2>
+    <div class="back__register">
+      <a class="qr back__qr" href={c.links.registration[lang]} set:html={qr} />
+      <div>
+        <div class="kick">{t.registerKicker}</div>
+        <h3 class="back__cta"><a href={c.links.registration[lang]}>{t.registerCta}</a></h3>
+        {
+          registration && (
+            <p class="back__until">
+              {t.until} <b>{formatDate(toIso(registration.date), lang)}</b>
+            </p>
+          )
+        }
+        <p class="muted" set:html={mdInline(firstStep.text)} />
+      </div>
+    </div>
+    <div class="back__contacts">
+      {
+        contacts.map((block) => (
+          <div class="back__card">
+            <div class="kick">{block.title}</div>
+            <div class="md" set:html={block.html} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="back__sign">
+    <Logo year={c.year} width={150} />
+    <a href="https://imconf.com.ua/">{t.site}</a>
+  </div>
+</section>
+
+<style>
+  .back__body {
+    inset: 0 0 150px;
+  }
+
+  .back__register {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    border-left: 6px solid var(--red);
+    border-radius: 18px;
+    padding: 24px 28px;
+    background: var(--soft);
+  }
+
+  .back__qr {
+    width: 170px;
+    height: 170px;
+  }
+
+  .back__cta {
+    margin: 6px 0 8px;
+    font-size: 26px;
+  }
+
+  .back__cta a {
+    text-decoration: none;
+  }
+
+  .back__until {
+    font-size: 16px;
+  }
+
+  .back__until b {
+    color: var(--red);
+  }
+
+  .back__contacts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .back__card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 20px;
+    background: #fff;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .back__card .kick {
+    margin-bottom: 6px;
+  }
+
+  .back__card a {
+    text-decoration: none;
+  }
+
+  .back__sign {
+    position: absolute;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    bottom: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 14px;
+    padding: 12px 22px;
+    background: rgb(255 255 255 / 92%);
+  }
+
+  .back__sign a {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--blue);
+    text-decoration: none;
+  }
+</style>

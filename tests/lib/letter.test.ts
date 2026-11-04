@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { conferenceSchema } from '../../src/content/schema';
-import { findOverflow, groupDeadlines, ordinalWord, parseCommittees } from '../../src/lib/letter';
+import { findOverflow, groupDeadlines, ordinalWord, parseCommittees, shortDate, shortRange } from '../../src/lib/letter';
 import { conference } from '../fixtures/conference';
 
 describe('ordinalWord', () => {
@@ -73,4 +73,11 @@ describe('findOverflow', () => {
       ]),
     ).toEqual([2]);
   });
+});
+
+describe('short dates', () => {
+  it('writes a day and month as DD.MM', () => expect(shortDate('2026-01-05')).toBe('05.01'));
+  it('shares the month inside one month', () => expect(shortRange('2026-02-17', '2026-02-19')).toBe('17–19.02'));
+  it('writes both months across a month boundary', () => expect(shortRange('2026-02-27', '2026-03-01')).toBe('27.02–01.03'));
+  it('writes a one-day event as one date', () => expect(shortRange('2026-02-17', '2026-02-17')).toBe('17.02'));
 });

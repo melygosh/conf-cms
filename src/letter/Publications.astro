@@ -1,0 +1,162 @@
+---
+import type { Conference, Lang } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { md } from '../lib/markdown';
+import Page from './Page.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+const a = c.publication.articles;
+const template = a.templateUrl[lang];
+---
+
+<Page lang={lang} conference={c} n={5} kicker={t.letter.pages.publications} title={t.letter.titles.publications}>
+  <h3><span class="tag">{t.letter.abstracts}</span></h3>
+  <div class="spec">
+    <!-- Schematic only: the sizes live in the rules text, so the drawing can never contradict them. -->
+    <div class="sheet" aria-hidden="true">
+      <div class="sheet__area">
+        <div class="sheet__l1"></div>
+        <div class="sheet__l2"></div>
+        <div class="sheet__l3"></div>
+        <div class="sheet__text"></div>
+        <div class="sheet__fig"></div>
+      </div>
+    </div>
+    <div class="rules">
+      <div class="md" set:html={md(c.publication.rules[lang])} />
+      <div class="md" set:html={md(c.publication.formatting[lang])} />
+    </div>
+  </div>
+
+  <h3><span class="tag">{t.letter.papers}</span> <a href={a.journalUrl}>{t.sections.authorsNote}</a></h3>
+  <div class="badges">{a.badges[lang].map((b) => <span>{b}</span>)}</div>
+  <div class="two">
+    <div class="md small" set:html={md(a.review[lang])} />
+    <div class="soft small">
+      <div class="md" set:html={md(a.requirements[lang])} />
+      {template && <p class="template"><a href={template}>{t.letter.template} ↗</a></p>}
+    </div>
+  </div>
+</Page>
+
+<style>
+  .tag {
+    display: inline-block;
+    margin-right: 8px;
+    border-radius: 4px;
+    padding: 2px 8px;
+    background: var(--deep);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    vertical-align: 3px;
+  }
+
+  h3 a {
+    text-decoration: none;
+  }
+
+  .spec {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+
+  .sheet {
+    position: relative;
+    height: 268px;
+    border: 1px solid #c9d1de;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgb(16 36 58 / 10%);
+  }
+
+  .sheet__area {
+    position: absolute;
+    inset: 22px;
+    border: 1px dashed var(--blue);
+  }
+
+  .sheet__l1 {
+    width: 80%;
+    height: 8px;
+    margin: 12px auto 0;
+    background: var(--deep);
+  }
+
+  .sheet__l2 {
+    width: 50%;
+    height: 6px;
+    margin: 6px auto 0;
+    background: var(--blue);
+  }
+
+  .sheet__l3 {
+    width: 62%;
+    height: 5px;
+    margin: 6px auto 0;
+    background: repeating-linear-gradient(115deg, var(--muted) 0 3px, transparent 3px 5px);
+  }
+
+  .sheet__text {
+    height: 100px;
+    margin: 12px 8px 0;
+    background: repeating-linear-gradient(180deg, #d7dde7 0 3px, transparent 3px 8px);
+  }
+
+  .sheet__fig {
+    width: 60%;
+    height: 40px;
+    margin: 8px auto 0;
+    border: 1px solid var(--line);
+    background: var(--soft);
+  }
+
+  .rules {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .rules .md + .md {
+    margin-top: 8px;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 14px;
+  }
+
+  .badges span {
+    border: 1.5px solid var(--blue);
+    border-radius: 999px;
+    padding: 2px 12px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--blue);
+  }
+
+  .small {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .template {
+    margin: 8px 0 0;
+    font-weight: 800;
+  }
+
+  .template a {
+    color: var(--blue);
+  }
+</style>

@@ -1,0 +1,219 @@
+@import '@fontsource/source-serif-4/400.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/800.css';
+
+/* The info letter: A4 pages printed to PDF by `npm run letter`. Sizes are CSS px at 96 dpi (A4 = 794 × 1123). */
+:root {
+  --blue: #1d3c8f;
+  --deep: #10243a;
+  --soft: #e9eef8;
+  --red: #c0302b;
+  --red-soft: #f6d9d7;
+  --ink: #1c2633;
+  --muted: #5a6676;
+  --line: #e1e4ea;
+  --pad-x: 64px;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  background: #d9dde4;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 24px auto;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 40px rgb(16 36 58 / 18%);
+  break-after: page;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .page {
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+/* The part of a page that holds its content; `npm run letter` fails when content is taller than this box. */
+.page__body {
+  position: absolute;
+  inset: 0 0 64px;
+  overflow: hidden;
+  padding: 56px var(--pad-x) 0;
+}
+
+.page__foot {
+  position: absolute;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.page__foot b {
+  color: var(--blue);
+}
+
+.kick {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.kick--red {
+  color: var(--red);
+}
+
+.page h2 {
+  margin: 6px 0 28px;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--deep);
+}
+
+.page h3 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--deep);
+}
+
+.page p {
+  margin: 0 0 10px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.soft {
+  border-radius: 14px;
+  padding: 18px 22px;
+  background: var(--soft);
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.dash {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dash li {
+  position: relative;
+  margin-bottom: 6px;
+  padding-left: 20px;
+}
+
+.dash li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 10px;
+  height: 2px;
+  background: var(--blue);
+}
+
+.md p:last-child,
+.md ul:last-child {
+  margin-bottom: 0;
+}
+
+.md ul {
+  margin: 0 0 8px;
+  padding-left: 18px;
+}
+
+.md li {
+  margin-bottom: 4px;
+}
+
+.qr {
+  flex: none;
+  display: block;
+  padding: 8px;
+  background: #fff;
+}
+
+.qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Outlined numerals: the edition on the cover, section numbers. */
+.outline {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--blue);
+}
+
+/* Covers: the Carpathians under a white veil that clears towards the bottom, like the site's hero. */
+.photo {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 96%) 0%, rgb(255 255 255 / 93%) 58%, rgb(255 255 255 / 86%) 67%, rgb(255 255 255 / 30%) 75%, rgb(255 255 255 / 0%) 84%),
+    linear-gradient(90deg, rgb(250 250 248 / 70%) 0%, rgb(250 250 248 / 0%) 60%);
+}
+
+.photo--back::after {
+  background: linear-gradient(180deg, rgb(255 255 255 / 97%) 0%, rgb(255 255 255 / 95%) 62%, rgb(255 255 255 / 55%) 74%, rgb(255 255 255 / 0%) 88%);
+}

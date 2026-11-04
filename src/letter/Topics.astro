@@ -1,0 +1,67 @@
+---
+import type { Conference, Lang } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { md, mdInline } from '../lib/markdown';
+import Page from './Page.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+---
+
+<Page lang={lang} conference={c} n={3} kicker={t.letter.pages.topics} title={t.letter.titles.topics}>
+  {
+    c.sections.map((s, i) => (
+      <div class="sec">
+        <div class="sec__n outline">{String(i + 1).padStart(2, '0')}</div>
+        <div>
+          <h3 set:html={mdInline(s.name[lang])} />
+          {s.items && (
+            <ul class="dash">
+              {s.items[lang].map((item) => (
+                <li set:html={mdInline(item)} />
+              ))}
+            </ul>
+          )}
+          {s.text && <div class="md muted" set:html={md(s.text[lang])} />}
+        </div>
+      </div>
+    ))
+  }
+  <div class="soft outputs">
+    <div class="kick">{t.sections.publication}</div>
+    <div class="md" set:html={md(c.publication.summary[lang])} />
+  </div>
+</Page>
+
+<style>
+  .sec {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 10px;
+    border-top: 2px solid var(--deep);
+    padding: 20px 0;
+  }
+
+  .sec__n {
+    font-size: 60px;
+    line-height: 0.9;
+    -webkit-text-stroke-width: 1.5px;
+  }
+
+  .sec h3 {
+    font-size: 20px;
+  }
+
+  .outputs {
+    margin-top: 16px;
+  }
+
+  .outputs .kick {
+    margin-bottom: 6px;
+  }
+</style>

@@ -55,6 +55,25 @@ export interface UiStrings {
   langSwitchLabel: string;
   langSwitchTitle: string;
   footer: string;
+  letter: {
+    title: string;
+    editionWords: (word: string) => string;
+    pages: { about: string; topics: string; participation: string; publications: string; committees: string; contacts: string };
+    titles: { about: string; topics: string; participation: string; publications: string; committees: string; contacts: string };
+    factDeadline: string;
+    factDeadlineNote: string;
+    factFee: string;
+    factLanguages: string;
+    groups: { participation: string; papers: string };
+    format: string;
+    abstracts: string;
+    papers: string;
+    template: string;
+    registerKicker: string;
+    registerCta: string;
+    until: string;
+    site: string;
+  };
 }
 
 export const ui: Record<Lang, UiStrings> = {
@@ -108,6 +127,39 @@ export const ui: Record<Lang, UiStrings> = {
     langSwitchLabel: 'EN',
     langSwitchTitle: 'English version',
     footer: 'Designed and developed by Strategic Management Department',
+    letter: {
+      title: 'Інформаційний лист',
+      editionWords: (word) => `${word} міжнародна науково-практична конференція`,
+      pages: {
+        about: 'Про конференцію',
+        topics: 'Тематика',
+        participation: 'Участь',
+        publications: 'Публікації',
+        committees: 'Комітети',
+        contacts: 'Контакти й реєстрація',
+      },
+      titles: {
+        about: 'Шановні колеги!',
+        topics: 'Секції конференції',
+        participation: 'Важливі дати й умови',
+        publications: 'Тези й статті',
+        committees: 'Комітети конференції',
+        contacts: 'Чекаємо на вас!',
+      },
+      factDeadline: 'Заявка й тези до',
+      factDeadlineNote: 'через форму реєстрації',
+      factFee: 'Оргвнесок',
+      factLanguages: 'Робочі мови',
+      groups: { participation: 'Участь', papers: 'Статті' },
+      format: 'Формат',
+      abstracts: 'Тези',
+      papers: 'Статті',
+      template: 'Шаблон статті',
+      registerKicker: 'Заявка на участь',
+      registerCta: 'Заповнити реєстраційну форму',
+      until: 'до',
+      site: 'imconf.com.ua',
+    },
   },
   en: {
     nav: {
@@ -159,6 +211,39 @@ export const ui: Record<Lang, UiStrings> = {
     langSwitchLabel: 'UA',
     langSwitchTitle: 'Українська версія',
     footer: 'Designed and developed by Strategic Management Department',
+    letter: {
+      title: 'Call for Papers',
+      editionWords: (word) => `${word} International Scientific and Practical Conference`,
+      pages: {
+        about: 'About the conference',
+        topics: 'Topics',
+        participation: 'Participation',
+        publications: 'Publications',
+        committees: 'Committees',
+        contacts: 'Contacts and registration',
+      },
+      titles: {
+        about: 'Dear colleagues!',
+        topics: 'Conference sections',
+        participation: 'Key dates and terms',
+        publications: 'Abstracts and papers',
+        committees: 'Conference committees',
+        contacts: 'We look forward to seeing you!',
+      },
+      factDeadline: 'Registration and abstracts by',
+      factDeadlineNote: 'via the registration form',
+      factFee: 'Participation',
+      factLanguages: 'Languages',
+      groups: { participation: 'Participation', papers: 'Papers' },
+      format: 'Format',
+      abstracts: 'Abstracts',
+      papers: 'Papers',
+      template: 'Paper template',
+      registerKicker: 'Registration',
+      registerCta: 'Complete the registration form',
+      until: 'by',
+      site: 'imconf.com.ua',
+    },
   },
 };
 

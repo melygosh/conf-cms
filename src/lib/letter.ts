@@ -80,3 +80,17 @@ export function parseCommittees(markdown: string): Committee[] {
 export function findOverflow(pages: { scrollHeight: number; clientHeight: number }[]): number[] {
   return pages.flatMap((p, i) => (p.scrollHeight > p.clientHeight + 1 ? [i + 1] : []));
 }
+
+const dm = (iso: string) => `${iso.slice(8, 10)}.${iso.slice(5, 7)}`;
+
+/** "2026-01-25" → "25.01" (the cover and the timeline already show the year). */
+export function shortDate(iso: string): string {
+  return dm(iso);
+}
+
+/** "17–19.02", or "27.02–01.03" across months, or "17.02" for one day. */
+export function shortRange(startIso: string, endIso: string): string {
+  if (startIso === endIso) return dm(startIso);
+  if (startIso.slice(0, 7) === endIso.slice(0, 7)) return `${startIso.slice(8, 10)}–${dm(endIso)}`;
+  return `${dm(startIso)}–${dm(endIso)}`;
+}

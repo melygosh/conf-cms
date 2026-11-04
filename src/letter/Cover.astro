@@ -1,0 +1,174 @@
+---
+import Logo from '../components/Logo.astro';
+import type { Conference, Lang } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { toRoman } from '../lib/conference';
+import { toIso } from '../lib/dates';
+import { ordinalWord, shortDate, shortRange } from '../lib/letter';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+  photo: string;
+  qr: string;
+}
+
+const { lang, conference: c, photo, qr } = Astro.props;
+const t = ui[lang].letter;
+const word = ordinalWord(c.edition, lang);
+const registration = c.deadlines.find((d) => d.registration);
+const fee = c.cost[lang].items[0];
+---
+
+<section class="page cover">
+  <div class="photo" style={`background-image: url(${photo}); background-position: 62% 100%;`}></div>
+  <div class="page__body cover__body">
+    <div class="cover__top">
+      <Logo year={c.year} width={176} />
+      <div class="kick">{t.title}</div>
+    </div>
+    <div class="cover__num outline">{toRoman(c.edition)}</div>
+    <div class="kick cover__edition">{t.editionWords(word[0].toUpperCase() + word.slice(1))}</div>
+    <h1 class="cover__title">{c.title[lang]}</h1>
+    <div class="cover__dates">
+      <div class="cover__range">{shortRange(toIso(c.dates.start), toIso(c.dates.end))}</div>
+      <div class="cover__meta">
+        {c.year}
+        <span>{c.venue.place[lang]}<br />{c.venue.format[lang]}</span>
+      </div>
+    </div>
+  </div>
+  <div class="cover__strip">
+    {
+      registration && (
+        <div>
+          <small>{t.factDeadline}</small>
+          <strong>{shortDate(toIso(registration.date))}</strong>
+          <p>{t.factDeadlineNote}</p>
+        </div>
+      )
+    }
+    <div>
+      <small>{t.factFee}</small>
+      <strong class="cover__fee">{fee.amount}</strong>
+      {fee.unit && <p>{fee.unit}</p>}
+    </div>
+    <div>
+      <small>{t.factLanguages}</small>
+      <strong class="cover__langs">{c.languages[lang].replace(/\.$/, '')}</strong>
+      <p>{t.site}</p>
+    </div>
+    <a class="qr cover__qr" href={c.links.registration[lang]} set:html={qr} />
+  </div>
+</section>
+
+<style>
+  .cover__body {
+    inset: 0 0 190px;
+    padding-top: 52px;
+  }
+
+  .cover__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cover__num {
+    margin: 48px 0 0 -8px;
+    font-size: 210px;
+    line-height: 0.85;
+  }
+
+  .cover__edition {
+    margin-top: 16px;
+  }
+
+  .cover__title {
+    margin: 20px 0 0;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--deep);
+  }
+
+  .cover__dates {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 36px;
+  }
+
+  .cover__range {
+    font-size: 84px;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--red);
+    white-space: nowrap;
+  }
+
+  .cover__meta {
+    padding-bottom: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--deep);
+  }
+
+  .cover__meta span {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .cover__strip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 190px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 136px;
+    gap: 22px;
+    padding: 30px var(--pad-x);
+    background: rgb(233 238 248 / 93%);
+  }
+
+  .cover__strip small {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .cover__strip strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--deep);
+  }
+
+  .cover__strip .cover__langs,
+  .cover__strip .cover__fee {
+    font-size: 22px;
+  }
+
+  .cover__strip p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .cover__qr {
+    justify-self: end;
+    width: 130px;
+    height: 130px;
+  }
+</style>

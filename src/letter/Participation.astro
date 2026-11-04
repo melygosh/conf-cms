@@ -1,0 +1,226 @@
+---
+import type { Conference, Lang } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { toIso } from '../lib/dates';
+import { groupDeadlines, shortDate } from '../lib/letter';
+import { md, mdInline } from '../lib/markdown';
+import Page from './Page.astro';
+
+interface Props {
+  lang: Lang;
+  conference: Conference;
+}
+
+const { lang, conference: c } = Astro.props;
+const t = ui[lang];
+const steps = groupDeadlines(c, lang).flatMap((g) => g.items.map((d) => ({ group: g.group, d })));
+const cost = c.cost[lang];
+---
+
+<Page lang={lang} conference={c} n={4} kicker={t.letter.pages.participation} title={t.letter.titles.participation}>
+  <ol class="tline" style={`grid-template-columns: repeat(${steps.length}, 1fr)`}>
+    {
+      steps.map(({ group, d }) => (
+        <li class:list={['tline__step', { 'tline__step--hot': group === 'participation' }]}>
+          <em>{t.letter.groups[group]}</em>
+          <span class="tline__date">{shortDate(toIso(d.date))}</span>
+          <i />
+          <p>{d.title[lang]}</p>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="kick">{t.sections.submission}</div>
+  <ol class="steps">
+    {
+      c.submission[lang].map((s, i) => (
+        <li>
+          <b>{i + 1}</b>
+          <strong>{s.title}</strong>
+          <span set:html={mdInline(s.text)} />
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="money">
+    {
+      cost.items.map((item) => (
+        <div class="money__item">
+          <strong>
+            {item.amount}
+            {item.unit && <em>{item.unit}</em>}
+          </strong>
+          <p class="money__label" set:html={mdInline(item.label)} />
+          {item.note && <div class="md money__note" set:html={md(item.note)} />}
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="pay">
+    <div class="md" set:html={md(cost.payment)} />
+  </div>
+</Page>
+
+<style>
+  .tline {
+    position: relative;
+    display: grid;
+    margin: 14px 0 22px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 69px;
+    height: 4px;
+    background: var(--soft);
+  }
+
+  .tline__step em {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .tline__date {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--deep);
+  }
+
+  .tline__step i {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 6px 0 12px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+
+  .tline__step--hot .tline__date {
+    color: var(--red);
+  }
+
+  .tline__step--hot i {
+    background: var(--red);
+    box-shadow: 0 0 0 5px var(--red-soft);
+  }
+
+  .tline__step p {
+    margin: 0;
+    padding-right: 10px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 10px 0 18px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps li {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .steps b {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--blue);
+  }
+
+  .steps strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: var(--deep);
+  }
+
+  .steps a {
+    color: var(--blue);
+  }
+
+  .money {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .money__item {
+    border-radius: 14px;
+    padding: 16px 18px;
+    background: var(--soft);
+  }
+
+  .money__item strong {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--blue);
+  }
+
+  .money__item strong em {
+    margin-left: 6px;
+    font-size: 16px;
+    font-style: normal;
+    letter-spacing: 0;
+    color: var(--deep);
+  }
+
+  .money__label {
+    margin: 10px 0 4px;
+    font-weight: 800;
+    color: var(--deep);
+  }
+
+  .money__note {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  .pay {
+    border: 2px dashed var(--line);
+    border-radius: 14px;
+    padding: 14px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .pay :global(strong) {
+    color: var(--deep);
+  }
+
+  .pay :global(p:last-child strong:first-child) {
+    color: var(--red);
+  }
+</style>

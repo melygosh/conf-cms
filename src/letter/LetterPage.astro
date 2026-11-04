@@ -1,0 +1,40 @@
+---
+// The info letter for the current conference: seven A4 pages, printed to PDF by `npm run letter`.
+import { getImage } from 'astro:assets';
+import { getCollection, getEntry } from 'astro:content';
+import carpathians from '../assets/photos/carpathians.jpg';
+import type { Lang } from '../content/schema';
+import { ui } from '../i18n/ui';
+import { assertConferenceFiles, pickCurrent } from '../lib/conference';
+import { qrSvg } from '../lib/qr';
+import About from './About.astro';
+import Back from './Back.astro';
+import Committees from './Committees.astro';
+import Cover from './Cover.astro';
+import LetterLayout from './LetterLayout.astro';
+import Participation from './Participation.astro';
+import Publications from './Publications.astro';
+import Topics from './Topics.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const entries = await getCollection('conferences');
+assertConferenceFiles(entries);
+const c = pickCurrent(entries.map((e) => e.data));
+const site = (await getEntry('site', 'site'))!.data;
+const photo = (await getImage({ src: carpathians, width: 1600, format: 'jpg' })).src;
+const qr = await qrSvg(c.links.registration[lang]);
+---
+
+<LetterLayout lang={lang} title={`${ui[lang].letter.title} · ${c.title[lang]} ${c.year}`}>
+  <Cover lang={lang} conference={c} photo={photo} qr={qr} />
+  <About lang={lang} conference={c} />
+  <Topics lang={lang} conference={c} />
+  <Participation lang={lang} conference={c} />
+  <Publications lang={lang} conference={c} />
+  <Committees lang={lang} conference={c} />
+  <Back lang={lang} conference={c} site={site} photo={photo} qr={qr} />
+</LetterLayout>

@@ -26,3 +26,8 @@ export const pages: [Lang, string][] = [
 
 /** How Astro writes a string into an HTML attribute. */
 export const attr = (value: string) => value.replaceAll('&', '&amp;');
+
+export const letters: [Lang, string][] = [
+  ['uk', readFileSync('dist/letter/index.html', 'utf8')],
+  ['en', readFileSync('dist/en/letter/index.html', 'utf8')],
+];
