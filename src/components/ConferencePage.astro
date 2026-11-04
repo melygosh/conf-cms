@@ -42,7 +42,7 @@ const description = `${t.editionLine(toRoman(conference.edition))}: ${conference
 <Base lang={lang} title={title} description={description}>
   <Header lang={lang} year={conference.year} hasArchive={archive.length > 0} />
   <main>
-    <Hero lang={lang} conference={conference} />
+    <Hero lang={lang} conference={conference} proceedings={archive.find((a) => a.year === conference.year)?.proceedings} />
     <Dates lang={lang} conference={conference} />
     <About lang={lang} conference={conference} />
     <PhotoStrip />

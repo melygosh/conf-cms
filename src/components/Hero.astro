@@ -10,9 +10,11 @@ import RegisterButton from './RegisterButton.astro';
 interface Props {
   lang: Lang;
   conference: Conference;
+  /** This year's book of abstracts, once it is in src/content/archive. */
+  proceedings?: string;
 }
 
-const { lang, conference: c } = Astro.props;
+const { lang, conference: c, proceedings } = Astro.props;
 const t = ui[lang];
 const endIso = toIso(c.dates.end);
 ---
@@ -39,6 +41,13 @@ const endIso = toIso(c.dates.end);
     <p class="hero__actions">
       <RegisterButton lang={lang} conference={c} label={t.register} />
       <a class="button button--ghost" href={c.links.infoLetter[lang]} target="_blank" rel="noopener">{t.infoLetter}</a>
+      {
+        proceedings && (
+          <a class="button button--ghost" href={proceedings} target="_blank" rel="noopener">
+            {t.proceedings} ↗
+          </a>
+        )
+      }
     </p>
   </div>
 </section>

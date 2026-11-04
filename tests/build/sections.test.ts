@@ -46,6 +46,13 @@ describe('page sections', () => {
     expect(toForm[0]).toContain(`>${attr(ui[lang].registrationClosed)}<`);
   });
 
+  it.each(pages)('%s links the current year\'s book of abstracts in the hero once it is published', (lang, html) => {
+    const hero = html.slice(html.indexOf('class="hero"'), html.indexOf('id="dates"'));
+    const proceedings = archive.find((a) => a.year === c.year)?.proceedings;
+    if (proceedings) expect(hero).toMatch(new RegExp(`href="${attr(proceedings)}"[^>]*>${ui[lang].proceedings} ↗<`));
+    else expect(hero).not.toContain(`>${ui[lang].proceedings} ↗<`);
+  });
+
   it.each(pages)('%s uses native disclosure for the authors section', (_, html) => {
     expect(html).toContain('<details');
   });

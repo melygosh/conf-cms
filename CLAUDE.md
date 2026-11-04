@@ -23,7 +23,7 @@ npm run logo -- <in.png> <out.png>       # strip the red year from a logo PNG
 
 - `src/content/conferences/<year>.yaml` — everything about one conference, every text as `{ uk, en }`. The conference with the largest `year` is the current one. Texts are Markdown (raw HTML such as `<sup>` passes through).
 - Organizers (in the conference YAML) need `href`; `logo` is optional and shown as a 40% watermark cropped by the card edge, so round marks work best. Round marks for MOE, UPMA, AzMIU and AzPMA are hand-made SVGs in `public/images/organizers/` (sign on a brand-colour disc); full logos stay in `site.yaml` partners.
-- `src/content/archive/<year>.yaml` — past years: `proceedings` (the book of abstracts in the KhPI repository, `repository.kpi.kharkov.ua/handle/KhPI-Press/…`; the volumes for 2024 onward are there), `photos`, `presentations`; a year with none of them is not shown.
+- `src/content/archive/<year>.yaml` — past years: `proceedings` (the book of abstracts in the KhPI repository, `repository.kpi.kharkov.ua/handle/KhPI-Press/…`; the volumes for 2024 onward are there), `photos`, `presentations`; a year with none of them is not shown. When the current conference's year has `proceedings`, the hero also shows a «Збірник тез» button.
 - `src/content/site.yaml` — data that does not change per year: contacts, KhPI map, partners.
 - `src/content/schema.ts` — zod schemas (strict). A missing translation, unknown field, a date not written as `YYYY-MM-DD`, or conference dates outside its `year` fail the build and name the field. `assertConferenceFiles` (called from `ConferencePage.astro`) fails the build when a file name does not match its `year`.
 - `src/i18n/ui.ts` — interface strings (nav, section titles, buttons). Content never goes here.

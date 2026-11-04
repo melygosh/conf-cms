@@ -145,7 +145,7 @@ export const ui: Record<Lang, UiStrings> = {
     countdownPrefix: 'Days left to submit abstracts:',
     conferenceDates: 'Conference',
     openMap: 'Open in Google Maps',
-    proceedings: 'Book of abstracts',
+    proceedings: 'Abstracts',
     photos: 'Photos',
     presentations: 'Presentations',
     menu: 'Menu',
