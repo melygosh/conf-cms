@@ -17,6 +17,7 @@ npm test             # unit tests (schema, dates, data files, client date script
 npm run test:build   # astro build + assertions on dist/*.html
 npx vitest run tests/lib/dates.test.ts   # a single test file
 npm run logo -- <in.png> <out.png>       # strip the red year from a logo PNG
+npm run letter       # print the info letter to public/letters/*.pdf (Playwright; falls back to installed Chrome)
 ```
 
 ## Where things live
@@ -28,12 +29,15 @@ npm run logo -- <in.png> <out.png>       # strip the red year from a logo PNG
 - `src/content/schema.ts` — zod schemas (strict). A missing translation, unknown field, a date not written as `YYYY-MM-DD`, or conference dates outside its `year` fail the build and name the field. `assertConferenceFiles` (called from `ConferencePage.astro`) fails the build when a file name does not match its `year`.
 - `src/i18n/ui.ts` — interface strings (nav, section titles, buttons). Content never goes here.
 - `src/lib/` — pure functions (no Astro/DOM imports) used both at build time and in the browser.
+- `src/letter/` — the info letter (call for papers): seven A4 pages at `/letter/` and `/en/letter/` (noindex, not linked), built from the same data as the site. `scripts/build-letter.mjs` prints them to `public/letters/info-letter-<year>-<lang>.pdf` and writes `info-letter-<year>.hash`; the PDFs are committed. Design: `docs/superpowers/specs/2026-11-04-info-letter-design.md`.
 - `src/components/ConferencePage.astro` — loads collections and composes the page; `src/pages/index.astro` (uk, `/`) and `src/pages/en/index.astro` (en, `/en/`) only pick the language.
 
 ## Things that are not obvious
 
-- **Adding a new year:** copy `src/content/conferences/2026.yaml` to `<year>.yaml`, change `year`, `edition`, `dates`, `deadlines`, `links`; edit the rest as organizers ask. The logo year updates by itself.
-- **UA and EN differ on purpose** in `cost` (USD vs EUR, bank details vs "contact the Program Committee") and in `site.contacts`. Do not "sync" them without asking the owner.
+- **Adding a new year:** copy `src/content/conferences/2026.yaml` to `<year>.yaml`, change `year`, `edition`, `dates`, `deadlines`, `links`; edit the rest as organizers ask. The logo year updates by itself. Do not add `links.infoLetter`: the hero links the generated letter. Finish with `npm run letter` and commit the PDFs.
+- **The organizers' calls for papers are the source of truth.** Each year they send two (UA and EN); each one is the source for its language: dates, topics, committees verbatim (no shortened names), prices, contacts. When a new one arrives: show the owner a diff against the YAML and a separate list of contradictions, never "fix" the call for papers silently. The one deliberate deviation is submission: the registration form takes the application, the abstract (doc/docx) and the fee receipt; papers and the publication receipt go to publish.conf@gmail.com.
+- **UA and EN differ on purpose** because their calls for papers do: `cost.uk`/`cost.en` are separate price lists (UA 2026: hryvnias; EN 2026: free for foreign participants, publication terms from the site), a deadline can exist in one language only (`only: uk`), and `site.contacts` differ. Do not "sync" them without asking the owner.
+- **The info letter must be regenerated after any change it shows.** `astro build` (and so Render) fails with "run npm run letter" when the current year has no `links.infoLetter` and its PDFs are missing or older than their inputs (the year's YAML, `site.yaml`, `ui.ts`, `src/letter/**`, `src/lib/letter.ts`, `src/lib/qr.ts`); `astro dev` only warns. `npm run letter` itself fails, writing nothing, when a page's content does not fit the page: tighten that page's layout, never shorten the text.
 - **Dates are build-time *and* client-side.** `Dates.astro` renders states with the build date and the contract attributes `data-deadline`, `data-countdown` (+`data-lang`), `data-finished-after`, `data-hidden-after` (registration buttons/section), `data-closed-after` (`RegisterButton.astro`: the deadline marked `registration: true` turns every form button grey and inert, labelled «Реєстрацію завершено»); `src/scripts/date-states.ts` recomputes them on the visitor's date. Keep both sides in sync. All date math is in `Europe/Kyiv`; the deadline day itself counts as "today", not past.
 - **Logo:** `public/images/logo-base.png` is the original artwork without the year; `Logo.astro` draws the year as SVG text over it. The PNG is 326×161, so keep the rendered logo ≤ 160 px wide.
 - **Legacy URLs:** `public/index_eng.html` (meta refresh) and an inline script in `Base.astro` (`/?lang=en`) send old links to `/en/`.
