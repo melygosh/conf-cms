@@ -1,7 +1,7 @@
 ---
 import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
-import { countdownTarget, isFinished } from '../../lib/conference';
+import { countdownTarget, deadlinesByDay, isFinished } from '../../lib/conference';
 import { daysUntil, deadlineState, formatDate, formatRange, pluralDays, toIso } from '../../lib/dates';
 
 interface Props {
@@ -43,15 +43,24 @@ const split = (formatted: string) => {
       </div>
       <ol class="dates__list">
         {
-          c.deadlines.filter((d) => d.title[lang]).map((d) => {
-            const iso = toIso(d.date);
+          // One card per day: in 2026 four of the five deadlines fall on 25 January, and a card each
+          // would push the key dates onto a second row.
+          deadlinesByDay(c, lang).map(({ iso, titles }) => {
             const { day, rest } = split(formatDate(iso, lang));
             return (
               <li class="date-card" data-deadline={iso} data-state={deadlineState(iso, now)}>
                 <p class="date-card__when">
                   <span class="date-card__day">{day}</span> {rest}
                 </p>
-                <p class="date-card__title">{d.title[lang]}</p>
+                {titles.length === 1 ? (
+                  <p class="date-card__title">{titles[0]}</p>
+                ) : (
+                  <ul class="date-card__titles">
+                    {titles.map((title) => (
+                      <li>{title}</li>
+                    ))}
+                  </ul>
+                )}
               </li>
             );
           })
@@ -125,9 +134,11 @@ const split = (formatted: string) => {
     color: #fff;
   }
 
+  /* All key dates in one row: as many equal columns as there are cards. */
   .dates__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
     gap: 1rem;
     margin: 0;
     padding: 0;
@@ -167,6 +178,35 @@ const split = (formatted: string) => {
     color: #fff;
   }
 
+  .date-card__titles {
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .date-card__titles li {
+    position: relative;
+    padding-left: 0.9rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: #fff;
+  }
+
+  .date-card__titles li + li {
+    margin-top: 0.4rem;
+  }
+
+  .date-card__titles li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--color-on-dark-muted);
+  }
+
   .date-card__note {
     margin-top: 0.25rem !important;
     font-size: 0.88rem;
@@ -195,6 +235,14 @@ const split = (formatted: string) => {
   }
 
   /* Phones: one compact row per date (date left, what right) instead of four tall cards. */
+  /* Tablets: three columns would squeeze four events into one narrow card; wrap instead. */
+  @media (max-width: 960px) {
+    .dates__list {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    }
+  }
+
   @media (max-width: 640px) {
     .dates__list {
       gap: 0.5rem;
@@ -218,7 +266,8 @@ const split = (formatted: string) => {
       font-size: 1.75rem;
     }
 
-    .date-card__title {
+    .date-card__title,
+    .date-card__titles {
       margin-top: 0.15rem !important;
       font-size: 0.95rem;
     }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertConferenceFiles, countdownTarget, isFinished, letterHref, pickCurrent, registrationClose, toRoman } from '../../src/lib/conference';
+import { assertConferenceFiles, countdownTarget, deadlinesByDay, isFinished, letterHref, pickCurrent, registrationClose, toRoman } from '../../src/lib/conference';
 import { conference } from '../fixtures/conference';
 
 describe('pickCurrent', () => {
@@ -73,5 +73,27 @@ describe('letterHref', () => {
     const c = await conference();
     const links = { ...c.links, infoLetter: { uk: 'https://x/uk.pdf', en: 'https://x/en.pdf' } };
     expect(letterHref({ ...c, links }, 'uk')).toBe('https://x/uk.pdf');
+  });
+});
+
+describe('deadlinesByDay', () => {
+  it('gives each date one entry, in order, with every event of that day', async () => {
+    const c = await conference();
+    c.deadlines = [
+      { ...c.deadlines[0], date: new Date('2026-01-25T00:00:00Z'), title: { uk: 'Заявка', en: 'Registration' } },
+      { ...c.deadlines[1], date: new Date('2026-01-25T00:00:00Z'), title: { uk: 'Тези', en: 'Abstracts' } },
+      { ...c.deadlines[2], date: new Date('2026-02-16T00:00:00Z'), title: { uk: 'Рецензування', en: 'Review' } },
+    ];
+    expect(deadlinesByDay(c, 'uk')).toEqual([
+      { iso: '2026-01-25', titles: ['Заявка', 'Тези'] },
+      { iso: '2026-02-16', titles: ['Рецензування'] },
+    ]);
+  });
+
+  it('leaves out events the language does not have', async () => {
+    const c = await conference();
+    c.deadlines[0] = { ...c.deadlines[0], only: 'uk', title: { uk: 'Оргвнесок' } };
+    expect(deadlinesByDay(c, 'en').flatMap((d) => d.titles)).not.toContain('Оргвнесок');
+    expect(deadlinesByDay(c, 'en')).toHaveLength(2);
   });
 });

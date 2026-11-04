@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ui } from '../../src/i18n/ui';
 import { letterHref } from '../../src/lib/conference';
+import { toIso } from '../../src/lib/dates';
 import { md, mdInline } from '../../src/lib/markdown';
 import { archive, attr, conference as c, countdownIso, deadlineIsos, endIso, pages, registrationIso, site } from './expected';
 
@@ -20,6 +21,11 @@ describe('page sections', () => {
     for (const iso of deadlineIsos) expect(html).toContain(`data-deadline="${iso}"`);
     expect(html).toContain(`data-countdown="${countdownIso}"`);
     expect(html).toContain(`data-finished-after="${endIso}"`);
+  });
+
+  it.each(pages)('%s shows one date card per day, so the key dates fit one row', (lang, html) => {
+    const days = new Set(c.deadlines.filter((d) => d.title[lang]).map((d) => toIso(d.date)));
+    expect(html.match(/<li class="date-card"/g)).toHaveLength(days.size);
   });
 
   it.each(pages)('%s ties registration to the conference end date', (lang, html) => {

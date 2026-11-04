@@ -60,3 +60,17 @@ export function isFinished(conf: Conference, now: Date): boolean {
 export function letterHref(c: Conference, lang: Lang): string {
   return c.links.infoLetter?.[lang] ?? `/letters/info-letter-${c.year}-${lang}.pdf`;
 }
+
+/** The key dates one language shows, one entry per day (several events often share a deadline day). */
+export function deadlinesByDay(c: Conference, lang: Lang): { iso: string; titles: string[] }[] {
+  const days: { iso: string; titles: string[] }[] = [];
+  for (const d of c.deadlines) {
+    const title = d.title[lang];
+    if (!title) continue;
+    const iso = toIso(d.date);
+    const day = days.find((x) => x.iso === iso);
+    if (day) day.titles.push(title);
+    else days.push({ iso, titles: [title] });
+  }
+  return days;
+}
