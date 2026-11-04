@@ -43,7 +43,7 @@ const split = (formatted: string) => {
       </div>
       <ol class="dates__list">
         {
-          c.deadlines.map((d) => {
+          c.deadlines.filter((d) => d.title[lang]).map((d) => {
             const iso = toIso(d.date);
             const { day, rest } = split(formatDate(iso, lang));
             return (
@@ -52,7 +52,6 @@ const split = (formatted: string) => {
                   <span class="date-card__day">{day}</span> {rest}
                 </p>
                 <p class="date-card__title">{d.title[lang]}</p>
-                {d.note && <p class="date-card__note">{d.note[lang]}</p>}
               </li>
             );
           })

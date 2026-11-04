@@ -1,7 +1,7 @@
 ---
 import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
-import { md } from '../../lib/markdown';
+import { md, mdInline } from '../../lib/markdown';
 import Section from './Section.astro';
 
 interface Props {
@@ -22,6 +22,14 @@ const { lang, conference: c } = Astro.props;
         </details>
       ))
     }
+    <details class="accordion__item" open>
+      <summary>{ui[lang].sections.submission}</summary>
+      <ol class="prose accordion__body">
+        {c.submission[lang].map((step) => (
+          <li><strong>{step.title}.</strong> <span set:html={mdInline(step.text)} /></li>
+        ))}
+      </ol>
+    </details>
   </div>
 </Section>
 

@@ -42,10 +42,16 @@ describe('2026 conference', () => {
     expect(toIso(c.dates.end)).toBe('2026-02-19');
   });
 
-  it('keeps per-language prices as deployed (USD in UA, EUR in EN)', () => {
-    const abroad = c.cost.rows.map((r) => r.abroad);
-    expect(abroad.some((a) => a.uk.includes('5 USD'))).toBe(true);
-    expect(abroad.some((a) => a.en.includes('5 EUR'))).toBe(true);
+  // Each language takes its prices from its own call for papers (UA: hryvnias only; EN: free for foreign participants).
+  it('takes each language’s prices from its own call for papers', () => {
+    expect(c.cost.uk.items.map((i) => i.amount)).toEqual(['300 грн', '150 грн']);
+    expect(c.cost.en.items[0].note).toContain('free of charge for participants who are not citizens of Ukraine');
+  });
+
+  it('has the five UA and four EN key dates of the 2026 calls for papers', () => {
+    expect(c.deadlines.filter((d) => d.title.uk)).toHaveLength(5);
+    expect(c.deadlines.filter((d) => d.title.en)).toHaveLength(4);
+    expect(c.deadlines.filter((d) => d.group === 'papers').map((d) => toIso(d.date))).toEqual(['2026-01-25', '2026-02-16']);
   });
 
   it('closes registration on 25 January', () => {

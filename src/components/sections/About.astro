@@ -47,6 +47,12 @@ const t = ui[lang];
       <h4 class="about__label">{t.sections.venue}</h4>
       <h3 class="venue__place">{c.venue.place[lang]}</h3>
       <div class="prose" set:html={md(c.venue.description[lang])} />
+      <dl class="venue__facts">
+        <dt>{c.venue.name[lang]}</dt>
+        <dd><a href={c.venue.url[lang]} target="_blank" rel="noopener">{c.venue.address[lang]}</a></dd>
+        {c.venue.director && <dd>{t.venueDirector}: {c.venue.director[lang]}</dd>}
+        <dd>{c.venue.format[lang]}</dd>
+      </dl>
     </div>
     <div class="venue__map">
       <iframe
@@ -62,6 +68,21 @@ const t = ui[lang];
 </Section>
 
 <style>
+  .venue__facts {
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+  }
+
+  .venue__facts dt {
+    font-weight: 700;
+    color: var(--color-primary-deep);
+  }
+
+  .venue__facts dd {
+    margin: 0.15rem 0 0;
+    color: var(--color-muted);
+  }
+
   .about__label {
     margin-top: 0;
   }

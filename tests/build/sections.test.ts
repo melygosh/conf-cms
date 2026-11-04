@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ui } from '../../src/i18n/ui';
+import { letterHref } from '../../src/lib/conference';
 import { md, mdInline } from '../../src/lib/markdown';
 import { archive, attr, conference as c, countdownIso, deadlineIsos, endIso, pages, registrationIso, site } from './expected';
 
@@ -84,19 +85,31 @@ describe('page sections', () => {
     expect(html).not.toContain('href=""');
   });
 
-  it.each(pages)('%s shows its own prices and payment details', (lang, html) => {
-    for (const row of c.cost.rows) {
-      expect(html).toContain(mdInline(row.label[lang]));
-      if (row.abroad[lang].trim() !== '-') expect(html).toContain(row.abroad[lang]);
+  it.each(pages)('%s shows every price item of its own language and its payment details', (lang, html) => {
+    const section = html.slice(html.indexOf('id="cost"'), html.indexOf('id="authors"'));
+    for (const item of c.cost[lang].items) {
+      expect(section).toContain(mdInline(item.label));
+      expect(section).toContain(item.amount);
     }
-    expect(html).toContain(md(c.cost.payment[lang]));
+    expect(section).toContain(md(c.cost[lang].payment));
   });
 
   it('does not leak one language’s payment details into the other', () => {
     const [[, uk], [, en]] = pages;
-    if (c.cost.payment.uk !== c.cost.payment.en) {
-      expect(uk).not.toContain(md(c.cost.payment.en));
-      expect(en).not.toContain(md(c.cost.payment.uk));
-    }
+    expect(uk).not.toContain(md(c.cost.en.payment));
+    expect(en).not.toContain(md(c.cost.uk.payment));
+  });
+
+  it.each(pages)('%s shows the venue address and its link', (lang, html) => {
+    expect(html).toContain(c.venue.address[lang]);
+    expect(html).toContain(`href="${attr(c.venue.url[lang])}"`);
+  });
+
+  it.each(pages)('%s hero links the info letter', (lang, html) => {
+    expect(html).toContain(`href="${attr(letterHref(c, lang))}"`);
+  });
+
+  it.each(pages)('%s lists what goes to the Program Committee', (lang, html) => {
+    for (const step of c.submission[lang]) expect(html).toContain(step.title);
   });
 });

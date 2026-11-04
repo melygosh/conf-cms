@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets';
 import carpathians from '../assets/photos/carpathians.jpg';
 import type { Conference, Lang } from '../content/schema';
-import { toRoman } from '../lib/conference';
+import { letterHref, toRoman } from '../lib/conference';
 import { formatRange, toIso } from '../lib/dates';
 import { ui } from '../i18n/ui';
 import RegisterButton from './RegisterButton.astro';
@@ -40,7 +40,7 @@ const endIso = toIso(c.dates.end);
     </p>
     <p class="hero__actions">
       <RegisterButton lang={lang} conference={c} label={t.register} />
-      <a class="button button--ghost" href={c.links.infoLetter[lang]} target="_blank" rel="noopener">{t.infoLetter}</a>
+      <a class="button button--ghost" href={letterHref(c, lang)} target="_blank" rel="noopener">{t.infoLetter}</a>
       {
         proceedings && (
           <a class="button button--ghost" href={proceedings} target="_blank" rel="noopener">

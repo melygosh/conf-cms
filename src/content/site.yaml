@@ -1,6 +1,6 @@
 # Дані, що не залежать від року конференції.
 
-# UA і EN контакти різні навмисно (так на сайті 2026).
+# UA і EN контакти різні навмисно: кожна мова бере їх зі свого інформаційного листа.
 contacts:
   uk: |
     ### Поштова адреса
@@ -18,14 +18,15 @@ contacts:
 
     ### Програмний комітет
 
+    Лобач Олена Володимирівна<br>
     Телефон кафедри: [+38 (057) 707-68-24](tel:+380577076824)<br>
     Мобільний: [+38 (050) 984-69-79](tel:+380509846979)<br>
     E-mail: [publish.conf@gmail.com](mailto:publish.conf@gmail.com)
   en: |
     ### Address
 
-    Strategic Management Department<br>
-    NTU "KhPI", 2 Kyrpychova str.<br>
+    Department of Project Management in Information Technology<br>
+    NTU "KhPI", 2 Kyrpychov str.<br>
     Kharkiv, 61002, Ukraine
 
     ### Contact Information

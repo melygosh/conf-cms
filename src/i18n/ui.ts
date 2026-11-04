@@ -29,6 +29,7 @@ export interface UiStrings {
     payment: string;
     authors: string;
     authorsNote: string;
+    submission: string;
     committees: string;
     registration: string;
     archive: string;
@@ -45,6 +46,7 @@ export interface UiStrings {
   countdownPrefix: string;
   conferenceDates: string;
   openMap: string;
+  venueDirector: string;
   proceedings: string;
   photos: string;
   presentations: string;
@@ -80,6 +82,7 @@ export const ui: Record<Lang, UiStrings> = {
       payment: 'Оплата',
       authors: 'Авторам публікацій',
       authorsNote: 'Вісник НТУ «ХПІ»',
+      submission: 'До програмного комітету подаються',
       committees: 'Комітети',
       registration: 'Реєстрація',
       archive: 'Архів',
@@ -96,6 +99,7 @@ export const ui: Record<Lang, UiStrings> = {
     countdownPrefix: 'До кінця прийому тез:',
     conferenceDates: 'Конференція',
     openMap: 'Відкрити на мапі',
+    venueDirector: 'Директор',
     proceedings: 'Збірник тез',
     photos: 'Фото',
     presentations: 'Презентації',
@@ -129,6 +133,7 @@ export const ui: Record<Lang, UiStrings> = {
       payment: 'Payment',
       authors: 'For authors',
       authorsNote: 'Bulletin of the NTU "KhPI"',
+      submission: 'To Program Committee should be submitted',
       committees: 'Committees',
       registration: 'Registration',
       archive: 'Archive',
@@ -145,6 +150,7 @@ export const ui: Record<Lang, UiStrings> = {
     countdownPrefix: 'Days left to submit abstracts:',
     conferenceDates: 'Conference',
     openMap: 'Open in Google Maps',
+    venueDirector: 'Camp Director',
     proceedings: 'Abstracts',
     photos: 'Photos',
     presentations: 'Presentations',

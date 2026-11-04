@@ -2,6 +2,7 @@
 # Новий рік: скопіювати цей файл у <рік>.yaml і змінити year, edition, dates, deadlines, links.
 # Поточною на сайті стає конференція з найбільшим year.
 # Тексти — Markdown. Кожне поле має значення uk і en.
+# Джерело істини — інформаційні листи (call for papers) організаторів: UA для uk, EN для en.
 
 year: 2026
 edition: 16
@@ -14,6 +15,11 @@ dates:
   start: 2026-02-17
   end: 2026-02-19
 
+# Звернення з інформаційного листа, дослівно.
+invitation:
+  uk: Запрошуємо Вас прийняти участь у роботі XVI-ї Міжнародної науково-практичної конференції «Інтегроване стратегічне управління, управління портфелями, програмами, проєктами», яка відбудеться 17-19 лютого 2026 року в смт Славсько Львівської області у комбінованому форматі.
+  en: We invite you to take part in the 16th International Scientific and Practical Conference “Integrated Strategic Management, Portfolio, Program and Project Management”, which will be held 17-19 February 2026 in hybrid format.
+
 venue:
   # Коротко, для шапки сторінки.
   place:
@@ -21,13 +27,28 @@ venue:
     en: Slavsko, Ukrainian Carpathians
   description:
     uk: |
-      Конференція буде проходити в мальовничому куточку Українських Карпат у затишному навчально-оздоровчому таборі Національного університету «Львівська політехніка» [«Політехнік-2»](http://www.lp.edu.ua/politehnik-2), який знаходиться у селищі Славсько, Львівської області. Славсько це не тільки неповторний місцевий колорит, який закохує в себе багатьох гостей раз і назавжди, а й база гірськолижного відпочинку, де кожному можна підібрати трасу відповідно до свого рівня спортивної підготовки.
+      Конференція буде проходити в мальовничому куточку Українських Карпат у затишному навчально-оздоровчому таборі Національного університету «Львівська політехніка» [«Політехнік-2»](https://lpnu.ua/politekhnik-2), який знаходиться у селищі Славсько, Львівської області. Славсько це не тільки неповторний місцевий колорит, який закохує в себе багатьох гостей раз і назавжди, а й база гірськолижного відпочинку, де кожному можна підібрати трасу відповідно до свого рівня спортивної підготовки.
 
       Конференція буде проходити в змішаному форматі. Посилання для приєднання до засідань будуть надіслані зареєстрованим учасникам.
     en: |
-      The conference will take place in a picturesque corner of the Ukrainian Carpathians in a cozy educational and health camp of the National University «Lviv Polytechnic» ["Polytechnic-2"](http://www.lp.edu.ua/politehnik-2), located in Slavsko, Lviv region. Slavsko is not only a unique local flavor that makes many guests fall in love with it once and for all, but also a base for skiing and recreation, where everyone can choose a trail according to their level of athletic training.
+      The conference will take place in a picturesque corner of the Ukrainian Carpathians in a cozy educational and health camp of the National University «Lviv Polytechnic» ["Polytechnic-2"](https://lpnu.ua/politekhnik-2), located in Slavsko, Lviv region. Slavsko is not only a unique local flavor that makes many guests fall in love with it once and for all, but also a base for skiing and recreation, where everyone can choose a trail according to their level of athletic training.
 
       The conference will be held in a hybrid format. Links to join the sessions will be sent to registered participants.
+  name:
+    uk: Навчально-оздоровчий табір Національного університету «Львівська політехніка» «Політехнік-2»
+    en: Recreational Camp of the Lviv Polytechnic National University “Polytechnic-2”
+  address:
+    uk: Львівська область, смт Славсько, вул. І. Франка, буд. 49
+    en: Ukraine, Lviv region, Slavsko town, 49, I. Franko Street
+  url:
+    uk: https://lpnu.ua/politekhnik-2
+    en: https://lpnu.ua/en/polytechnic-2-recreational-camp
+  director:
+    uk: Білодід Володимир Петрович
+    en: Volodymyr P. Bilodid
+  format:
+    uk: комбінований формат
+    en: hybrid format
   mapEmbedUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99897.5166815242!2d23.46006058048362!3d48.856157216603066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47398b454daeba4b%3A0x8ce8ecf3a65b8b10!2z0J3QsNCy0YfQsNC70YzQvdC-LdC-0LfQtNC-0YDQvtCy0YfQuNC5INGC0LDQsdGW0YAg0KPQvdGW0LLQtdGA0YHQuNGC0LXRgtGDIMKr0J_QvtC70ZbRgtC10YXQvdGW0LotMsK7!5e0!3m2!1sen!2sua!4v1574459297253!5m2!1sen!2sua
   mapLink: https://maps.app.goo.gl/xyA32VJdHeu1uJ4a6
 
@@ -35,9 +56,6 @@ links:
   registration:
     uk: https://docs.google.com/forms/d/e/1FAIpQLScH4NPI31ig5qQ7ENp5DNdq-89fkvnv0CWZfmoMKaqpb7DwSA/viewform?usp=header
     en: https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header
-  infoLetter:
-    uk: https://drive.google.com/file/d/1YRxQU5y64J0Z_zOHJFTVxMsxUHKY3h4o/view?usp=sharing
-    en: https://drive.google.com/file/d/1ElIhfmjbDcbgkylnpDjZhMhthZdkqVOa/view?usp=sharing
 
 organizers:
   - name:
@@ -77,17 +95,16 @@ aim:
 
 sections:
   - name:
-      uk: "Інтеграція стратегічного управління, управління портфелями, програмами, проектами: моделі, методи та технології"
+      uk: "Інтеграція стратегічного управління, управління портфелями, програмами, проєктами: моделі, методи та технології"
       en: "Integration of Strategic Management with Portfolio, Program and Project Management: Models, Methods, and Techniques"
     items:
       uk:
-        - Прогнозне забезпечення стратегічного управління, управління проектами і програмами.
-        - Моделі та методи стратегічного управління, управління портфелями, програмами, проектами.
+        - Прогнозне забезпечення стратегічного управління, управління проєктами і програмами.
+        - Моделі та методи стратегічного управління, управління портфелями, програмами, проєктами.
         - Маркетингові стратегії в сучасних умовах.
-        - Формування портфеля проектів організації.
-        - Система збалансованих показників.
+        - Формування портфеля проєктів організації.
         - Оптимізація бізнес-процесів організацій.
-        - Інформаційні технології у стратегічному управлінні, управлінні портфелями, програмами, проектами.
+        - Інформаційні технології у стратегічному управлінні, управлінні портфелями, програмами, проєктами.
       en:
         - Forecasting in strategic management, project and program management.
         - Models and methods of strategic management, portfolio, program and project management.
@@ -98,7 +115,7 @@ sections:
         - Information technology in strategic management, portfolio, program and project management.
   - name:
       uk: Управління ІТ проєктами
-      en: Managing IT Projects
+      en: IT project management
     text:
       uk: Виступ експертів з управління ІТ проєктами.
       en: Speeches by experts in IT project management.
@@ -106,12 +123,16 @@ sections:
       uk: Застосування ефективних технологій управління на практиці
       en: Application of Effective Management Technologies in Practice
     text:
-      uk: Виступ експертів-практиків з управління. Виступи випускників університетів з доповіддю про власні професійні досягнення.
-      en: Speeches by experts in management. Speeches by students graduated in project management about their professional achievements.
+      uk: Виступ експертів-практиків з управління.
+      en: |
+        Speeches by experts in management.
 
+        Presentations by university graduates who have completed project management training on their professional achievements.
+
+# Робочі мови конференції; мова тез — у publication.rules.
 languages:
-  uk: Англійська та українська.
-  en: English.
+  uk: Англійська, українська.
+  en: English, Ukrainian.
 
 publication:
   summary:
@@ -119,14 +140,14 @@ publication:
     en: The conference materials will be published in the form of a collection of abstracts and in the NTU "KhPI" Bulletin.
   rules:
     uk: |
-      - Тези приймаються **лише через форму реєстрації**: файл прикріплюється до форми.
+      - Тези приймаються **лише через форму реєстрації**: файл (doc/docx) прикріплюється до форми.
       - Обсяг тез — 2 сторінки тексту формату А4, включно з рисунками, у редакторі MS Word.
-      - Мова конференції: **англійська та українська**.
+      - Мова тез: **англійська**.
       - Назва файлу повинна відповідати прізвищу першого автора.
     en: |
-      - Abstracts are accepted **only through the registration form**: attach the file to the form.
+      - Abstracts are accepted **only through the registration form**: attach the file (doc/docx) to the form.
       - Abstracts are 2 pages of A4 text, including figures, in MS Word.
-      - Conference language: **English**.
+      - Abstract language: **English**.
       - The file name should correspond to the surname of the first author.
   formatting:
     uk: |
@@ -147,73 +168,98 @@ publication:
       - *in the third line* – the full name of the organisation and the city in italics (bold).
       - Figures inserted into the text should be no larger than 12 by 9 cm in size and should use the following formats: **bmp**, **tif**, **jpg**. The font size under the figure is 12 pt. Figures made using Word must be grouped.
       - References to the literature are given in **APA** style.
+  articles:
+    journalUrl: http://pm.khpi.edu.ua/
+    # В англійському листі посилання на шаблон немає.
+    templateUrl:
+      uk: https://docs.google.com/document/d/1e0Tu9xXuOFtup2iuru7FOt_fjaCLywAY/edit?usp=sharing&ouid=117658175139483443750&rtpof=true&sd=true
+    badges:
+      uk: [категорія Б, "спеціальності 122, 126", DOI, подвійне анонімне рецензування]
+      en: [double-blind peer review, professional edition of Ukraine, 11 international scientometric databases]
+    review:
+      uk: Статті, отримані програмним комітетом, будуть направлені на подвійне анонімне рецензування. Статті, рекомендовані рецензентами та програмним комітетом, будуть надруковані у Віснику НТУ «ХПІ» ([pm.khpi.edu.ua](http://pm.khpi.edu.ua/)), який входить до переліку наукових фахових видань категорії Б зі спеціальностей – 122, 126. На усі статті, що будуть опубліковані у віснику, буде встановлено цифрові ідентифікатори DOI.
+      en: >-
+        Papers received by the program committee will be subject to a peer review by the double-blinded reviewers. All accepted papers will be published in scientific journal Bulletin of NTU "KhPI". Series: Strategic Management, Portfolio, Program and Project Management ([pm.khpi.edu.ua](http://pm.khpi.edu.ua/)), which is included in the list of professional editions of Ukraine and is abstracted and indexed in the 11 international scientometric databases, repositories, libraries, search engines, and catalogs.
+    requirements:
+      uk: Статті можуть бути підготовлені українською або англійською мовами (мова статті обирається особисто автором). Обсяг статті – **не менше 5-ти шаблонних сторінок**. Стаття повинна бути набрана в шаблонному документі та відповідати вимогам, які детально описані на сайті Віснику НТУ «ХПІ», інакше стаття не буде надрукована.
+      en: Papers submitted for consideration to the program committee must fully comply with the requirements listed on the scientific journal website. Otherwise, your article will not be published. The terms of payment for publishing a paper are available on the conference website.
+
+# Що й куди подається. Відступ від інформаційного листа: заявка, тези й квитанція — лише через форму реєстрації.
+submission:
+  uk:
+    - title: Заявка, тези й квитанція
+      text: Заповнюється реєстраційна форма; до неї прикріплюються файл тез доповіді (doc/docx) і квитанція про сплату організаційного внеску.
+    - title: Стаття до Вісника
+      text: Електронний варіант статті надсилається на [publish.conf@gmail.com](mailto:publish.conf@gmail.com).
+    - title: Оплата публікації
+      text: Після прийняття статті програмним комітетом; копія чека надсилається на [publish.conf@gmail.com](mailto:publish.conf@gmail.com).
+  en:
+    - title: Registration and abstract
+      text: Complete the registration form and attach the abstract file (doc/docx) to it.
+    - title: Paper for the Bulletin
+      text: Send the electronic version of the paper to [publish.conf@gmail.com](mailto:publish.conf@gmail.com).
+    - title: Publication payment
+      text: After the paper is accepted by the Program Committee; the terms of payment are available on the conference website.
 
 deadlines:
   - date: 2026-01-25
     registration: true
     title:
       uk: Подача заявки учасниками
-      en: Conference registration
-    note:
+      en: Registration deadline
+  # Іноземні учасники не сплачують оргвнесок, тому в англійському листі цієї дати немає.
+  - date: 2026-01-25
+    only: uk
+    title:
       uk: Оплата організаційного внеску
-      en: Payment of the participation fee
   - date: 2026-01-25
     countdown: true
     title:
-      uk: Закінчення прийому тез доповідей
-      en: Abstracts and reports submission
-  - date: 2026-02-16
+      uk: Прийом тез доповідей
+      en: Acceptance of abstracts
+  - date: 2026-01-25
+    group: papers
     title:
       uk: Закінчення прийому статей
-      en: Paper submission
-    note:
-      uk: Оплата публікації
-      en: Payment for publication
+      en: Deadline for paper submission
+  - date: 2026-02-16
+    group: papers
+    title:
+      uk: Рецензування та оповіщення авторів про прийом статті до публікації
+      en: Paper review and notification of acceptance
 
+# Ціни кожна мова бере зі свого інформаційного листа. В англійському листі суми публікації немає (він відсилає на сайт),
+# тому EN-сума публікації й примітка про друковані примірники лишаються такими, як були на сайті.
 cost:
-  headers:
-    uk: [Умови участі, Для України, Для інших країн]
-    en: [Terms of participation, For Ukraine, For other countries]
-  rows:
-    - label:
-        uk: Організаційний внесок за участь у конференції <sup>1</sup>
-        en: Fee for participation in the conference <sup>1</sup>
-      ukraine:
-        uk: 300 грн.
-        en: 300 UAH
-      abroad:
-        uk: "-"
-        en: "-"
-    - label:
-        uk: Оплата за публікацію статті у Віснику НТУ «ХПІ» <sup>2</sup>
-        en: Payment for the paper publication in the Bulletin of the NTU "KhPI" <sup>2</sup>
-      ukraine:
-        uk: 150 грн. за сторінку
-        en: 150 UAH per page
-      abroad:
-        uk: 5 USD per page
-        en: 5 EUR per page
-  notes:
-    uk: |
-      <sup>1</sup> Оплата здійснюється окремо після прийняття статті програмним комітетом.
-
-      <sup>2</sup> Друкований примірник наукового журналу зі статтями конференції у вартість публікації статті не входить. Друковані примірники журналу можуть бути замовлені окремо. Вартість складатиме 300 грн. для учасників з України та 12 USD для учасників із-за кордону.
-    en: |
-      <sup>1</sup> Payment is made separately after the paper acceptance by the Program Committee.
-
-      <sup>2</sup> Printed copy of a scientific bulletin with conference papers is not included in the paper publication cost. Printed copies of the bulletin can be ordered separately. The cost will be 300 UAH for participants from Ukraine and 12 EUR for participants from abroad.
-  # UA і EN тут різні навмисно (так на сайті 2026): в EN немає реквізитів.
-  payment:
-    uk: |
-      **Реквізити для сплати організаційного внеску і сплати за публікацію статті у Віснику НТУ «ХПІ»:**
+  uk:
+    items:
+      - label: Організаційний внесок за участь у конференції
+        amount: 300 грн
+        note: До організаційного внеску входять витрати на оренду приміщення, обслуговування обладнання, канцтовари, інформаційне обслуговування, видання збірника тез, програми конференції, списку учасників тощо. Витрати на харчування, проживання та проїзд учасники конференції несуть самостійно.
+      - label: Оплата за публікацію статті у Віснику НТУ «ХПІ»
+        amount: 150 грн
+        unit: за сторінку
+        note: Здійснюється окремо після прийняття статті програмним комітетом із розрахунку за одну сторінку відповідно до шаблону.
+    payment: |
+      **Реквізити для сплати оргвнеску**
 
       Отримувач: ФОП Роговий Антон Іванович<br>
       Код отримувача: 2676910774<br>
-      Рахунок: UA283052990000026002045921275 в ПАТ КБ "Приватбанк"<br>
-      Призначення платежу: *"За участь в конференції" (Прізвище, ім'я, по-батькові учасника)*.
+      Рахунок: UA283052990000026002045921275<br>
+      Назва банку: АТ КБ "ПРИВАТБАНК"<br>
+      Призначення платежу: За участь у конференції (Прізвище, ім'я, по-батькові учасника)
 
-      **Увага!!!!** Обов'язково вказувати призначення платежу та ПІБ учасника, без нього кошти не зарахуються й участь не підтвердиться.
-    en: |
+      **Увага!** Обов'язково вказувати призначення платежу і ПІБ учасника, без них кошти не зарахуються і участь не підтвердиться.
+  en:
+    items:
+      - label: Participation in the conference
+        amount: Free of charge
+        note: Participation in the conference is free of charge for participants who are not citizens of Ukraine. Conference participants are responsible for their own food, accommodation and travel expenses.
+      - label: Payment for the paper publication in the Bulletin of the NTU "KhPI"
+        amount: 5 EUR
+        unit: per page
+        note: Payment is made separately after the paper acceptance by the Program Committee. Printed copy of a scientific bulletin with conference papers is not included in the paper publication cost. Printed copies of the bulletin can be ordered separately. The cost will be 12 EUR for participants from abroad.
+    payment: |
       **Payment details:**
 
       To pay for the publication of a paper in the NTU 'KhPI' Bulletin, authors will need to contact the Program Committee.
@@ -242,20 +288,6 @@ authors:
         4. The paper recommended by reviewers and the Program committee should be paid in accordance with section *["Price"](#cost)* in the allotted time, which is defined in Section *["Important Dates"](#dates)*. In case of late publication costs payment, the Program committee reserves the right not to publish the paper. The publication payment in this case will be returned to the author in full.
         5. Papers that have successfully passed the review process and were promptly paid will be published in the *[Bulletin of NTU "KhPI". Series: Strategic Management, Portfolio, Program and Project Management](http://pm.khpi.edu.ua/issue/view/5768)*. The journal is included in the list of scientific specialised editions of Ukraine; abstracted and indexed in the international scientometric databases, repositories, libraries, search engines, and catalogues.
         6. All conference papers that will be published in the journal will have DOI numerical identifiers.
-  - title:
-      uk: До програмного комітету подаються
-      en: To Program Committee should be submitted
-    body:
-      uk: |
-        1. *[Заявка на участь](https://docs.google.com/forms/d/e/1FAIpQLScH4NPI31ig5qQ7ENp5DNdq-89fkvnv0CWZfmoMKaqpb7DwSA/viewform?usp=header)*
-        2. *Електронний варіант тез доповіді (прикріплюється до заявки)*
-        3. *Електронний варіант статті (електронною поштою) за бажанням.*
-        4. *Копія чеку про сплату організаційного внеску та вартості публікації статті.*
-      en: |
-        1. *[Application for participation](https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header)*
-        2. *Electronic version of the abstracts (attached to the application)*
-        3. *Electronic version of the article (by email) if desired.*
-        4. *Copy of the payment check (the organizational fee and the publication cost payment).*
 
 committees:
   uk: |
@@ -347,7 +379,7 @@ committees:
 
     **Igor V. Chumachenko**, D.Sc. (Tech.), Professor, O.M.Beketov National University of Urban Economy, Kharkiv, Ukraine
 
-    **Helena V. Lobach**, Associate Professor, NTU "KhPI", Kharkiv, Ukraine
+    **Helena V. Lobach**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
 
     **Anton I. Rogovoy**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
 
@@ -377,7 +409,7 @@ committees:
 
     **Maximilien F. Kpodjedo**, Ph.D., Digital Adviser to the President of the Republic of Benin, Republic of Benin
 
-    **Olga V. Maleeva**, D.Sc. (Tech.), NAU "KHAI", Kharkiv, Ukraine
+    **Olga V. Maleeva**, D.Sc. (Tech.), Professor, NAU "KHAI", Kharkiv, Ukraine
 
     **Anatoliy O. Sachenko**, D.Sc. (Tech.), Professor, Director of Research Institute for Intelligent Computer Systems, West Ukrainian National University, Ternopil, Ukraine
 

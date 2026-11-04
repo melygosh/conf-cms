@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertConferenceFiles, countdownTarget, isFinished, pickCurrent, registrationClose, toRoman } from '../../src/lib/conference';
+import { assertConferenceFiles, countdownTarget, isFinished, letterHref, pickCurrent, registrationClose, toRoman } from '../../src/lib/conference';
 import { conference } from '../fixtures/conference';
 
 describe('pickCurrent', () => {
@@ -60,5 +60,18 @@ describe('assertConferenceFiles', () => {
   it('fails when a copied file keeps the old year', async () => {
     const c = await conference();
     expect(() => assertConferenceFiles([{ id: '2026', data: c }, { id: '2027', data: c }])).toThrow(/2027\.yaml.*year: 2026/);
+  });
+});
+
+describe('letterHref', () => {
+  it('links the generated letter when the year has no info letter link', async () => {
+    const c = await conference();
+    expect(letterHref({ ...c, links: { registration: c.links.registration } }, 'en')).toBe('/letters/info-letter-2026-en.pdf');
+  });
+
+  it('keeps an explicit info letter link', async () => {
+    const c = await conference();
+    const links = { ...c.links, infoLetter: { uk: 'https://x/uk.pdf', en: 'https://x/en.pdf' } };
+    expect(letterHref({ ...c, links }, 'uk')).toBe('https://x/uk.pdf');
   });
 });

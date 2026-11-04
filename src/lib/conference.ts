@@ -1,4 +1,4 @@
-import type { Conference } from '../content/schema';
+import type { Conference, Lang } from '../content/schema';
 import { deadlineState, toIso } from './dates';
 
 /**
@@ -54,4 +54,9 @@ export function registrationClose(conf: Conference): string | null {
 
 export function isFinished(conf: Conference, now: Date): boolean {
   return deadlineState(toIso(conf.dates.end), now) === 'past';
+}
+
+/** The info letter: the year's own link if it has one, otherwise the PDF `npm run letter` generates. */
+export function letterHref(c: Conference, lang: Lang): string {
+  return c.links.infoLetter?.[lang] ?? `/letters/info-letter-${c.year}-${lang}.pdf`;
 }

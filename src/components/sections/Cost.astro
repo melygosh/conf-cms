@@ -11,35 +11,27 @@ interface Props {
 
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
-const [, ukraineHeader, abroadHeader] = c.cost.headers[lang];
-// "-" in the data means "not applicable".
-const dash = (value: string) => (value.trim() === '-' ? '—' : value);
+const cost = c.cost[lang];
 ---
 
 <Section id="cost" title={t.sections.cost} tone="surface">
   <div class="prices">
     {
-      c.cost.rows.map((r) => (
+      cost.items.map((item) => (
         <div class="card price">
-          <p class="price__label" set:html={mdInline(r.label[lang])} />
-          <dl class="price__values">
-            <div>
-              <dt>{ukraineHeader}</dt>
-              <dd>{dash(r.ukraine[lang])}</dd>
-            </div>
-            <div>
-              <dt>{abroadHeader}</dt>
-              <dd>{dash(r.abroad[lang])}</dd>
-            </div>
-          </dl>
+          <p class="price__label" set:html={mdInline(item.label)} />
+          <p class="price__amount">
+            {item.amount}
+            {item.unit && <span class="price__unit">{item.unit}</span>}
+          </p>
+          {item.note && <div class="prose price__note" set:html={md(item.note)} />}
         </div>
       ))
     }
   </div>
-  <div class="prose cost__notes" set:html={md(c.cost.notes[lang])} />
   <div class="cost__payment">
     <h4>{t.sections.payment}</h4>
-    <div class="prose" set:html={md(c.cost.payment[lang])} />
+    <div class="prose" set:html={md(cost.payment)} />
   </div>
 </Section>
 
@@ -56,39 +48,31 @@ const dash = (value: string) => (value.trim() === '-' ? '—' : value);
     line-height: 1.45;
   }
 
-  .price__values {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  .price__amount {
     margin: 0;
-  }
-
-  .price__values dt {
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-muted);
-  }
-
-  .price__values dd {
-    margin: 0.25rem 0 0;
     font-family: var(--font-serif);
-    font-size: 1.15rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.2;
     color: var(--color-primary-deep);
   }
 
-  .cost__notes {
-    max-width: 64rem;
-    margin-top: 1.25rem;
+  .price__unit {
+    margin-left: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .price__note {
+    margin-top: 0.75rem;
     font-size: 0.88rem;
     color: var(--color-muted);
   }
 
-  .cost__notes :global(p) {
-    margin: 0.4rem 0;
+  .price__note :global(p) {
+    margin: 0;
   }
 
   .cost__payment {

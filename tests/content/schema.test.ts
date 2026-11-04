@@ -53,6 +53,55 @@ describe('conferenceSchema', () => {
     expect(paths({ ...rawConference(), dates: { start: '2026-02-19', end: '2026-02-17' } })).toContainEqual(['dates', 'end']);
   });
 
+  it('accepts a conference without an info letter link', () => {
+    const raw = rawConference() as { links: Record<string, unknown> };
+    delete raw.links.infoLetter;
+    expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
+  it('rejects an unknown deadline group and names the field', () => {
+    const raw = rawConference() as { deadlines: { group?: string }[] };
+    raw.deadlines[0].group = 'other';
+    expect(paths(raw)).toContainEqual(['deadlines', 0, 'group']);
+  });
+
+  it('requires prices for each language separately', () => {
+    const raw = rawConference() as { cost: Record<string, unknown> };
+    delete raw.cost.en;
+    expect(paths(raw)).toContainEqual(['cost', 'en']);
+  });
+
+  it('rejects a language with no price items', () => {
+    const raw = rawConference() as { cost: { uk: { items: unknown[] } } };
+    raw.cost.uk.items = [];
+    expect(paths(raw)).toContainEqual(['cost', 'uk', 'items']);
+  });
+
+  it('allows a deadline that only one language has', () => {
+    const raw = rawConference() as { deadlines: { title: Record<string, string>; only?: string }[] };
+    delete raw.deadlines[2].title.en;
+    raw.deadlines[2].only = 'uk';
+    expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
+  it('still requires both titles of a deadline both languages have', () => {
+    const raw = rawConference() as { deadlines: { title: Record<string, string> }[] };
+    delete raw.deadlines[2].title.en;
+    expect(paths(raw)).toContainEqual(['deadlines', 2, 'title', 'en']);
+  });
+
+  it('allows an article template for one language only', () => {
+    const raw = rawConference() as { publication: { articles: { templateUrl: Record<string, string> } } };
+    delete raw.publication.articles.templateUrl.en;
+    expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
+  it('lets each language link its own venue page', () => {
+    const raw = rawConference() as { venue: { url: unknown } };
+    raw.venue.url = { uk: 'https://lpnu.ua/politekhnik-2', en: 'https://lpnu.ua/en/polytechnic-2-recreational-camp' };
+    expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
   it('rejects unknown top-level fields', () => {
     expect(conferenceSchema.safeParse({ ...rawConference(), extra: 1 }).success).toBe(false);
   });
