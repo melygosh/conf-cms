@@ -56,6 +56,11 @@ links:
   registration:
     uk: https://docs.google.com/forms/d/e/1FAIpQLScH4NPI31ig5qQ7ENp5DNdq-89fkvnv0CWZfmoMKaqpb7DwSA/viewform?usp=header
     en: https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header
+  # The organizers' original letters, shown while the generated one is switched off.
+  # Remove this block to link /letters/info-letter-<year>-<lang>.pdf again.
+  infoLetter:
+    uk: https://drive.google.com/file/d/1YRxQU5y64J0Z_zOHJFTVxMsxUHKY3h4o/view?usp=sharing
+    en: https://drive.google.com/file/d/1ElIhfmjbDcbgkylnpDjZhMhthZdkqVOa/view?usp=sharing
 
 organizers:
   - name:
