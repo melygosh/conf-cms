@@ -13,13 +13,15 @@ export function rawConference(): Record<string, unknown> {
     venue: {
       place: l('Славсько', 'Slavsko'),
       description: l('Карпати', 'Carpathians'),
-      name: l('Табір «Політехнік-2»', 'Camp "Polytechnic-2"'),
-      address: l('смт Славсько, вул. І. Франка, 49', 'Slavsko, 49 I. Franka St.'),
-      url: l('https://lpnu.ua/politekhnik-2', 'https://lpnu.ua/en/polytechnic-2-recreational-camp'),
-      director: l('Білодід В.П.', 'V. Bilodid'),
       format: l('комбінований формат', 'hybrid format'),
-      mapEmbedUrl: 'https://www.google.com/maps/embed?pb=x',
-      mapLink: 'https://maps.app.goo.gl/xyA32VJdHeu1uJ4a6',
+      location: {
+        name: l('Табір «Політехнік-2»', 'Camp "Polytechnic-2"'),
+        address: l('смт Славсько, вул. І. Франка, 49', 'Slavsko, 49 I. Franka St.'),
+        url: l('https://lpnu.ua/politekhnik-2', 'https://lpnu.ua/en/polytechnic-2-recreational-camp'),
+        director: l('Білодід В.П.', 'V. Bilodid'),
+        mapEmbedUrl: 'https://www.google.com/maps/embed?pb=x',
+        mapLink: 'https://maps.app.goo.gl/xyA32VJdHeu1uJ4a6',
+      },
     },
     links: {
       registration: l('https://example.com/uk', 'https://example.com/en'),

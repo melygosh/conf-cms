@@ -13,6 +13,7 @@ interface Props {
 
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
+const loc = c.venue.location;
 ---
 
 <Section id="about" title={t.sections.about}>
@@ -35,36 +36,60 @@ const t = ui[lang];
     }
   </ul>
 
-  <article class="venue">
-    <Image
-      class="venue__photo"
-      src={politekhnik}
-      widths={[425, 850]}
-      sizes="(min-width: 760px) 24rem, 100vw"
-      alt={c.venue.place[lang]}
-    />
-    <div class="venue__text">
-      <h4 class="about__label">{t.sections.venue}</h4>
-      <h3 class="venue__place">{c.venue.place[lang]}</h3>
-      <div class="prose" set:html={md(c.venue.description[lang])} />
-      <dl class="venue__facts">
-        <dt>{c.venue.name[lang]}</dt>
-        <dd><a href={c.venue.url[lang]} target="_blank" rel="noopener">{c.venue.address[lang]}</a></dd>
-        {c.venue.director && <dd>{t.venueDirector}: {c.venue.director[lang]}</dd>}
-        <dd>{c.venue.format[lang]}</dd>
-      </dl>
-    </div>
-    <div class="venue__map">
-      <iframe
-        class="map-frame"
-        src={c.venue.mapEmbedUrl}
-        title={`${t.sections.venue}: ${c.venue.place[lang]}`}
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
-      <a class="venue__map-link" href={c.venue.mapLink} target="_blank" rel="noopener">{t.openMap} ↗</a>
-    </div>
-  </article>
+  {
+    // Online-only years have no location: no photo, address or map, only the place and how to join.
+    loc ? (
+      <article class="venue">
+        <Image
+          class="venue__photo"
+          src={politekhnik}
+          widths={[425, 850]}
+          sizes="(min-width: 760px) 24rem, 100vw"
+          alt={c.venue.place[lang]}
+        />
+        <div class="venue__text">
+          <h4 class="about__label">{t.sections.venue}</h4>
+          <h3 class="venue__place">{c.venue.place[lang]}</h3>
+          <div class="prose" set:html={md(c.venue.description[lang])} />
+          <dl class="venue__facts">
+            <dt>{loc.name[lang]}</dt>
+            <dd>
+              <a href={loc.url[lang]} target="_blank" rel="noopener">
+                {loc.address[lang]}
+              </a>
+            </dd>
+            {loc.director && (
+              <dd>
+                {t.venueDirector}: {loc.director[lang]}
+              </dd>
+            )}
+            <dd>{c.venue.format[lang]}</dd>
+          </dl>
+        </div>
+        <div class="venue__map">
+          <iframe
+            class="map-frame"
+            src={loc.mapEmbedUrl}
+            title={`${t.sections.venue}: ${c.venue.place[lang]}`}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          />
+          <a class="venue__map-link" href={loc.mapLink} target="_blank" rel="noopener">
+            {t.openMap} ↗
+          </a>
+        </div>
+      </article>
+    ) : (
+      <article class="venue venue--online">
+        <div class="venue__text">
+          <h4 class="about__label">{t.sections.venue}</h4>
+          <h3 class="venue__place">{c.venue.place[lang]}</h3>
+          <div class="prose" set:html={md(c.venue.description[lang])} />
+        </div>
+      </article>
+    )
+  }
 </Section>
 
 <style>
@@ -202,7 +227,7 @@ const t = ui[lang];
   }
 
   @media (min-width: 760px) {
-    .venue {
+    .venue:not(.venue--online) {
       grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     }
 

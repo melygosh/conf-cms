@@ -34,23 +34,25 @@ venue:
       The conference will take place in a picturesque corner of the Ukrainian Carpathians in a cozy educational and health camp of the National University «Lviv Polytechnic» ["Polytechnic-2"](https://lpnu.ua/politekhnik-2), located in Slavsko, Lviv region. Slavsko is not only a unique local flavor that makes many guests fall in love with it once and for all, but also a base for skiing and recreation, where everyone can choose a trail according to their level of athletic training.
 
       The conference will be held in a hybrid format. Links to join the sessions will be sent to registered participants.
-  name:
-    uk: Навчально-оздоровчий табір Національного університету «Львівська політехніка» «Політехнік-2»
-    en: Recreational Camp of the Lviv Polytechnic National University “Polytechnic-2”
-  address:
-    uk: Львівська область, смт Славсько, вул. І. Франка, буд. 49
-    en: Ukraine, Lviv region, Slavsko town, 49, I. Franko Street
-  url:
-    uk: https://lpnu.ua/politekhnik-2
-    en: https://lpnu.ua/en/polytechnic-2-recreational-camp
-  director:
-    uk: Білодід Володимир Петрович
-    en: Volodymyr P. Bilodid
   format:
     uk: комбінований формат
     en: hybrid format
-  mapEmbedUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99897.5166815242!2d23.46006058048362!3d48.856157216603066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47398b454daeba4b%3A0x8ce8ecf3a65b8b10!2z0J3QsNCy0YfQsNC70YzQvdC-LdC-0LfQtNC-0YDQvtCy0YfQuNC5INGC0LDQsdGW0YAg0KPQvdGW0LLQtdGA0YHQuNGC0LXRgtGDIMKr0J_QvtC70ZbRgtC10YXQvdGW0LotMsK7!5e0!3m2!1sen!2sua!4v1574459297253!5m2!1sen!2sua
-  mapLink: https://maps.app.goo.gl/xyA32VJdHeu1uJ4a6
+  # Фізичне місце; у роки «тільки онлайн» цього блоку немає.
+  location:
+    name:
+      uk: Навчально-оздоровчий табір Національного університету «Львівська політехніка» «Політехнік-2»
+      en: Recreational Camp of the Lviv Polytechnic National University “Polytechnic-2”
+    address:
+      uk: Львівська область, смт Славсько, вул. І. Франка, буд. 49
+      en: Ukraine, Lviv region, Slavsko town, 49, I. Franko Street
+    url:
+      uk: https://lpnu.ua/politekhnik-2
+      en: https://lpnu.ua/en/polytechnic-2-recreational-camp
+    director:
+      uk: Білодід Володимир Петрович
+      en: Volodymyr P. Bilodid
+    mapEmbedUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99897.5166815242!2d23.46006058048362!3d48.856157216603066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47398b454daeba4b%3A0x8ce8ecf3a65b8b10!2z0J3QsNCy0YfQsNC70YzQvdC-LdC-0LfQtNC-0YDQvtCy0YfQuNC5INGC0LDQsdGW0YAg0KPQvdGW0LLQtdGA0YHQuNGC0LXRgtGDIMKr0J_QvtC70ZbRgtC10YXQvdGW0LotMsK7!5e0!3m2!1sen!2sua!4v1574459297253!5m2!1sen!2sua
+    mapLink: https://maps.app.goo.gl/xyA32VJdHeu1uJ4a6
 
 links:
   registration:

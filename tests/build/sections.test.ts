@@ -12,9 +12,11 @@ describe('page sections', () => {
     for (const id of SECTION_IDS) expect(html, id).toContain(`id="${id}"`);
   });
 
-  it.each(pages)('%s embeds the venue map and the KhPI map', (_, html) => {
-    expect(html).toContain(`src="${attr(c.venue.mapEmbedUrl)}"`);
+  it.each(pages)('%s embeds the KhPI map, and the venue map only for a physical venue', (_, html) => {
     expect(html).toContain(`src="${attr(site.khpiMapEmbedUrl)}"`);
+    const loc = c.venue.location;
+    if (loc) expect(html).toContain(`src="${attr(loc.mapEmbedUrl)}"`);
+    else expect(html.match(/<iframe/g)).toHaveLength(1);
   });
 
   it.each(pages)('%s marks deadlines and the countdown for the client script', (_, html) => {
@@ -106,9 +108,15 @@ describe('page sections', () => {
     expect(en).not.toContain(md(c.cost.uk.payment));
   });
 
-  it.each(pages)('%s shows the venue address and its link', (lang, html) => {
-    expect(html).toContain(c.venue.address[lang]);
-    expect(html).toContain(`href="${attr(c.venue.url[lang])}"`);
+  it.each(pages)('%s shows the venue: its address and link, or how an online conference is held', (lang, html) => {
+    const loc = c.venue.location;
+    if (loc) {
+      expect(html).toContain(loc.address[lang]);
+      expect(html).toContain(`href="${attr(loc.url[lang])}"`);
+    } else {
+      expect(html).toContain(md(c.venue.description[lang]));
+      expect(html).not.toContain('venue__photo');
+    }
   });
 
   it.each(pages)('%s hero links the info letter', (lang, html) => {

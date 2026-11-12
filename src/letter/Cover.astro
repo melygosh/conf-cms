@@ -34,7 +34,7 @@ const fee = c.cost[lang].items[0];
       <div class="cover__range">{shortRange(toIso(c.dates.start), toIso(c.dates.end))}</div>
       <div class="cover__meta">
         {c.year}
-        <span>{c.venue.place[lang]}<br />{c.venue.format[lang]}</span>
+        <span>{c.venue.place[lang]}{c.venue.location && <><br />{c.venue.format[lang]}</>}</span>
       </div>
     </div>
   </div>

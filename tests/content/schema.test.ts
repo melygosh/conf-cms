@@ -97,9 +97,21 @@ describe('conferenceSchema', () => {
   });
 
   it('lets each language link its own venue page', () => {
-    const raw = rawConference() as { venue: { url: unknown } };
-    raw.venue.url = { uk: 'https://lpnu.ua/politekhnik-2', en: 'https://lpnu.ua/en/polytechnic-2-recreational-camp' };
+    const raw = rawConference() as { venue: { location: { url: unknown } } };
+    raw.venue.location.url = { uk: 'https://lpnu.ua/politekhnik-2', en: 'https://lpnu.ua/en/polytechnic-2-recreational-camp' };
     expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
+  it('accepts an online-only conference without a physical location', () => {
+    const raw = rawConference() as { venue: Record<string, unknown> };
+    delete raw.venue.location;
+    expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
+  it('rejects a location without its map', () => {
+    const raw = rawConference() as { venue: { location: Record<string, unknown> } };
+    delete raw.venue.location.mapEmbedUrl;
+    expect(paths(raw)).toContainEqual(['venue', 'location', 'mapEmbedUrl']);
   });
 
   it('rejects unknown top-level fields', () => {

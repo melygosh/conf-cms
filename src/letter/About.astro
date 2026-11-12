@@ -12,6 +12,7 @@ interface Props {
 const { lang, conference: c } = Astro.props;
 const ui_ = ui[lang];
 const t = ui_.letter;
+const loc = c.venue.location;
 ---
 
 <Page lang={lang} conference={c} n={2} kicker={t.pages.about} title={t.titles.about}>
@@ -34,11 +35,22 @@ const t = ui_.letter;
   <div class="two">
     <div class="soft">
       <div class="kick">{ui_.sections.venue}</div>
-      <h3><a href={c.venue.url[lang]}>{c.venue.name[lang]}</a></h3>
-      <p class="muted small">
-        {c.venue.address[lang]}
-        {c.venue.director && <><br />{ui_.venueDirector}: {c.venue.director[lang]}</>}
-      </p>
+      {
+        loc ? (
+          <>
+            <h3><a href={loc.url[lang]}>{loc.name[lang]}</a></h3>
+            <p class="muted small">
+              {loc.address[lang]}
+              {loc.director && <><br />{ui_.venueDirector}: {loc.director[lang]}</>}
+            </p>
+          </>
+        ) : (
+          <>
+            <h3>{c.venue.place[lang]}</h3>
+            <div class="muted small md" set:html={md(c.venue.description[lang])} />
+          </>
+        )
+      }
     </div>
     <div class="soft">
       <div class="kick">{t.format}</div>
@@ -71,10 +83,11 @@ const t = ui_.letter;
     margin: 4px 0 0;
   }
 
+  /* One column: the organizers' order is agreed with them and must read unambiguously. */
   .orgs {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px 22px;
+    grid-template-columns: 1fr;
+    gap: 8px;
     margin: 12px 0 24px;
     padding: 0;
     list-style: none;

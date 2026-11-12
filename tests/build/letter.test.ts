@@ -36,8 +36,13 @@ describe('info letter', () => {
 
 describe('info letter inner pages', () => {
   it.each(letters)('%s keeps every block of its call for papers', (lang, html) => {
-    expect(html).toContain(text(c.venue.name[lang]));
-    expect(html).toContain(text(c.venue.address[lang]));
+    const loc = c.venue.location;
+    if (loc) {
+      expect(html).toContain(text(loc.name[lang]));
+      expect(html).toContain(text(loc.address[lang]));
+    } else {
+      expect(html).toContain(text(c.venue.place[lang]));
+    }
     for (const o of c.organizers) expect(html).toContain(text(o.name[lang]));
     for (const s of c.sections) expect(html).toContain(s.name[lang]);
     for (const d of c.deadlines.filter((x) => x.title[lang])) expect(html).toContain(d.title[lang]!);
