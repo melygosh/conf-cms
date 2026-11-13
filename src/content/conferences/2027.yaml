@@ -37,9 +37,9 @@ venue:
 
 links:
   registration:
-    # UA — посилання з листа 2027. EN — форма 2026, доки не буде нової.
-    uk: https://forms.gle/WSKKvna8DrvhiNMT9
-    en: https://docs.google.com/forms/d/e/1FAIpQLScEfkk2mFtDALmhYqns17EhPYjNVtGsQJrJtH649Xot4c57jg/viewform?usp=header
+    # Форми 2027 в акаунті imconf@gmail.com (копії форм 2026, оновлені 13.11.2026).
+    uk: https://docs.google.com/forms/d/e/1FAIpQLScKBPb98ondxz5ARzQ9P4tCxJX8g--OMvh5tqsgJt40fN2MjQ/viewform
+    en: https://docs.google.com/forms/d/e/1FAIpQLSc4r2EUAf8v2eAaa6EmEsRzawqrDN9_ATBu4J5pYHGbDYUO2Q/viewform
   # Окрема форма для статей (пропозиція Шуби 13.11.2026) — додати paperForm.uk / .en, коли буде посилання.
   # Тоді кнопка реєстрації стає меню «Тези доповіді / Стаття до Вісника», а крок «Стаття до Вісника»
   # у submission треба переписати на окрему форму.
