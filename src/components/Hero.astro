@@ -38,8 +38,8 @@ const endIso = toIso(c.dates.end);
       <span class="hero__dates">{formatRange(toIso(c.dates.start), endIso, lang)}</span>
       <span class="hero__place">{c.venue.place[lang]}</span>
     </p>
-    <p class="hero__actions">
-      <RegisterButton lang={lang} conference={c} label={t.register} />
+    <div class="hero__actions">
+      <RegisterButton lang={lang} conference={c} label={t.register} menuLabel={t.registerMenu} menuUp />
       <a class="button button--ghost" href={letterHref(c, lang)} target="_blank" rel="noopener">{t.infoLetter}</a>
       {
         proceedings && (
@@ -48,7 +48,7 @@ const endIso = toIso(c.dates.end);
           </a>
         )
       }
-    </p>
+    </div>
   </div>
 </section>
 

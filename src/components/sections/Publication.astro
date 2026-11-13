@@ -18,7 +18,13 @@ const { lang, conference: c } = Astro.props;
   <div class="publication">
     <div class="publication__rules">
       <div class="prose" set:html={md(c.publication.rules[lang])} />
-      <RegisterButton lang={lang} conference={c} label={`${ui[lang].submitAbstract} →`} class="publication__submit" />
+      <RegisterButton
+        lang={lang}
+        conference={c}
+        form="registration"
+        label={`${ui[lang].submitAbstract} →`}
+        class="publication__submit"
+      />
     </div>
     <div class="card prose publication__format" set:html={md(c.publication.formatting[lang])} />
   </div>

@@ -39,6 +39,10 @@ export interface UiStrings {
   register: string;
   registerLong: string;
   submitAbstract: string;
+  submitPaper: string;
+  /** The registration menu, when the year has a separate paper form. */
+  registerMenu: string;
+  registerOptions: Record<'abstracts' | 'paper', { title: string; hint: string }>;
   registrationClosed: string;
   infoLetter: string;
   editionLine: (roman: string) => string;
@@ -71,6 +75,7 @@ export interface UiStrings {
     template: string;
     registerKicker: string;
     registerCta: string;
+    paperCta: string;
     until: string;
     site: string;
   };
@@ -111,6 +116,12 @@ export const ui: Record<Lang, UiStrings> = {
     register: 'Реєстрація та подання тез',
     registerLong: 'Зареєструватися на конференцію',
     submitAbstract: 'Подати тези через форму реєстрації',
+    submitPaper: 'Подати статтю через форму',
+    registerMenu: 'Зареєструватися',
+    registerOptions: {
+      abstracts: { title: 'Тези доповіді', hint: 'Заявка, тези й квитанція' },
+      paper: { title: 'Стаття до Вісника', hint: 'Повний текст для рецензування' },
+    },
     registrationClosed: 'Реєстрацію завершено',
     infoLetter: 'Інформаційний лист',
     editionLine: (roman) => `${roman} міжнародна науково-практична конференція`,
@@ -157,6 +168,7 @@ export const ui: Record<Lang, UiStrings> = {
       template: 'Шаблон статті',
       registerKicker: 'Заявка на участь',
       registerCta: 'Заповнити реєстраційну форму',
+      paperCta: 'Подати статтю до Вісника',
       until: 'до',
       site: 'imconf.com.ua',
     },
@@ -195,6 +207,12 @@ export const ui: Record<Lang, UiStrings> = {
     register: 'Register & submit abstracts',
     registerLong: 'Register for the conference',
     submitAbstract: 'Submit abstracts via the registration form',
+    submitPaper: 'Submit a paper via the form',
+    registerMenu: 'Register',
+    registerOptions: {
+      abstracts: { title: 'Abstract', hint: 'Registration and abstract' },
+      paper: { title: 'Paper for the Bulletin', hint: 'Full text for peer review' },
+    },
     registrationClosed: 'Registration closed',
     infoLetter: 'Call for Papers',
     editionLine: (roman) => `${roman} International Scientific and Practical Conference`,
@@ -241,6 +259,7 @@ export const ui: Record<Lang, UiStrings> = {
       template: 'Paper template',
       registerKicker: 'Registration',
       registerCta: 'Complete the registration form',
+      paperCta: 'Submit a paper to the Bulletin',
       until: 'by',
       site: 'imconf.com.ua',
     },

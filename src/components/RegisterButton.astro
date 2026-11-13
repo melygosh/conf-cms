@@ -1,7 +1,10 @@
 ---
-// The link to the registration form, used in the hero, the publication rules and the registration band.
-// Inert after the registration deadline, hidden after the conference; both are recomputed on the
-// visitor's date by src/scripts/date-states.ts (data-closed-after, data-hidden-after).
+// The link to the registration form, used in the hero, the publication rules, the authors' section and the
+// registration band. When the language has a separate paper form (links.paperForm), the button opens a menu
+// with both forms instead; `form` links one of them directly. The button (or the menu's button) is inert
+// after the registration deadline and hidden after the conference; both are recomputed on the visitor's
+// date by src/scripts/date-states.ts (data-closed-after, data-hidden-after). The paper form closes with
+// registration: the call for papers gives both the same deadline.
 import type { Conference, Lang } from '../content/schema';
 import { ui } from '../i18n/ui';
 import { isFinished, registrationClose } from '../lib/conference';
@@ -11,29 +14,91 @@ interface Props {
   lang: Lang;
   conference: Conference;
   label: string;
+  /** The menu button's text, when it differs from the link's (no "→", the menu adds a caret). */
+  menuLabel?: string;
+  /** Link this form directly instead of offering the menu. */
+  form?: 'registration' | 'paper';
+  /** Open the menu upwards, where content below would cover it (the hero is its own stacking context). */
+  menuUp?: boolean;
   class?: string;
   [attr: string]: unknown;
 }
 
-const { lang, conference: c, label, class: className, ...rest } = Astro.props;
+const { lang, conference: c, label, menuLabel, form, menuUp, class: className, ...rest } = Astro.props;
+const t = ui[lang];
 const now = new Date();
 const closeIso = registrationClose(c);
 const closed = closeIso !== null && deadlineState(closeIso, now) === 'past';
+const finished = isFinished(c, now);
+const paper = c.links.paperForm?.[lang];
+const registration = c.links.registration[lang];
+const menu = form === undefined && paper !== undefined;
+const href = form === 'paper' ? paper : registration;
+const state = {
+  'data-closed-after': closeIso ?? undefined,
+  'aria-disabled': closed ? ('true' as const) : undefined,
+  tabindex: closed ? -1 : undefined,
+};
 ---
 
-<a
-  class:list={['button button--accent register-button', className]}
-  href={c.links.registration[lang]}
-  target="_blank"
-  rel="noopener"
-  data-closed-after={closeIso ?? undefined}
-  data-hidden-after={toIso(c.dates.end)}
-  aria-disabled={closed ? 'true' : undefined}
-  tabindex={closed ? -1 : undefined}
-  hidden={isFinished(c, now)}
-  {...rest}
-  ><span class="register-button__open">{label}</span><span class="register-button__closed">{ui[lang].registrationClosed}</span></a
->
+{
+  menu ? (
+    <details class:list={['register-menu', { 'register-menu--up': menuUp }]} data-hidden-after={toIso(c.dates.end)} hidden={finished}>
+      <summary class:list={['button button--accent register-button', className]} {...state} {...rest}>
+        <span class="register-button__open">{menuLabel ?? label}</span>
+        <span class="register-button__closed">{t.registrationClosed}</span>
+      </summary>
+      <ul class="register-menu__list">
+        <li>
+          <a href={registration} target="_blank" rel="noopener">
+            <strong>{t.registerOptions.abstracts.title}</strong>
+            <span>{t.registerOptions.abstracts.hint}</span>
+          </a>
+        </li>
+        <li>
+          <a href={paper} target="_blank" rel="noopener">
+            <strong>{t.registerOptions.paper.title}</strong>
+            <span>{t.registerOptions.paper.hint}</span>
+          </a>
+        </li>
+      </ul>
+    </details>
+  ) : (
+    href && (
+      <a
+        class:list={['button button--accent register-button', className]}
+        href={href}
+        target="_blank"
+        rel="noopener"
+        data-hidden-after={toIso(c.dates.end)}
+        hidden={finished}
+        {...state}
+        {...rest}
+      >
+        <span class="register-button__open">{label}</span>
+        <span class="register-button__closed">{t.registrationClosed}</span>
+      </a>
+    )
+  )
+}
+
+<script>
+  // <details> does not close by itself: close an open menu on a click outside it, on choosing a form, and on Escape.
+  const openMenus = () => document.querySelectorAll<HTMLDetailsElement>('details.register-menu[open]');
+  document.addEventListener('click', (e) => {
+    const target = e.target as Element;
+    openMenus().forEach((d) => {
+      if (!d.contains(target) || target.closest('.register-menu__list a')) d.open = false;
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    openMenus().forEach((d) => {
+      d.open = false;
+      d.querySelector('summary')?.focus();
+    });
+  });
+</script>
 
 <style>
   .register-button__closed {
@@ -53,5 +118,80 @@ const closed = closeIso !== null && deadlineState(closeIso, now) === 'past';
 
   .register-button[aria-disabled='true'] .register-button__closed {
     display: inline;
+  }
+
+  .register-menu {
+    position: relative;
+    display: inline-block;
+  }
+
+  .register-menu summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .register-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .register-menu summary:not([aria-disabled='true'])::after {
+    content: '';
+    width: 0.45em;
+    height: 0.45em;
+    margin: -0.2em 0 0 0.6em;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+  }
+
+  .register-menu[open] summary::after {
+    margin-top: 0.25em;
+    transform: rotate(-135deg);
+  }
+
+  .register-menu__list {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: max(100%, 17rem);
+    margin: 0;
+    padding: 0.4rem;
+    list-style: none;
+    border: 1px solid var(--color-border);
+    border-radius: 0.9rem;
+    background: #fff;
+    box-shadow: 0 18px 40px rgb(10 25 70 / 22%);
+    text-align: left;
+  }
+
+  .register-menu--up .register-menu__list {
+    top: auto;
+    bottom: calc(100% + 0.5rem);
+  }
+
+  .register-menu__list a {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.6rem;
+    color: var(--color-primary-deep);
+    text-decoration: none;
+  }
+
+  .register-menu__list a:hover,
+  .register-menu__list a:focus-visible {
+    background: var(--color-primary-soft);
+  }
+
+  .register-menu__list strong {
+    font-size: 1rem;
+  }
+
+  .register-menu__list span {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    font-weight: 400;
   }
 </style>

@@ -27,7 +27,13 @@ const endIso = toIso(c.dates.end);
       <h2 id="registration-title" class="registration__title">{t.sections.registration}</h2>
       <p class="registration__meta">{formatRange(toIso(c.dates.start), endIso, lang)} · {c.venue.place[lang]}</p>
     </div>
-    <RegisterButton lang={lang} conference={c} label={`${t.registerLong} →`} class="registration__button" />
+    <RegisterButton
+      lang={lang}
+      conference={c}
+      label={`${t.registerLong} →`}
+      menuLabel={t.registerLong}
+      class="registration__button"
+    />
   </div>
 </section>
 

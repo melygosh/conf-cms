@@ -59,6 +59,18 @@ describe('conferenceSchema', () => {
     expect(conferenceSchema.safeParse(raw).success).toBe(true);
   });
 
+  it('accepts a separate paper form for one language only', () => {
+    const raw = rawConference() as { links: Record<string, unknown> };
+    raw.links.paperForm = { uk: 'https://forms.gle/paper' };
+    expect(conferenceSchema.safeParse(raw).success).toBe(true);
+  });
+
+  it('rejects a paper form that is not a URL', () => {
+    const raw = rawConference() as { links: Record<string, unknown> };
+    raw.links.paperForm = { uk: 'forms.gle/paper' };
+    expect(paths(raw)).toContainEqual(['links', 'paperForm', 'uk']);
+  });
+
   it('rejects an unknown deadline group and names the field', () => {
     const raw = rawConference() as { deadlines: { group?: string }[] };
     raw.deadlines[0].group = 'other';

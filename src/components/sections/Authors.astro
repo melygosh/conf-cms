@@ -2,6 +2,7 @@
 import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
 import { md, mdInline } from '../../lib/markdown';
+import RegisterButton from '../RegisterButton.astro';
 import Section from './Section.astro';
 
 interface Props {
@@ -29,11 +30,16 @@ const { lang, conference: c } = Astro.props;
           <li><strong>{step.title}.</strong> <span set:html={mdInline(step.text)} /></li>
         ))}
       </ol>
+      <RegisterButton lang={lang} conference={c} form="paper" label={`${ui[lang].submitPaper} →`} class="authors__submit" />
     </details>
   </div>
 </Section>
 
 <style>
+  .authors__submit {
+    margin: 0 0 1.5rem;
+  }
+
   .accordion {
     border-top: 1px solid var(--color-border);
   }

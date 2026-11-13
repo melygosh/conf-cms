@@ -17,6 +17,7 @@ const { lang, conference: c, site, photo, qr } = Astro.props;
 const t = ui[lang].letter;
 const registration = c.deadlines.find((d) => d.registration);
 const firstStep = c.submission[lang][0];
+const paperForm = c.links.paperForm?.[lang];
 // Contacts Markdown is "### Heading" blocks; each becomes a card.
 const contacts = site.contacts[lang]
   .split(/^### /m)
@@ -45,6 +46,13 @@ const contacts = site.contacts[lang]
           )
         }
         <p class="muted" set:html={mdInline(firstStep.text)} />
+        {
+          paperForm && (
+            <p class="back__paper">
+              <a href={paperForm}>{t.paperCta} →</a>
+            </p>
+          )
+        }
       </div>
     </div>
     <div class="back__contacts">
@@ -95,6 +103,16 @@ const contacts = site.contacts[lang]
 
   .back__until {
     font-size: 16px;
+  }
+
+  .back__paper {
+    margin: 8px 0 0;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .back__paper a {
+    text-decoration: none;
   }
 
   .back__until b {
