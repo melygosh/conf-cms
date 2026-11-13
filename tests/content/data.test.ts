@@ -76,3 +76,18 @@ describe('2026 conference', () => {
     expect(c.deadlines.filter((d) => d.countdown).map((d) => toIso(d.date))).toEqual(['2026-01-25']);
   });
 });
+
+describe('2027 conference', () => {
+  const c = conferenceSchema.parse(load('src/content/conferences/2027.yaml'));
+
+  it('lists the organizers as agreed: the ministry, KhPI, Lviv Polytechnic, AzUAC, then the two associations', () => {
+    expect(c.organizers.map((o) => [o.kind, new URL(o.href).hostname])).toEqual([
+      ['ministry', 'mon.gov.ua'],
+      ['university', 'www.kpi.kharkov.ua'],
+      ['university', 'lpnu.ua'],
+      ['university', 'azmiu.edu.az'],
+      ['association', 'upma.kiev.ua'],
+      ['association', 'azpma.az'],
+    ]);
+  });
+});

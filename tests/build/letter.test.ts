@@ -54,6 +54,12 @@ describe('info letter inner pages', () => {
     if (template) expect(html).toContain(`href="${attr(template)}"`);
   });
 
+  it.each(letters)('%s lists the organizers in one column, in the agreed order', (_, html) => {
+    const list = html.slice(html.indexOf('<ul class="orgs"'), html.indexOf('</ul>', html.indexOf('<ul class="orgs"')));
+    const hrefs = [...list.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+    expect(hrefs).toEqual(c.organizers.map((o) => attr(o.href)));
+  });
+
   it('shows a deadline only in the language that has it', () => {
     const [[, uk], [, en]] = letters;
     for (const d of c.deadlines.filter((x) => x.only === 'uk')) {

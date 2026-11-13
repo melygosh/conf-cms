@@ -1,7 +1,6 @@
 ---
 import type { Conference, Lang } from '../content/schema';
 import { ui } from '../i18n/ui';
-import { organizerRows } from '../lib/conference';
 import { md, mdInline } from '../lib/markdown';
 import Page from './Page.astro';
 
@@ -14,7 +13,6 @@ const { lang, conference: c } = Astro.props;
 const ui_ = ui[lang];
 const t = ui_.letter;
 const loc = c.venue.location;
-const rows = organizerRows(c.organizers);
 ---
 
 <Page lang={lang} conference={c} n={2} kicker={t.pages.about} title={t.titles.about}>
@@ -24,20 +22,16 @@ const rows = organizerRows(c.organizers);
     <p set:html={mdInline(c.aim[lang])} />
   </div>
   <div class="kick">{ui_.sections.organizers}</div>
-  <div class="orgs">
+  <ul class="orgs">
     {
-      rows.map((row) => (
-        <ul class="orgs__row" data-kind={row[0].kind} style={`--n: ${row.length}`}>
-          {row.map((o) => (
-            <li>
-              {o.logo && <img src={o.logo} alt="" />}
-              <a href={o.href}>{o.name[lang]}</a>
-            </li>
-          ))}
-        </ul>
+      c.organizers.map((o) => (
+        <li>
+          {o.logo && <img src={o.logo} alt="" />}
+          <a href={o.href}>{o.name[lang]}</a>
+        </li>
       ))
     }
-  </div>
+  </ul>
   <div class="two">
     <div class="soft">
       <div class="kick">{ui_.sections.venue}</div>
@@ -89,29 +83,14 @@ const rows = organizerRows(c.organizers);
     margin: 4px 0 0;
   }
 
-  /* One row per kind, as on the site: the order is agreed with the organizers and must read unambiguously. */
+  /* One column: the organizers' order is agreed with them and must read unambiguously. */
   .orgs {
     display: grid;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 8px;
     margin: 12px 0 24px;
-  }
-
-  .orgs__row {
-    display: grid;
-    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
-    gap: 16px;
-    margin: 0;
     padding: 0;
     list-style: none;
-  }
-
-  .orgs__row[data-kind='ministry'] li {
-    font-size: 16px;
-  }
-
-  .orgs__row[data-kind='ministry'] img {
-    width: 46px;
-    height: 46px;
   }
 
   .orgs li {
