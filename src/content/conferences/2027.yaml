@@ -1,5 +1,5 @@
 # XVII конференція, 2027.
-# UA — з інформаційного листа 2027 (чернетка від 12.11.2026) і рішень зустрічі 12.11.2026.
+# UA — з інформаційного листа 2027 (версія від 13.11.2026) і рішень зустрічі 12.11.2026.
 # EN — чернетка: англійського листа 2027 немає; складено з UA 2027 і EN 2026 (перевіряє власник).
 # Новий рік: скопіювати цей файл у <рік>.yaml і змінити year, edition, dates, deadlines, links.
 # Поточною на сайті стає конференція з найбільшим year.
@@ -170,7 +170,6 @@ publication:
       uk: Статті можуть бути підготовлені українською або англійською мовами (мова статті обирається особисто автором). Обсяг статті – **не менше 5-ти шаблонних сторінок**. Стаття повинна бути набрана в шаблонному документі та відповідати вимогам, які детально описані на сайті Віснику НТУ «ХПІ», інакше стаття не буде надрукована.
       en: Papers submitted for consideration to the program committee must fully comply with the requirements listed on the scientific journal website. Otherwise, your article will not be published.
 
-# Що й куди подається. Відступ від інформаційного листа: заявка, тези й квитанція — лише через форму реєстрації.
 # Що й куди подається. Відступ від інформаційного листа (рішення 12.11.2026): усе — лише через форму реєстрації, пошта для подачі не використовується.
 submission:
   uk:
@@ -219,7 +218,7 @@ cost:
     items:
       - label: Організаційний внесок за участь у конференції
         amount: 300 грн
-        note: До організаційного внеску входять витрати на оренду приміщення, обслуговування обладнання, канцтовари, інформаційне обслуговування, видання збірника тез, програми конференції, списку учасників тощо. Витрати на харчування, проживання та проїзд учасники конференції несуть самостійно.
+        note: До організаційного внеску входять витрати на обслуговування обладнання, канцтовари, інформаційне обслуговування, видання збірника тез, програми конференції, списку учасників тощо.
     payment: |
       **Реквізити для сплати оргвнеску:**
 
@@ -235,7 +234,7 @@ cost:
     items:
       - label: Participation in the conference
         amount: To be announced
-        note: The participation fee for participants who are not citizens of Ukraine will be announced later. Publication of papers in the Bulletin of NTU "KhPI" is free of charge. Conference participants are responsible for their own food, accommodation and travel expenses.
+        note: The participation fee for participants who are not citizens of Ukraine will be announced later. Publication of papers in the Bulletin of NTU "KhPI" is free of charge.
     payment: |
       **Payment details:**
 
@@ -264,6 +263,8 @@ authors:
         4. Papers that have successfully passed the review process will be published in the *[Bulletin of NTU "KhPI". Series: Strategic Management, Portfolio, Program and Project Management](http://pm.khpi.edu.ua/issue/view/5768)*. The journal is included in the list of scientific specialised editions of Ukraine; abstracted and indexed in the international scientometric databases, repositories, libraries, search engines, and catalogues.
         5. All conference papers that will be published in the journal will have DOI numerical identifiers.
 
+# Лист 2027 (13.11.2026): Маляренко — менеджер конференції, Шуба — член оргкомітету; Танака Х. — новий у програмному комітеті.
+# EN-ім'я «Hiroshi Tanaka» — припущення (засновник JPMF, попередниці PMAJ; почесний професор КНУБА): перевіряє власник.
 committees:
   uk: |
     ### Організаційний комітет
@@ -290,13 +291,13 @@ committees:
 
     #### Члени оргкомітету
 
-    **Маляренко В.В.**, PhD, НТУ «ХПІ», м. Харків, Україна
-
     **Роговий А.І.**, к.т.н., доцент, НТУ «ХПІ», м. Харків, Україна
 
     **Тимочко В.О.**, к.т.н., доцент, ЛНАУ, м. Львів, Україна
 
     **Тімофєєв В.О.**, д.т.н., проф., ХНУМГ ім. О.М. Бекетова, м. Харків, Україна
+
+    **Шуба І.В.**, к.т.н., доцент, НТУ «ХПІ», м. Харків, Україна
 
     **Чумаченко І.В.**, д.т.н., проф., зав. кафедрою управління проектами в міському господарстві і будівництві ХНУМГ ім. О.М. Бекетова, м. Харків, Україна
 
@@ -304,7 +305,7 @@ committees:
 
     #### Менеджер конференції
 
-    **Шуба І.В.**, к.т.н., доцент, НТУ «ХПІ», м. Харків, Україна
+    **Маляренко В.В.**, PhD, НТУ «ХПІ», м. Харків, Україна
 
     ### Програмний комітет
 
@@ -325,6 +326,8 @@ committees:
     **Малєєва О.В.**, д.т.н., проф., НАУ ім. М.Є.Жуковського «ХАІ», м. Харків, Україна
 
     **Саченко А.О.**, д.т.н., проф., директор Науково-дослідного інституту інтелектуальних комп'ютерних систем, Західноукраїнський національний університет, м. Тернопіль, Україна
+
+    **Танака Х.**, PhD, проф., засновник Асоціації управління проєктами Японії, Токіо, Японія
 
     **Чернов С.К.**, д.т.н., проф., зав. кафедрою управління проєктами НУК ім. адмірала Макарова, м. Миколаїв, Україна
   en: |
@@ -354,9 +357,9 @@ committees:
 
     **Igor V. Chumachenko**, D.Sc. (Tech.), Professor, O.M.Beketov National University of Urban Economy, Kharkiv, Ukraine
 
-    **Vladyslav V. Maliarenko**, Ph.D., NTU "KhPI", Kharkiv, Ukraine
-
     **Anton I. Rogovoy**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
+
+    **Iryna V. Shuba**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
 
     **Volodymyr O. Timofeev**, D.Sc. (Tech.), Professor, O.M.Beketov National University of Urban Economy, Kharkiv, Ukraine
 
@@ -366,7 +369,7 @@ committees:
 
     #### Conference Manager
 
-    **Iryna V. Shuba**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
+    **Vladyslav V. Maliarenko**, Ph.D., NTU "KhPI", Kharkiv, Ukraine
 
     ### Program Committee
 
@@ -387,5 +390,7 @@ committees:
     **Olga V. Maleeva**, D.Sc. (Tech.), Professor, NAU "KHAI", Kharkiv, Ukraine
 
     **Anatoliy O. Sachenko**, D.Sc. (Tech.), Professor, Director of Research Institute for Intelligent Computer Systems, West Ukrainian National University, Ternopil, Ukraine
+
+    **Hiroshi Tanaka**, Ph.D., Professor, Founder of the Project Management Association of Japan, Tokyo, Japan
 
     **Oleg B. Zachko**, D.Sc. (Tech.), Professor, Lviv State University of Life Safety, Lviv, Ukraine
