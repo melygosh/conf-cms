@@ -78,9 +78,18 @@ export const conferenceSchema = z
       })
       .strict(),
     // Shown as cards linking to the organizer's site; logo is a path under public/ (optional until a file exists).
+    // Consecutive organizers of one kind share a row (the ministry, the universities, the associations);
+    // the order stays the one agreed with the organizers.
     organizers: z
       .array(
-        z.object({ name: localized(z.string()), href: url, logo: z.string().startsWith('/').optional() }).strict(),
+        z
+          .object({
+            kind: z.enum(['ministry', 'university', 'association']),
+            name: localized(z.string()),
+            href: url,
+            logo: z.string().startsWith('/').optional(),
+          })
+          .strict(),
       )
       .min(1),
     aim: localized(z.string()),

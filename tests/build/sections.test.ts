@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ui } from '../../src/i18n/ui';
-import { letterHref } from '../../src/lib/conference';
+import { letterHref, organizerRows } from '../../src/lib/conference';
 import { toIso } from '../../src/lib/dates';
 import { md, mdInline } from '../../src/lib/markdown';
 import { archive, attr, conference as c, countdownIso, deadlineIsos, endIso, pages, registrationIso, site } from './expected';
@@ -87,6 +87,13 @@ describe('page sections', () => {
       expect(card, o.href).toBeDefined();
       expect(card).toContain('target="_blank"');
     }
+  });
+
+  it.each(pages)('%s shows the organizers in rows by kind, in the agreed order', (_, html) => {
+    const rows = [...html.matchAll(/<ul class="organizers__row"[^>]*data-kind="(\w+)"[^>]*>(.*?)<\/ul>/gs)];
+    expect(rows.map((r) => r[1])).toEqual(organizerRows(c.organizers).map((row) => row[0].kind));
+    const hrefs = rows.flatMap((r) => [...r[2].matchAll(/class="organizer[^"]*"[^>]*href="([^"]+)"|href="([^"]+)"[^>]*class="organizer/g)].map((m) => m[1] ?? m[2]));
+    expect(hrefs).toEqual(c.organizers.map((o) => attr(o.href)));
   });
 
   it.each(pages)('%s has no empty links', (_, html) => {

@@ -16,6 +16,17 @@ export function assertConferenceFiles(entries: { id: string; data: Conference }[
   }
 }
 
+/** Rows of organizers: each run of one kind is a row; the order is kept, never sorted. */
+export function organizerRows<T extends { kind: string }>(organizers: T[]): T[][] {
+  const rows: T[][] = [];
+  for (const o of organizers) {
+    const last = rows.at(-1);
+    if (last && last[0].kind === o.kind) last.push(o);
+    else rows.push([o]);
+  }
+  return rows;
+}
+
 /** The current conference is the one with the latest year. */
 export function pickCurrent(list: Conference[]): Conference {
   if (list.length === 0) throw new Error('No conference data in src/content/conferences');

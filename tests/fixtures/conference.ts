@@ -26,7 +26,7 @@ export function rawConference(): Record<string, unknown> {
     links: {
       registration: l('https://example.com/uk', 'https://example.com/en'),
     },
-    organizers: [{ name: l('МОН України', 'Ministry of Education'), href: 'https://mon.gov.ua' }],
+    organizers: [{ kind: 'ministry', name: l('МОН України', 'Ministry of Education'), href: 'https://mon.gov.ua' }],
     aim: l('Мета', 'Aim'),
     sections: [{ name: l('Секція 1', 'Section 1'), items: { uk: ['a'], en: ['a'] } }],
     languages: l('Українська', 'Ukrainian'),

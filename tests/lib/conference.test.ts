@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertConferenceFiles, countdownTarget, deadlinesByDay, isFinished, letterHref, pickCurrent, registrationClose, toRoman } from '../../src/lib/conference';
+import { assertConferenceFiles, countdownTarget, deadlinesByDay, isFinished, letterHref, organizerRows, pickCurrent, registrationClose, toRoman } from '../../src/lib/conference';
 import { conference } from '../fixtures/conference';
 
 describe('pickCurrent', () => {
@@ -95,5 +95,19 @@ describe('deadlinesByDay', () => {
     c.deadlines[0] = { ...c.deadlines[0], only: 'uk', title: { uk: 'Оргвнесок' } };
     expect(deadlinesByDay(c, 'en').flatMap((d) => d.titles)).not.toContain('Оргвнесок');
     expect(deadlinesByDay(c, 'en')).toHaveLength(2);
+  });
+});
+
+describe('organizerRows', () => {
+  const o = (kind: 'ministry' | 'university' | 'association', id: string) => ({ kind, id });
+
+  it('puts each run of one kind on its own row, in the agreed order', () => {
+    const list = [o('ministry', 'mon'), o('university', 'khpi'), o('university', 'lpnu'), o('university', 'azmiu'), o('association', 'upma'), o('association', 'azpma')];
+    expect(organizerRows(list).map((r) => r.map((x) => x.id))).toEqual([['mon'], ['khpi', 'lpnu', 'azmiu'], ['upma', 'azpma']]);
+  });
+
+  it('starts a new row when a kind comes back, instead of reordering', () => {
+    const list = [o('ministry', 'mon'), o('university', 'khpi'), o('association', 'upma'), o('university', 'lpnu')];
+    expect(organizerRows(list).map((r) => r.map((x) => x.id))).toEqual([['mon'], ['khpi'], ['upma'], ['lpnu']]);
   });
 });

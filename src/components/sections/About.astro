@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import politekhnik from '../../assets/photos/politekhnik-2.jpg';
 import type { Conference, Lang } from '../../content/schema';
 import { ui } from '../../i18n/ui';
+import { organizerRows } from '../../lib/conference';
 import { md } from '../../lib/markdown';
 import Section from './Section.astro';
 
@@ -14,27 +15,32 @@ interface Props {
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
 const loc = c.venue.location;
+const rows = organizerRows(c.organizers);
 ---
 
 <Section id="about" title={t.sections.about}>
   <h4 class="about__label">{t.sections.organizers}</h4>
-  <ul class="organizers">
+  <div class="organizers">
     {
-      c.organizers.map((o) => (
-        <li>
-          <a
-            class:list={['organizer', { 'organizer--with-logo': o.logo }]}
-            href={o.href}
-            target="_blank"
-            rel="noopener"
-          >
-            {o.logo && <img class="organizer__watermark" src={o.logo} alt="" loading="lazy" />}
-            <span class="organizer__name">{o.name[lang]}</span>
-          </a>
-        </li>
+      rows.map((row) => (
+        <ul class="organizers__row" data-kind={row[0].kind} style={`--n: ${row.length}`}>
+          {row.map((o) => (
+            <li>
+              <a
+                class:list={['organizer', { 'organizer--with-logo': o.logo }]}
+                href={o.href}
+                target="_blank"
+                rel="noopener"
+              >
+                {o.logo && <img class="organizer__watermark" src={o.logo} alt="" loading="lazy" />}
+                <span class="organizer__name">{o.name[lang]}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       ))
     }
-  </ul>
+  </div>
 
   {
     // Online-only years have no location: no photo, address or map, only the place and how to join.
@@ -112,13 +118,51 @@ const loc = c.venue.location;
     margin-top: 0;
   }
 
+  /* One row per kind, in the agreed order: the ministry across the whole width, then the universities,
+     then the associations. Narrow screens stack every card. */
   .organizers {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .organizers__row {
+    display: grid;
     gap: 0.75rem;
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  @media (min-width: 900px) {
+    .organizers__row {
+      grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    }
+  }
+
+  /* The ministry leads: a taller card, a larger name and seal. */
+  [data-kind='ministry'] .organizer {
+    min-height: 7.5rem;
+    padding-left: 1.75rem;
+    background: linear-gradient(100deg, var(--color-surface) 55%, var(--color-primary-soft));
+  }
+
+
+  [data-kind='ministry'] .organizer__name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    color: var(--color-primary-deep);
+  }
+
+  /* The larger seal needs room the phone width does not have. */
+  @media (min-width: 640px) {
+    [data-kind='ministry'] .organizer--with-logo {
+      padding-right: 11rem;
+    }
+
+    [data-kind='ministry'] .organizer__watermark {
+      right: -2.5rem;
+      width: 13rem;
+    }
   }
 
   /* The organizer's logo is a large, faded watermark cropped by the card edge. */

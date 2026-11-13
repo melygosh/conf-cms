@@ -126,6 +126,12 @@ describe('conferenceSchema', () => {
     expect(paths(raw)).toContainEqual(['venue', 'location', 'mapEmbedUrl']);
   });
 
+  it('requires the kind of each organizer, for its row', () => {
+    const raw = rawConference() as { organizers: Record<string, unknown>[] };
+    delete raw.organizers[0].kind;
+    expect(paths(raw)).toContainEqual(['organizers', 0, 'kind']);
+  });
+
   it('rejects unknown top-level fields', () => {
     expect(conferenceSchema.safeParse({ ...rawConference(), extra: 1 }).success).toBe(false);
   });
