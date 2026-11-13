@@ -32,7 +32,7 @@ const cost = c.cost[lang];
   </ol>
 
   <div class="kick">{t.sections.submission}</div>
-  <ol class="steps">
+  <ol class="steps" style={`--n: ${c.submission[lang].length}`}>
     {
       c.submission[lang].map((s, i) => (
         <li>
@@ -44,7 +44,7 @@ const cost = c.cost[lang];
     }
   </ol>
 
-  <div class="money">
+  <div class:list={['money', { 'money--single': cost.items.length === 1 }]} style={`--n: ${cost.items.length}`}>
     {
       cost.items.map((item) => (
         <div class="money__item">
@@ -52,8 +52,10 @@ const cost = c.cost[lang];
             {item.amount}
             {item.unit && <em>{item.unit}</em>}
           </strong>
-          <p class="money__label" set:html={mdInline(item.label)} />
-          {item.note && <div class="md money__note" set:html={md(item.note)} />}
+          <div>
+            <p class="money__label" set:html={mdInline(item.label)} />
+            {item.note && <div class="md money__note" set:html={md(item.note)} />}
+          </div>
         </div>
       ))
     }
@@ -129,9 +131,10 @@ const cost = c.cost[lang];
     color: var(--muted);
   }
 
+  /* As many columns as the call for papers has steps / prices, so a shorter year leaves no empty slot. */
   .steps {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--n), 1fr);
     gap: 14px;
     margin: 10px 0 18px;
     padding: 0;
@@ -168,7 +171,7 @@ const cost = c.cost[lang];
 
   .money {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(var(--n), 1fr);
     gap: 16px;
     margin-bottom: 18px;
   }
@@ -200,6 +203,24 @@ const cost = c.cost[lang];
     margin: 10px 0 4px;
     font-weight: 800;
     color: var(--deep);
+  }
+
+  /* One price: the amount on the left, what it covers on the right, across the page. */
+  .money--single .money__item {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 20px 24px;
+  }
+
+  .money--single .money__item strong {
+    flex: none;
+    max-width: 45%;
+    font-size: 44px;
+  }
+
+  .money--single .money__label {
+    margin-top: 0;
   }
 
   .money__note {
