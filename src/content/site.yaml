@@ -2,7 +2,7 @@
 
 # UA і EN контакти різні навмисно: кожна мова бере їх зі свого інформаційного листа.
 # Міський телефон кафедри прибрано (зустріч 12.11.2026: не працює). З листа 2027 (13.11.2026) програмного комітету
-# в контактах немає: лишається одна пошта imconf@gmail.com (підтвердила Шуба). EN-контакт ще уточнюють.
+# в контактах немає: лишається одна пошта imconf@gmail.com (підтвердила Шуба). EN-контакт — Маляренко В.В. (зустріч 12.11.2026; погоджено власником 14.11.2026), як і в EN-формі.
 contacts:
   uk: |
     ### Поштова адреса
@@ -25,9 +25,9 @@ contacts:
 
     ### Contact Information
 
-    Igor V. Kononenko<br>
-    Phone: [+38 (050) 514-20-16](tel:+380505142016)<br>
-    E-mail: [igorvkononenko@gmail.com](mailto:igorvkononenko@gmail.com)
+    Vladyslav Maliarenko<br>
+    E-mail: [Vladyslav.Maliarenko@khpi.edu.ua](mailto:Vladyslav.Maliarenko@khpi.edu.ua)<br>
+    E-mail: [imconf@gmail.com](mailto:imconf@gmail.com)
 
 khpiMapEmbedUrl: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10258.636093345713!2d36.2498081!3d49.9990019!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4847f00cec333b6!2z0J3QsNGG0LjQvtC90LDQu9GM0L3Ri9C5INGC0LXRhdC90LjRh9C10YHQutC40Lkg0YPQvdC40LLQtdGA0YHQuNGC0LXRgiAi0KXQsNGA0YzQutC-0LLRgdC60LjQuSDQv9C-0LvQuNGC0LXRhdC90LjRh9C10YHQutC40Lkg0LjQvdGB0YLQuNGC0YPRgiI!5e0!3m2!1sru!2sua!4v1509992454938
 
