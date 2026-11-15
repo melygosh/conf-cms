@@ -38,12 +38,12 @@ venue:
 
 links:
   registration:
-    # Форми 2027 в акаунті imconf@gmail.com (копії форм 2026, оновлені 13.11.2026).
+    # Форми 2027 в акаунті imconf@gmail.com (копії форм 2026, оновлені 13.11.2026; гілка статті — 15.11.2026).
     uk: https://docs.google.com/forms/d/e/1FAIpQLScKBPb98ondxz5ARzQ9P4tCxJX8g--OMvh5tqsgJt40fN2MjQ/viewform
     en: https://docs.google.com/forms/d/e/1FAIpQLSc4r2EUAf8v2eAaa6EmEsRzawqrDN9_ATBu4J5pYHGbDYUO2Q/viewform
-  # Окрема форма для статей (пропозиція Шуби 13.11.2026) — додати paperForm.uk / .en, коли буде посилання.
-  # Тоді кнопка реєстрації стає меню «Тези доповіді / Стаття до Вісника», а крок «Стаття до Вісника»
-  # у submission треба переписати на окрему форму.
+  # Статті подаються через ту саму форму (рішення 15.11.2026): роль «автор статті (без виступу)» або питання
+  # «Чи подаєте ви також статтю…» в кінці гілок учасника. Окремої форми статей (paperForm) немає.
+  # Відповіді — у Google Sheets з вкладками за ролями і «Статті» / «Papers».
 
 # Порядок погоджено на зустрічі 12.11.2026 (у чернетці листа УАУП стоїть третьою): МОН, університети, асоціації.
 # kind: сусідні організатори одного виду — один ряд на сайті (МОН, далі 3 університети, далі 2 асоціації); у листі одна колонка в цьому ж порядку.
@@ -187,12 +187,12 @@ submission:
     - title: Заявка, тези й квитанція
       text: Заповнюється реєстраційна форма; до неї прикріплюються файл тез доповіді (doc/docx) і квитанція про сплату організаційного внеску.
     - title: Стаття до Вісника
-      text: Електронний варіант статті прикріплюється до тієї ж реєстраційної форми.
+      text: Подається через ту саму реєстраційну форму у шаблоні Вісника (doc/docx). Доповідач наприкінці форми позначає, що подає статтю; хто подає лише статтю, обирає роль «автор статті (без виступу)».
   en:
     - title: Registration and abstract
       text: Complete the registration form and attach the abstract file (doc/docx) to it.
     - title: Paper for the Bulletin
-      text: Attach the electronic version of the paper to the same registration form.
+      text: Submitted through the same registration form, in the Bulletin template (doc/docx). Speakers indicate it at the end of the form; those submitting only a paper choose the role “paper author (no presentation)”.
 
 deadlines:
   - date: 2027-01-15
