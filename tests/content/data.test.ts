@@ -86,7 +86,7 @@ describe('2027 conference', () => {
       ['university', 'www.kpi.kharkov.ua'],
       ['university', 'lpnu.ua'],
       ['university', 'azmiu.edu.az'],
-      ['association', 'upma.kiev.ua'],
+      ['association', 'www.upma.kiev.ua'],
       ['association', 'azpma.az'],
       ['association', 'pmiukraine.org'],
     ]);
