@@ -246,12 +246,12 @@ cost:
       Призначення платежу: За участь у конференції (Прізвище, ім'я, по-батькові учасника)
 
       **Увага!** Обов'язково вказувати призначення платежу і ПІБ учасника, без них кошти не зарахуються і участь не підтвердиться.
-  # Внесок для іноземних учасників (USD) ще обговорюється (зустріч 12.11.2026): суми й реквізитів немає.
+  # Внесок для іноземців — 10 USD (рішення організаторів 16.11.2026). Реквізитів для оплати з-за кордону ще немає.
   en:
     items:
       - label: Participation in the conference
-        amount: To be announced
-        note: The participation fee for participants who are not citizens of Ukraine will be announced later. Publication of papers in the Bulletin of NTU "KhPI" is free of charge.
+        amount: 10 USD
+        note: The participation fee for participants who are not citizens of Ukraine. Publication of papers in the Bulletin of NTU "KhPI" is free of charge.
     payment: |
       **Payment details:**
 
