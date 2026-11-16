@@ -80,7 +80,7 @@ describe('2026 conference', () => {
 describe('2027 conference', () => {
   const c = conferenceSchema.parse(load('src/content/conferences/2027.yaml'));
 
-  it('lists the organizers as agreed: the ministry, KhPI, Lviv Polytechnic, AzUAC, then the two associations', () => {
+  it('lists the organizers as agreed: the ministry, KhPI, Lviv Polytechnic, AzUAC, then the three associations', () => {
     expect(c.organizers.map((o) => [o.kind, new URL(o.href).hostname])).toEqual([
       ['ministry', 'mon.gov.ua'],
       ['university', 'www.kpi.kharkov.ua'],
@@ -88,6 +88,7 @@ describe('2027 conference', () => {
       ['university', 'azmiu.edu.az'],
       ['association', 'upma.kiev.ua'],
       ['association', 'azpma.az'],
+      ['association', 'pmiukraine.org'],
     ]);
   });
 });
