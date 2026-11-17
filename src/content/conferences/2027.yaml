@@ -1,7 +1,6 @@
 # XVII конференція, 2027.
-# UA — з фінальної редакції інформаційного листа 2027 (16.11.2026, «Call for papers ukr 2027.docx») і рішень зустрічі 12.11.2026.
-# EN — з англійського листа 2027 (16.11.2026, «Call for papers_2027_eng.docx»). Де EN-лист розходиться з UA-листом
-# у фактах (склад і посади комітетів, мова тез), лишено UA-варіант до рішення власника — див. коментарі біля полів.
+# UA — з фінальної редакції інформаційного листа 2027 (17.11.2026, «Call for papers ukr 2027 (4).docx») і рішень зустрічі 12.11.2026.
+# EN — з англійського листа 2027 (17.11.2026, «Call for papers_2027_eng (1).docx»).
 # Відступ від обох листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації, не поштою.
 # Статті — на сайті Вісника, не через форму (організатори, 17.11.2026: «не треба плутати конференцію і Вісник»).
 # Новий рік: скопіювати цей файл у <рік>.yaml і змінити year, edition, dates, deadlines, links.
@@ -22,7 +21,6 @@ dates:
 
 # Звернення з інформаційного листа, дослівно.
 invitation:
-  # У листі «02-04 лютого 2026 року» — помилка: на обкладинці й у датах 2027.
   uk: Запрошуємо Вас прийняти участь у роботі XVII-ї Міжнародної науково-практичної конференції «Інтегроване стратегічне управління, управління портфелями, програмами, проєктами», яка відбудеться 02-04 лютого 2027 року в заочному форматі.
   en: We invite you to take part in the 17th International Scientific and Practical Conference “Integrated Strategic Management, Portfolio, Program and Project Management”, which will be held February 2–4, 2027, in a remote format.
 
@@ -188,8 +186,8 @@ publication:
       en: Papers submitted for consideration to the program committee must fully comply with the requirements listed on the scientific journal website. Otherwise, your article will not be published. The terms of payment for publishing a paper are available on the conference website.
 
 # Що й куди подається. Відступ від інформаційних листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації,
-# пошта для подачі не використовується (UA-лист: квитанцію на imconf@gmail.com; EN — тези на publish.conf@gmail.com, квитанцію на imconf@gmail.com).
-# Стаття — на сайті Вісника, як у UA-листі (підтверджено організаторами 17.11.2026). EN-крок — переклад UA-кроку, в EN-листі його немає.
+# пошта для подачі не використовується. Листи 17.11.2026 так і кажуть (лише EN-розділ про тези досі згадує publish.conf@gmail.com).
+# Стаття — на сайті Вісника (організатори, 17.11.2026). EN-кроки — дослівно з EN-листа 17.11.2026.
 submission:
   uk:
     - title: Заявка, тези й квитанція
@@ -198,9 +196,9 @@ submission:
       text: Електронний варіант статті слід завантажити на сайті Вісника НТУ «ХПІ» [pm.khpi.edu.ua/information/authors](https://pm.khpi.edu.ua/information/authors).
   en:
     - title: Registration, abstract and receipt
-      text: Complete the registration form and attach the abstract file (doc/docx) and a copy of the receipt for payment of the registration fee to it.
+      text: Complete the registration form on the conference website. Upload the electronic version of the abstract and a copy of the receipt for payment of the registration fee there as well.
     - title: Paper for the Bulletin
-      text: The paper is submitted on the website of the Bulletin of NTU "KhPI" [pm.khpi.edu.ua/information/authors](https://pm.khpi.edu.ua/information/authors).
+      text: The electronic version of the article should be uploaded to the NTU “KhPI” Bulletin website at [pm.khpi.edu.ua/information/authors](https://pm.khpi.edu.ua/information/authors).
 
 # Листи 16.11.2026: лише дві дати. Дат для статей немає: Вісник виходить двічі на рік, незалежно від конференції.
 deadlines:
@@ -232,7 +230,7 @@ cost:
       Призначення платежу: За участь у конференції (Прізвище, ім'я, по-батькові учасника)
 
       **Увага!** Обов'язково вказувати призначення платежу і ПІБ учасника, без них кошти не зарахуються і участь не підтвердиться.
-  # EN-лист 16.11.2026: 10 USD. Реквізитів для оплати з-за кордону в листі немає.
+  # EN-лист 16.11.2026: 10 USD. Реквізити для оплати з-за кордону — від організаторів 17.11.2026, дослівно (рахунок у USD, інший IBAN, ніж в UA).
   # Останнє речення note — не з листа: лист відсилає до сайту за умовами оплати публікації статті.
   en:
     items:
@@ -240,9 +238,19 @@ cost:
         amount: 10 USD
         note: The registration fee covers the costs of equipment maintenance, office supplies, information services, publication of the abstract book, conference program, list of participants, etc. Publication of papers in the Bulletin of NTU "KhPI" is free of charge.
     payment: |
-      **Payment details:**
+      **Payment Information for the Organizational Fee**
 
-      Payment details for participants from abroad will be announced later.
+      *Company details*<br>
+      Company Name: ФОП Роговий Антон Іванович<br>
+      IBAN Code: UA963052990000026001025937309<br>
+      Name of the bank: JSC CB "PRIVATBANK", 1D HRUSHEVSKOHO STR., KYIV, 01001, UKRAINE<br>
+      Bank SWIFT Code: PBANUA2X<br>
+      Company address: 61176, УКРАЇНА, ОБЛ. ХАРКІВСЬКА, М. ХАРКІВ, Ш. САЛТІВСЬКЕ, Б. 262А, КВ. 254.
+
+      *Correspondent bank*<br>
+      Account in the correspondent bank: 001-1-000080<br>
+      SWIFT Code of the correspondent bank: CHASUS33<br>
+      Correspondent bank: JP Morgan Chase Bank, New York, USA
 
 authors:
   - title:
@@ -269,10 +277,8 @@ authors:
         5. All conference papers that will be published in the journal will have DOI numerical identifiers.
         6. Please note that the Bulletin is published twice a year. The publication dates of the Bulletin are not tied to the dates of the conference.
 
-# Листи 16.11.2026: Скоромний А.Л. (PMI Ukraine Chapter) — новий у програмному комітеті; «Hiroshi Tanaka» підтверджено EN-листом.
-# EN-лист розходиться з UA-листом: голова й заступник від НТУ «ХПІ» — Sokol Ye.I. і Marchenko A.P. (у UA — Тимченко Г.М. і Ларін О.О.),
-# серед членів оргкомітету Lobach H.V. (в UA немає), Тимочко — «LNAU». Тут лишено UA-склад до рішення власника.
-# Тимочко: ЛНАУ перейменовано на ЛНУП (наказ МОН № 808 від 13.07.2021); EN-абревіатура LNEU — припущення.
+# Листи 16–17.11.2026: Скоромний А.Л. (PMI Ukraine Chapter) — новий у програмному комітеті; «Hiroshi Tanaka» підтверджено EN-листом.
+# EN-лист 17.11.2026 узгоджено з UA: Tymchenko і Larin, без Lobach, Тимочко — LNUNR (ЛНУП). EN-рядки — дослівно з нього.
 committees:
   uk: |
     ### Організаційний комітет
@@ -345,7 +351,7 @@ committees:
 
     #### Chairmen
 
-    **Galyna M. Tymchenko**, Ph.D., Associate Professor, Acting Rector of NTU "KhPI", Kharkiv, Ukraine
+    **Galyna M. Tymchenko**, Candidate of Sciences, Associate Professor, Acting Rector of NTU "KhPI", Kharkiv, Ukraine
 
     **Nataliya B. Shakhovska**, D.Sc. (Tech.), Professor, Rector of Lviv Polytechnic National University, Lviv, Ukraine
 
@@ -355,7 +361,7 @@ committees:
 
     #### Deputy Chairmen
 
-    **Oleksii O. Larin**, D.Sc. (Tech.), Professor, Acting Vice-rector of NTU "KhPI", Kharkiv, Ukraine
+    **Oleksiy O. Larin**, D.Sc. (Tech.), Professor, Acting vice-rector of NTU "KhPI", Kharkiv, Ukraine
 
     **Roman O. Korzh**, D.Sc. (Tech.), Professor, Vice-rector of Lviv Polytechnic National University, Lviv, Ukraine
 
@@ -373,7 +379,7 @@ committees:
 
     **Volodymyr O. Timofeev**, D.Sc. (Tech.), Professor, O.M.Beketov National University of Urban Economy, Kharkiv, Ukraine
 
-    **Vasiliy O. Tymochko**, Ph.D., Associate Professor, Lviv National Environmental University (LNEU), Lviv, Ukraine
+    **Vasiliy O. Tymochko**, Ph.D., Associate Professor, LNUNR, Lviv, Ukraine
 
     **Rasim Abdullayev**, Deputy Head of Project Management Department, Azerbaijan University of Architecture and Construction, Baku, Azerbaijan
 
