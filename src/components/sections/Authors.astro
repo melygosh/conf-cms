@@ -30,7 +30,7 @@ const { lang, conference: c } = Astro.props;
           <li><strong>{step.title}.</strong> <span set:html={mdInline(step.text)} /></li>
         ))}
       </ol>
-      <RegisterButton lang={lang} conference={c} form="paper" label={`${ui[lang].submitPaper} →`} class="authors__submit" />
+      <RegisterButton lang={lang} conference={c} form="paper" label={`${ui[lang].submitPaper}\u00a0→`} class="authors__submit" />
     </details>
   </div>
 </Section>
