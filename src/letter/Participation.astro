@@ -2,7 +2,7 @@
 import type { Conference, Lang } from '../content/schema';
 import { ui } from '../i18n/ui';
 import { toIso } from '../lib/dates';
-import { groupDeadlines, shortDate } from '../lib/letter';
+import { shortDate, shortRange, timelineSteps } from '../lib/letter';
 import { md, mdInline } from '../lib/markdown';
 import Page from './Page.astro';
 
@@ -13,22 +13,31 @@ interface Props {
 
 const { lang, conference: c } = Astro.props;
 const t = ui[lang];
-const steps = groupDeadlines(c, lang).flatMap((g) => g.items.map((d) => ({ group: g.group, d })));
+const steps = timelineSteps(c, lang);
 const cost = c.cost[lang];
 ---
 
 <Page lang={lang} conference={c} n={4} kicker={t.letter.pages.participation} title={t.letter.titles.participation}>
-  <ol class="tline" style={`grid-template-columns: repeat(${steps.length}, 1fr)`}>
+  {/* The conference closes the timeline, so a year with one deadline day still reads as a timeline. */}
+  <ol class="tline" style={`grid-template-columns: repeat(${steps.length + 1}, 1fr)`}>
     {
-      steps.map(({ group, d }) => (
+      steps.map(({ group, iso, titles }) => (
         <li class:list={['tline__step', { 'tline__step--hot': group === 'participation' }]}>
           <em>{t.letter.groups[group]}</em>
-          <span class="tline__date">{shortDate(toIso(d.date))}</span>
+          <span class="tline__date">{shortDate(iso)}</span>
           <i />
-          <p>{d.title[lang]}</p>
+          {titles.map((title) => (
+            <p>{title}</p>
+          ))}
         </li>
       ))
     }
+    <li class="tline__step tline__step--conference">
+      <em>{t.conferenceDates}</em>
+      <span class="tline__date">{shortRange(toIso(c.dates.start), toIso(c.dates.end))}</span>
+      <i />
+      <p>{c.venue.place[lang]}</p>
+    </li>
   </ol>
 
   <div class="kick">{t.sections.submission}</div>
@@ -121,6 +130,10 @@ const cost = c.cost[lang];
   .tline__step--hot i {
     background: var(--red);
     box-shadow: 0 0 0 5px var(--red-soft);
+  }
+
+  .tline__step p + p {
+    margin-top: 6px !important;
   }
 
   .tline__step p {

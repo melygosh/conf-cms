@@ -64,8 +64,16 @@ describe('info letter inner pages', () => {
     const [[, uk], [, en]] = letters;
     for (const d of c.deadlines.filter((x) => x.only === 'uk')) {
       expect(uk).toContain(d.title.uk!);
-      expect(en.match(/class="tline__step/g)).toHaveLength(c.deadlines.filter((x) => x.title.en).length);
+      expect(en).not.toContain(d.title.uk!);
     }
+  });
+
+  it.each(letters)('%s shows each deadline day once and ends the timeline with the conference', (lang, html) => {
+    const tline = html.slice(html.indexOf('<ol class="tline"'), html.indexOf('</ol>', html.indexOf('<ol class="tline"')));
+    const dates = [...tline.matchAll(/class="tline__date[^"]*"[^>]*>([^<]+)</g)].map((m) => m[1]);
+    expect(new Set(dates).size).toBe(dates.length);
+    expect(tline).toMatch(/tline__step--conference[\s\S]*$/);
+    for (const d of c.deadlines.filter((x) => x.title[lang])) expect(tline).toContain(d.title[lang]!);
   });
 
   it.each(letters)('%s lists every committee member verbatim', (lang, html) => {

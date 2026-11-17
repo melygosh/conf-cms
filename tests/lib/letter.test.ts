@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { conferenceSchema } from '../../src/content/schema';
-import { findOverflow, groupDeadlines, ordinalWord, parseCommittees, shortDate, shortRange } from '../../src/lib/letter';
+import { findOverflow, groupDeadlines, ordinalWord, parseCommittees, shortDate, shortRange, timelineSteps } from '../../src/lib/letter';
 import { conference } from '../fixtures/conference';
 
 describe('ordinalWord', () => {
@@ -42,6 +42,24 @@ describe('groupDeadlines', () => {
     const c = await conference();
     c.deadlines[0] = { ...c.deadlines[0], only: 'uk', title: { uk: 'Оргвнесок' } };
     expect(groupDeadlines(c, 'en')[0].items).toHaveLength(1);
+  });
+});
+
+describe('timelineSteps', () => {
+  it('merges deadlines of one group that share a day', async () => {
+    const c = await conference();
+    const day = c.deadlines[0].date;
+    c.deadlines = c.deadlines.map((d) => ({ ...d, date: day, group: 'participation' as const }));
+    const steps = timelineSteps(c, 'uk');
+    expect(steps).toHaveLength(1);
+    expect(steps[0].titles).toEqual(c.deadlines.map((d) => d.title.uk));
+  });
+
+  it('keeps groups apart on the same day', async () => {
+    const c = await conference();
+    const day = c.deadlines[0].date;
+    c.deadlines = c.deadlines.map((d) => ({ ...d, date: day }));
+    expect(timelineSteps(c, 'uk').map((s) => s.group)).toEqual(['participation', 'papers']);
   });
 });
 

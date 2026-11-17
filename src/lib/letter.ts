@@ -47,6 +47,27 @@ export function groupDeadlines(c: Conference, lang: Lang): DeadlineGroup[] {
   return groups;
 }
 
+export type TimelineStep = { group: Deadline['group']; iso: string; titles: string[] };
+
+/**
+ * The letter's timeline: one step per group and day, so deadlines that share a day (2027: registration,
+ * fee and abstracts all on 15 January) do not repeat the same label and date side by side.
+ */
+export function timelineSteps(c: Conference, lang: Lang): TimelineStep[] {
+  return groupDeadlines(c, lang).flatMap(({ group, items }) => {
+    const steps: TimelineStep[] = [];
+    for (const d of items) {
+      // Not toIso from ./dates: scripts/build-letter.mjs loads this file in plain Node, so no runtime imports.
+      // Schema dates are UTC midnight, so the ISO prefix is the calendar day.
+      const iso = d.date.toISOString().slice(0, 10);
+      const step = steps.find((x) => x.iso === iso);
+      if (step) step.titles.push(d.title[lang]!);
+      else steps.push({ group, iso, titles: [d.title[lang]!] });
+    }
+    return steps;
+  });
+}
+
 export type Committee = { title: string; groups: { role: string; members: string[] }[] };
 
 /**
