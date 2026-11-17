@@ -1,6 +1,6 @@
 # XVII конференція, 2027.
 # UA — з фінальної редакції інформаційного листа 2027 (17.11.2026, «Call for papers ukr 2027 (4).docx») і рішень зустрічі 12.11.2026.
-# EN — з англійського листа 2027 (17.11.2026, «Call for papers_2027_eng (1).docx»).
+# EN — з англійського листа 2027 (17.11.2026, «Call for papers_2027_eng (final-1).docx»: правки організатора поверх «(1)»).
 # Відступ від обох листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації, не поштою.
 # Статті — на сайті Вісника, не через форму (організатори, 17.11.2026: «не треба плутати конференцію і Вісник»).
 # Новий рік: скопіювати цей файл у <рік>.yaml і змінити year, edition, dates, deadlines, links.
@@ -113,12 +113,11 @@ sections:
         - Models and methods of strategic management, portfolio, program and project management.
         - Contemporary marketing strategies.
         - Portfolio selection and optimization.
-        - Balanced scorecard.
         - Business-process modeling and optimization.
         - Information technology and AI in strategic management, portfolio, program and project management.
   - name:
       uk: Управління ІТ проєктами
-      en: IT project management
+      en: IT Project Management
     text:
       uk: Виступ експертів з управління ІТ проєктами.
       en: Speeches by experts in IT project management.
@@ -183,7 +182,7 @@ publication:
         Papers received by the program committee will be subject to a peer review by the double-blinded reviewers. All accepted papers will be published in scientific journal Bulletin of NTU "KhPI". Series: Strategic Management, Portfolio, Program and Project Management ([pm.khpi.edu.ua](http://pm.khpi.edu.ua/)), which is included in the list of professional editions of Ukraine and is abstracted and indexed in the 11 international scientometric databases, repositories, libraries, search engines, and catalogs. Please note that the Bulletin is published twice a year. The publication dates of the Bulletin are not tied to the dates of the conference.
     requirements:
       uk: Статті можуть бути підготовлені українською або англійською мовами (мова статті обирається особисто автором). Обсяг статті – **не менше 5-ти шаблонних сторінок**. Стаття повинна бути набрана в шаблонному документі та відповідати вимогам, які детально описані на сайті Віснику НТУ «ХПІ», інакше стаття не буде надрукована.
-      en: Papers submitted for consideration to the program committee must fully comply with the requirements listed on the scientific journal website. Otherwise, your article will not be published. The terms of payment for publishing a paper are available on the conference website.
+      en: Papers submitted for consideration to the program committee must fully comply with the requirements listed on the scientific journal website. Otherwise, your paper will not be published.
 
 # Що й куди подається. Відступ від інформаційних листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації,
 # пошта для подачі не використовується. Листи 17.11.2026 так і кажуть (лише EN-розділ про тези досі згадує publish.conf@gmail.com).
@@ -231,7 +230,7 @@ cost:
 
       **Увага!** Обов'язково вказувати призначення платежу і ПІБ учасника, без них кошти не зарахуються і участь не підтвердиться.
   # EN-лист 16.11.2026: 10 USD. Реквізити для оплати з-за кордону — від організаторів 17.11.2026, дослівно (рахунок у USD, інший IBAN, ніж в UA).
-  # Останнє речення note — не з листа: лист відсилає до сайту за умовами оплати публікації статті.
+  # Останнє речення note — не з листа: публікація у Віснику безкоштовна (як і в UA).
   en:
     items:
       - label: Registration fee for participating in the conference
@@ -367,7 +366,7 @@ committees:
 
     **Igbal Babayev**, D.Sc. (Tech.), Professor, President of Azerbaijan Project Management Association, Head of Project Management Department, Azerbaijan University of Architecture and Construction, Baku, Azerbaijan
 
-    **Igor V. Kononenko**, D.Sc. (Tech.), Professor, NTU "KhPI", Kharkiv, Ukraine, Azerbaijan University of Architecture and Construction, Baku, Azerbaijan
+    **Igor V. Kononenko**, D.Sc. (Tech.), Professor, NTU "KhPI", Kharkiv, Ukraine
 
     #### Members
 
