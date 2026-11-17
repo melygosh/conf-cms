@@ -2,7 +2,8 @@
 # UA — з фінальної редакції інформаційного листа 2027 (16.11.2026, «Call for papers ukr 2027.docx») і рішень зустрічі 12.11.2026.
 # EN — з англійського листа 2027 (16.11.2026, «Call for papers_2027_eng.docx»). Де EN-лист розходиться з UA-листом
 # у фактах (склад і посади комітетів, мова тез), лишено UA-варіант до рішення власника — див. коментарі біля полів.
-# Відступ від обох листів (рішення 12.11.2026): подача — лише через форму реєстрації, не поштою.
+# Відступ від обох листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації, не поштою.
+# Статті — на сайті Вісника, не через форму (організатори, 17.11.2026: «не треба плутати конференцію і Вісник»).
 # Новий рік: скопіювати цей файл у <рік>.yaml і змінити year, edition, dates, deadlines, links.
 # Поточною на сайті стає конференція з найбільшим year.
 # Тексти — Markdown. Кожне поле має значення uk і en.
@@ -39,12 +40,10 @@ venue:
 
 links:
   registration:
-    # Форми 2027 в акаунті imconf@gmail.com (копії форм 2026, оновлені 13.11.2026; гілка статті — 15.11.2026).
+    # Форми 2027 в акаунті imconf@gmail.com (копії форм 2026, оновлені 13.11.2026; гілку статті прибрано 17.11.2026).
     uk: https://docs.google.com/forms/d/e/1FAIpQLScKBPb98ondxz5ARzQ9P4tCxJX8g--OMvh5tqsgJt40fN2MjQ/viewform
     en: https://docs.google.com/forms/d/e/1FAIpQLSc4r2EUAf8v2eAaa6EmEsRzawqrDN9_ATBu4J5pYHGbDYUO2Q/viewform
-  # Статті подаються через ту саму форму (рішення 15.11.2026): роль «автор статті (без виступу)» або питання
-  # «Чи подаєте ви також статтю…» в кінці гілок учасника. Окремої форми статей (paperForm) немає.
-  # Відповіді — у Google Sheets з вкладками за ролями і «Статті» / «Papers».
+  # Статті подаються на сайті Вісника (pm.khpi.edu.ua), тож форми статей (paperForm) немає.
 
 # Порядок погоджено на зустрічі 12.11.2026 (у чернетці листа УАУП стоїть третьою): МОН, університети, асоціації.
 # kind: сусідні організатори одного виду — один ряд на сайті (МОН, далі 3 університети, далі 3 асоціації); у листі одна колонка в цьому ж порядку.
@@ -188,19 +187,20 @@ publication:
       uk: Статті можуть бути підготовлені українською або англійською мовами (мова статті обирається особисто автором). Обсяг статті – **не менше 5-ти шаблонних сторінок**. Стаття повинна бути набрана в шаблонному документі та відповідати вимогам, які детально описані на сайті Віснику НТУ «ХПІ», інакше стаття не буде надрукована.
       en: Papers submitted for consideration to the program committee must fully comply with the requirements listed on the scientific journal website. Otherwise, your article will not be published. The terms of payment for publishing a paper are available on the conference website.
 
-# Що й куди подається. Відступ від інформаційних листів (рішення 12.11.2026): усе — лише через форму реєстрації, пошта для подачі не використовується.
-# Листи 16.11.2026 кажуть інакше: UA — квитанцію на imconf@gmail.com, статтю на сайт Вісника; EN — тези на publish.conf@gmail.com, квитанцію на imconf@gmail.com.
+# Що й куди подається. Відступ від інформаційних листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації,
+# пошта для подачі не використовується (UA-лист: квитанцію на imconf@gmail.com; EN — тези на publish.conf@gmail.com, квитанцію на imconf@gmail.com).
+# Стаття — на сайті Вісника, як у UA-листі (підтверджено організаторами 17.11.2026). EN-крок — переклад UA-кроку, в EN-листі його немає.
 submission:
   uk:
     - title: Заявка, тези й квитанція
       text: Заповнюється реєстраційна форма; до неї прикріплюються файл тез доповіді (doc/docx) і квитанція про сплату організаційного внеску.
     - title: Стаття до Вісника
-      text: Подається через ту саму реєстраційну форму у шаблоні Вісника (doc/docx). Доповідач наприкінці форми позначає, що подає статтю; хто подає лише статтю, обирає роль «автор статті (без виступу)».
+      text: Електронний варіант статті слід завантажити на сайті Вісника НТУ «ХПІ» [pm.khpi.edu.ua/information/authors](https://pm.khpi.edu.ua/information/authors).
   en:
     - title: Registration, abstract and receipt
       text: Complete the registration form and attach the abstract file (doc/docx) and a copy of the receipt for payment of the registration fee to it.
     - title: Paper for the Bulletin
-      text: Submitted through the same registration form, in the Bulletin template (doc/docx). Speakers indicate it at the end of the form; those submitting only a paper choose the role “paper author (no presentation)”.
+      text: The paper is submitted on the website of the Bulletin of NTU "KhPI" [pm.khpi.edu.ua/information/authors](https://pm.khpi.edu.ua/information/authors).
 
 # Листи 16.11.2026: лише дві дати. Дат для статей немає: Вісник виходить двічі на рік, незалежно від конференції.
 deadlines:
