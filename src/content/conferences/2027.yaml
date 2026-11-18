@@ -1,6 +1,6 @@
 # XVII конференція, 2027.
 # UA — з фінальної редакції інформаційного листа 2027 (17.11.2026, «Call for papers ukr 2027 (4).docx») і рішень зустрічі 12.11.2026.
-# EN — з англійського листа 2027 (17.11.2026, «Call for papers_2027_eng (final-1).docx»: правки організатора поверх «(1)»).
+# EN — з англійського листа 2027 (18.11.2026, «Call for papers_IM-2027_eng.docx»).
 # Відступ від обох листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації, не поштою.
 # Статті — на сайті Вісника, не через форму (організатори, 17.11.2026: «не треба плутати конференцію і Вісник»).
 # Новий рік: скопіювати цей файл у <рік>.yaml і змінити year, edition, dates, deadlines, links.
@@ -229,7 +229,7 @@ cost:
       Призначення платежу: За участь у конференції (Прізвище, ім'я, по-батькові учасника)
 
       **Увага!** Обов'язково вказувати призначення платежу і ПІБ учасника, без них кошти не зарахуються і участь не підтвердиться.
-  # EN-лист 16.11.2026: 10 USD. Реквізити для оплати з-за кордону — від організаторів 17.11.2026, дослівно (рахунок у USD, інший IBAN, ніж в UA).
+  # EN-лист: 10 USD. Реквізити для оплати з-за кордону — «Реквізити Рогового долари.docx» (організатори, 18.11.2026), дослівно; у листі — як у EN-буклеті.
   # Останнє речення note — не з листа: публікація у Віснику безкоштовна (як і в UA).
   en:
     items:
@@ -237,19 +237,48 @@ cost:
         amount: 10 USD
         note: The registration fee covers the costs of equipment maintenance, office supplies, information services, publication of the abstract book, conference program, list of participants, etc. Publication of papers in the Bulletin of NTU "KhPI" is free of charge.
     payment: |
-      **Payment Information for the Organizational Fee**
+      **Payment Information for the Registration Fee**
 
       *Company details*<br>
-      Company Name: ФОП Роговий Антон Іванович<br>
+      Company Name: Proprietor Anton Rogovyi<br>
       IBAN Code: UA963052990000026001025937309<br>
       Name of the bank: JSC CB "PRIVATBANK", 1D HRUSHEVSKOHO STR., KYIV, 01001, UKRAINE<br>
       Bank SWIFT Code: PBANUA2X<br>
-      Company address: 61176, УКРАЇНА, ОБЛ. ХАРКІВСЬКА, М. ХАРКІВ, Ш. САЛТІВСЬКЕ, Б. 262А, КВ. 254.
+      Company address: 61176, Ukraine, Kharkiv Region, Kharkiv city, Saltivske Highway, building 262A, apartment 254
+
+      *Correspondent banks*<br>
+      Account in the correspondent bank: 001-1-000080<br>
+      SWIFT Code of the correspondent bank: CHASUS33<br>
+      Correspondent bank: JP Morgan Chase Bank, New York, USA
+
+      or<br>
+      Account in the correspondent bank: 890-0085-754<br>
+      SWIFT Code of the correspondent bank: IRVT US 3N<br>
+      Correspondent bank: The Bank of New York Mellon, New York, USA
+
+      or<br>
+      Account in the correspondent bank: 36445343<br>
+      SWIFT Code of the correspondent bank: CITI US 33<br>
+      Correspondent bank: Citibank N.A., NEW YORK, USA
+
+      Payment Purpose: Conference registration fee, Participant's last name and first name.
+    # EN-лист друкує лише один кореспондентський банк (організатори, 18.11.2026).
+    paymentLetter: |
+      **Payment Information for the Registration Fee**
+
+      *Company details*<br>
+      Company Name: Proprietor Anton Rogovyi<br>
+      IBAN Code: UA963052990000026001025937309<br>
+      Name of the bank: JSC CB "PRIVATBANK", 1D HRUSHEVSKOHO STR., KYIV, 01001, UKRAINE<br>
+      Bank SWIFT Code: PBANUA2X<br>
+      Company address: 61176, Ukraine, Kharkiv Region, Kharkiv city, Saltivske Highway, building 262A, apartment 254
 
       *Correspondent bank*<br>
       Account in the correspondent bank: 001-1-000080<br>
       SWIFT Code of the correspondent bank: CHASUS33<br>
       Correspondent bank: JP Morgan Chase Bank, New York, USA
+
+      Payment Description: Conference registration fee, Participant's last name and first name.
 
 authors:
   - title:
@@ -372,7 +401,7 @@ committees:
 
     **Igor V. Chumachenko**, D.Sc. (Tech.), Professor, O.M.Beketov National University of Urban Economy, Kharkiv, Ukraine
 
-    **Anton I. Rogovoy**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
+    **Anton I. Rogovyi**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
 
     **Iryna V. Shuba**, Ph.D., Associate Professor, NTU "KhPI", Kharkiv, Ukraine
 

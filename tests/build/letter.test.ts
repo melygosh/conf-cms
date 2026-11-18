@@ -76,6 +76,16 @@ describe('info letter inner pages', () => {
     for (const d of c.deadlines.filter((x) => x.title[lang])) expect(tline).toContain(d.title[lang]!);
   });
 
+  it.each(letters)('%s shows the letter payment block when the call for papers prints a shorter one', (lang, html) => {
+    const { payment, paymentLetter } = c.cost[lang];
+    if (!paymentLetter) return;
+    const lines = (md: string) => md.split('\n').map((l) => l.replace(/<br>|\*/g, '').trim()).filter((l) => l.length > 10);
+    // Markdown writes ' as &#39;.
+    const page = html.replaceAll('&#39;', "'");
+    for (const line of lines(paymentLetter)) expect(page).toContain(text(line));
+    for (const line of lines(payment).filter((l) => !lines(paymentLetter).includes(l))) expect(page).not.toContain(text(line));
+  });
+
   it.each(letters)('%s lists every committee member verbatim', (lang, html) => {
     for (const name of c.committees[lang].match(/^\*\*[^*]+\*\*/gm)!) expect(html).toContain(name.slice(2, -2));
   });

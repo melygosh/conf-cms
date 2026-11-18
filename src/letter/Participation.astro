@@ -71,7 +71,7 @@ const cost = c.cost[lang];
   </div>
 
   <div class="pay">
-    <div class="md" set:html={md(cost.payment)} />
+    <div class="md" set:html={md(cost.paymentLetter ?? cost.payment)} />
   </div>
 </Page>
 

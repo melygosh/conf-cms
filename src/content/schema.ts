@@ -35,6 +35,8 @@ const costLang = z
       )
       .min(1),
     payment: z.string(),
+    /** The info letter's payment block when the call for papers prints less than the site (EN 2027: one correspondent bank of three). */
+    paymentLetter: z.string().optional(),
   })
   .strict();
 
