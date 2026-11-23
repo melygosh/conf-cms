@@ -1,5 +1,5 @@
 # XVII конференція, 2027.
-# UA — з фінальної редакції інформаційного листа 2027 (17.11.2026, «Call for papers ukr 2027 (4).docx») і рішень зустрічі 12.11.2026.
+# UA — з фінальної редакції інформаційного листа 2027 (18.11.2026, «Call for papers ukr IM-2027»; PDF повторно надіслано 23.11) і рішень зустрічі 12.11.2026.
 # EN — з англійського листа 2027 (18.11.2026, «Call for papers_IM-2027_eng.docx»).
 # Відступ від обох листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації, не поштою.
 # Статті — на сайті Вісника, не через форму (організатори, 17.11.2026: «не треба плутати конференцію і Вісник»).
@@ -21,7 +21,7 @@ dates:
 
 # Звернення з інформаційного листа, дослівно.
 invitation:
-  uk: Запрошуємо Вас прийняти участь у роботі XVII-ї Міжнародної науково-практичної конференції «Інтегроване стратегічне управління, управління портфелями, програмами, проєктами», яка відбудеться 02-04 лютого 2027 року в заочному форматі.
+  uk: Запрошуємо Вас взяти участь у роботі XVII-ї Міжнародної науково-практичної конференції «Інтегроване стратегічне управління, управління портфелями, програмами, проєктами», яка відбудеться 02-04 лютого 2027 року в заочному форматі.
   en: We invite you to take part in the 17th International Scientific and Practical Conference “Integrated Strategic Management, Portfolio, Program and Project Management”, which will be held February 2–4, 2027, in a remote format.
 
 # Тільки онлайн: блоку location немає, тож сайт і лист не показують фото, адресу й карту.
@@ -181,7 +181,7 @@ publication:
       en: >-
         Papers received by the program committee will be subject to a peer review by the double-blinded reviewers. All accepted papers will be published in scientific journal Bulletin of NTU "KhPI". Series: Strategic Management, Portfolio, Program and Project Management ([pm.khpi.edu.ua](http://pm.khpi.edu.ua/)), which is included in the list of professional editions of Ukraine and is abstracted and indexed in the 11 international scientometric databases, repositories, libraries, search engines, and catalogs. Please note that the Bulletin is published twice a year. The publication dates of the Bulletin are not tied to the dates of the conference.
     requirements:
-      uk: Статті можуть бути підготовлені українською або англійською мовами (мова статті обирається особисто автором). Обсяг статті – **не менше 5-ти шаблонних сторінок**. Стаття повинна бути набрана в шаблонному документі та відповідати вимогам, які детально описані на сайті Віснику НТУ «ХПІ», інакше стаття не буде надрукована.
+      uk: Статті можуть бути підготовлені українською або англійською мовами (мова статті обирається особисто автором). Обсяг статті – **не менше 5-ти шаблонних сторінок**. Стаття повинна бути набрана в шаблонному документі та відповідати вимогам, які детально описані на сайті Вісника НТУ «ХПІ», інакше стаття не буде надрукована.
       en: Papers submitted for consideration to the program committee must fully comply with the requirements listed on the scientific journal website. Otherwise, your paper will not be published.
 
 # Що й куди подається. Відступ від інформаційних листів (рішення 12.11.2026): заявка, тези й квитанція — лише через форму реєстрації,
@@ -226,7 +226,7 @@ cost:
       Код отримувача: 2676910774<br>
       Рахунок: UA283052990000026002045921275<br>
       Назва банку: АТ КБ "ПРИВАТБАНК"<br>
-      Призначення платежу: За участь у конференції (Прізвище, ім'я, по-батькові учасника)
+      Призначення платежу: За участь у конференції (Прізвище, ім'я, по батькові учасника)
 
       **Увага!** Обов'язково вказувати призначення платежу і ПІБ учасника, без них кошти не зарахуються і участь не підтвердиться.
   # EN-лист: 10 USD. Реквізити для оплати з-за кордону — «Реквізити Рогового долари.docx» (організатори, 18.11.2026), дослівно; у листі — як у EN-буклеті.
